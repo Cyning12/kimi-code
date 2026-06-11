@@ -146,6 +146,27 @@ Skills are grouped by scope (`Project`, `User`, `Extra`, `Built-in`) so you can 
 
 {{ KIMI_SKILLS }}
 
+## Creating skills
+
+When you create a skill, use either layout:
+
+- **Directory skill**: `<skill-name>/SKILL.md` (recommended for skills with supporting files)
+- **Flat skill**: `<skill-name>.md`
+
+Start the file with YAML frontmatter between `---` fences. Include at least `name` and `description`; add optional fields such as `type` (`prompt`, `inline`, or `flow`), `whenToUse`, or `arguments` when they help discovery or invocation.
+
+```markdown
+---
+name: my-skill
+description: One-line summary of what this skill does and when to use it.
+type: prompt
+---
+
+Skill instructions and examples go here.
+```
+
+If `name` or `description` is omitted, the loader falls back to the directory name (or `.md` filename stem) and the first non-empty body line. Prefer explicit frontmatter so skills are easy to find and invoke.
+
 ## How to use skills
 
 Identify the skills that are likely to be useful for the tasks you are currently working on, read the skill file for detailed instructions, guidelines, scripts and more.

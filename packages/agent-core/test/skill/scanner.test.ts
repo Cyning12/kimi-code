@@ -145,7 +145,7 @@ describe('skill discovery', () => {
     expect(registry.listInvocableSkills()).toEqual([]);
   });
 
-  it('skips directory skills with missing frontmatter metadata', async () => {
+  it('loads directory skills with missing frontmatter metadata using fallbacks', async () => {
     const { repoDir } = await makeWorkspace();
     const projectRoot = path.join(repoDir, '.kimi-code', 'skills');
     await writeSkill(projectRoot, path.join('valid', 'SKILL.md'), [
@@ -157,7 +157,7 @@ describe('skill discovery', () => {
       'Valid body.',
     ]);
     await writeSkill(projectRoot, path.join('no-frontmatter', 'SKILL.md'), [
-      '# Heading should not become a description',
+      'Do X when asked.',
       '',
       'Body.',
     ]);
@@ -173,7 +173,7 @@ describe('skill discovery', () => {
       'name: missing-description',
       '---',
       '',
-      '# Heading should not become a description',
+      'First body line for description.',
     ]);
 
     const warnings: string[] = [];
@@ -182,11 +182,18 @@ describe('skill discovery', () => {
       onWarning: (message) => warnings.push(message),
     });
 
-    expect(skills.map((skill) => skill.name)).toEqual(['valid']);
-    expect(warnings).toHaveLength(3);
-    expect(warnings.some((message) => message.includes('Missing frontmatter'))).toBe(true);
-    expect(warnings.some((message) => message.includes('"name"'))).toBe(true);
-    expect(warnings.some((message) => message.includes('"description"'))).toBe(true);
+    const byName = new Map(skills.map((skill) => [skill.name, skill]));
+    expect(skills.map((skill) => skill.name).sort()).toEqual([
+      'missing-description',
+      'missing-name',
+      'no-frontmatter',
+      'valid',
+    ]);
+    expect(byName.get('no-frontmatter')?.description).toContain('Do X');
+    expect(byName.get('missing-name')?.name).toBe('missing-name');
+    expect(byName.get('missing-name')?.description).toBe('Missing name');
+    expect(byName.get('missing-description')?.description).toContain('First body line');
+    expect(warnings).toEqual([]);
   });
 });
 
