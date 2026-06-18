@@ -29,7 +29,7 @@
 | **graph_delta**          | `10_flow_cli_session.graph.yaml` · `10_flow_agent_turn.graph.yaml`                                          |
 | **graph_delta_note**     | —                                                                                                           |
 | **graph_gate**           | `yaml_edit_before_30` · `close_partial_or_final`                                                            |
-| **entry_invoke_10_task** | `[docs/harness/invokes/by-task/fix-approve-once-437/](../../harness/invokes/by-task/fix-approve-once-437/)` |
+| **entry_invoke_10_task** | [`PROMPT_START_10_v1.md`](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md) |
 
 
 ### 人工闸
@@ -82,7 +82,7 @@ Issue comment：目录下多次 **Write** 选 session 仍多次提示。
 | 字段              | 值                                           |
 | --------------- | ------------------------------------------- |
 | **Open Folder** | `kimi-code`                                 |
-| **必读**          | 本 task · `10_flow_cli_session` · Issue #437 |
+| **必读**          | 本 task · `10_flow_cli_session` · Issue #437 · [`PROMPT_START_10_v1.md`](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md)（§5 回填） |
 | **禁止**          | 10 会话改产品码（可选补 §5）                           |
 
 

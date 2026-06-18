@@ -23,3 +23,11 @@ docker-compose.yml
 docs/superpowers/
 reports/
 .superpowers/
+
+# Harness 本地覆盖（机器级 · 不进仓）
+.cyning-harness/local.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class

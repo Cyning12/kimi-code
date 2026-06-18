@@ -11,6 +11,7 @@
 
 | 帽 | 文件 |
 | --- | --- |
+| **10 思考轮回填** | [`PROMPT_START_10_v1.md`](./PROMPT_START_10_v1.md)（22 R1 退回 · 补 §5） |
 | **22 任务审核** | [`PROMPT_START_22_v1.md`](./PROMPT_START_22_v1.md) |
 | **30 产品** | [`PROMPT_START_30_v1.md`](./PROMPT_START_30_v1.md)（须 **HG-AUDIT-R1 approved**） |
 
