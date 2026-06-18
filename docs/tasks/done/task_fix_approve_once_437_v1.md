@@ -1,6 +1,8 @@
 # Task：修复 Approve once vs session 无差异 · #437（阶段 C）
 
-> **状态**：`active` · HG-TASK-DRAFT **approved**（2026-06-18）  
+> **状态**：`done` — 上游 PR OPEN，待 merge（2026-06-18 · 30 G0–G3）  
+> **上游 PR**：[MoonshotAI/kimi-code#901](https://github.com/MoonshotAI/kimi-code/pull/901)  
+> **审查**：[`task_fix_approve_once_437_v1_audit_R1_20260618_reaudit.md`](../harness/reviews/task_fix_approve_once_437_v1_audit_R1_20260618_reaudit.md) · R1 复审通过 · **HG-AUDIT-R1 approved**（2026-06-18）  
 > **前序**：`[task_meta_graph_issue_sync_gate_v1.md](../done/task_meta_graph_issue_sync_gate_v1.md)` **CLOSE**  
 > **上游 Issue**：[MoonshotAI/kimi-code#437](https://github.com/MoonshotAI/kimi-code/issues/437)  
 > **关联图谱**：`[10_flow_cli_session.graph.yaml](../../_tech_graph/10_flow_cli_session.graph.yaml)` · `[01_struct.md](../../_tech_graph/01_struct.md)` `cli`  
@@ -252,11 +254,11 @@ PR 策略（30）：
 ## 6. 验收标准
 
 - [x] meta：`10_flow_cli_session.graph.yaml` skeleton + compile
-- [ ] 产品：`feature/fix-437-approve-once-clean` · 修复 + 测试 · upstream PR
-- [ ] `pnpm graph:issue-sync` exit 0
-- [ ] 上游 PR · `Fixes #437`
+- [x] 产品：`feature/fix-437-approve-once-clean` · 修复 + 测试 · upstream PR [#901](https://github.com/MoonshotAI/kimi-code/pull/901)
+- [x] `pnpm graph:issue-sync` exit 0（2026-06-18 · L1+L2+L3 PASS）
+- [x] 上游 PR · `Fixes #437`
 - [x] `HG-AUDIT-R1` approved（2026-06-18）
-- [ ] task → `done/`（G3 关账后）
+- [x] task → `done/`（G3 关账 2026-06-18）
 
 ---
 
@@ -283,10 +285,12 @@ pnpm --filter @moonshot-ai/kimi-code test -- test/tui/reverse-rpc/approval-adapt
 ## 8. 实现备忘
 
 
-| 项                   | 状态  | 备注                                      |
-| ------------------- | --- | --------------------------------------- |
-| meta skeleton YAML  | ✅   | `e08a56b2` · `d76c4da5` · `1a89ab2e`    |
-| 产品 Write session 粒度 | ✅   | 本地 clean `98f1fa5f` 已验证 · 待 upstream PR |
-| graph_issue_sync    | ✅   | L3 mock 绿 · 待 G3 关账 SHA                 |
+| 项                   | 状态  | 备注                                                                 |
+| ------------------- | --- | ------------------------------------------------------------------ |
+| meta skeleton YAML  | ✅   | `e08a56b2` · `d76c4da5` · `1a89ab2e`                               |
+| 产品 Write session 粒度 | ✅   | fix `98f1fa5f` · changeset `72b15b8c` · PR [#901](https://github.com/MoonshotAI/kimi-code/pull/901) |
+| upstream_pr_commit  | ✅   | `72b15b8c`（`feature/fix-437-approve-once-clean` HEAD）              |
+| graph_issue_sync    | ✅   | 2026-06-18 · L1+L2+L3 PASS · product-ref `upstream/main...72b15b8c` |
+| 30 invoke           | ✅   | [`invoke_20260618_30_fix-approve-once.md`](../harness/invokes/by-task/fix-approve-once-437/invoke_20260618_30_fix-approve-once.md) |
 
 

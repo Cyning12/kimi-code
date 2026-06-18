@@ -2,7 +2,7 @@
 
 | 项 | 值 |
 | --- | --- |
-| **task** | [`docs/tasks/active/task_fix_approve_once_437_v1.md`](../../../../tasks/active/task_fix_approve_once_437_v1.md) |
+| **task** | [`docs/tasks/done/task_fix_approve_once_437_v1.md`](../../../../tasks/done/task_fix_approve_once_437_v1.md) |
 | **issue** | [MoonshotAI/kimi-code#437](https://github.com/MoonshotAI/kimi-code/issues/437) |
 | **产品分支** | `feature/fix-437-approve-once-clean`（建议从 `upstream/main`） |
 | **图谱** | `10_flow_cli_session.graph.yaml` · `10_flow_agent_turn.graph.yaml`（备注） |
@@ -21,4 +21,4 @@
 - [x] 产品修复草稿 `eedd430c`（须 cherry-pick 到干净分支）
 - [x] `graph:issue-sync` L1+L2+L3 PASS
 - [x] 维护者签 **HG-AUDIT-R1**（2026-06-18）
-- [ ] 30 G0–G2 上游 PR · G3 关账 · task → `done/`
+- [x] 30 G0–G2 上游 PR [#901](https://github.com/MoonshotAI/kimi-code/pull/901) · G3 关账 · task → `done/`
