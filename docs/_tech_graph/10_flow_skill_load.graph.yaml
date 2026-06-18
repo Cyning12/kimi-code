@@ -1,0 +1,97 @@
+graph_id: 10_flow_skill_load
+title: 'Flow：Skill 发现 · 解析 · 注册（C3 #580）'
+description: scanner → parser → registry · directory SKILL.md frontmatter fallback
+version: '2026-06-18'
+nodes:
+- id: SK_SCAN
+  label: scanner.discoverSkills
+- id: SK_READ
+  label: 读取 SKILL.md
+- id: SK_PARSE
+  label: parseSkillText
+- id: SK_OK
+  label: 解析成功?
+- id: SK_REG
+  label: SkillRegistry.byName
+- id: SK_SKIP
+  label: warn · skip skill
+- id: SK_SYS
+  label: system.md Creating skills
+- id: SK_AUTHOR
+  label: agent 创作 SKILL.md
+- id: SK_META
+  label: directory SKILL.md frontmatter / 字段
+- id: SK_INVALID
+  label: 无效 YAML / 非 mapping
+- id: SK_FB
+  label: name ?? skillDirName · description ?? descriptionFromBody
+- id: SK_LIST
+  label: getModelSkillListing → KIMI_SKILLS
+edges:
+- from: SK_SCAN
+  to: SK_READ
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 143
+- from: SK_READ
+  to: SK_PARSE
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 107
+- from: SK_PARSE
+  to: SK_OK
+  mark: ?>
+  type: condition
+- from: SK_OK
+  to: SK_REG
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/skill/registry.ts
+- from: SK_OK
+  to: SK_SKIP
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 386
+- from: SK_SYS
+  to: SK_AUTHOR
+  mark: ::triggers
+  type: triggers
+  anchors:
+  - path: packages/agent-core/src/profile/default/system.md
+    line: 149
+- from: SK_AUTHOR
+  to: SK_READ
+  mark: ~>
+  type: async_calls
+- from: SK_PARSE
+  to: SK_META
+  mark: ?>
+  type: condition
+- from: SK_META
+  to: SK_INVALID
+  mark: '[err]'
+- from: SK_INVALID
+  to: SK_SKIP
+  mark: ->
+- from: SK_META
+  to: SK_FB
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 139
+- from: SK_FB
+  to: SK_REG
+  mark: ->
+- from: SK_REG
+  to: SK_LIST
+  mark: ::yields
+  type: yields
+  anchors:
+  - path: packages/agent-core/src/skill/registry.ts
+    line: 132
+notes: '**fork 真值**（516958cb）：directory `SKILL.md` 缺 frontmatter 时 parse fallback 注册；upstream main 未合并。
+
+  '

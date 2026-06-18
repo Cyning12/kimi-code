@@ -1,0 +1,40 @@
+# docs/_tech_graph（kimi-code-meta）
+
+本仓技术图谱目录。**流程图编辑源**为 `*.graph.yaml`；人类可读 `.md` 由 compile 生成。
+
+## 文件角色
+
+| 模式 | 维护者 | 说明 |
+|------|--------|------|
+| `*.graph.yaml` | 30 / 图谱 task | **唯一编辑源**（flowchart） |
+| `*.md` | compile | `pnpm graph:compile` 产出 · 审阅用 |
+| `01_struct.md` | 维护者 | 模块边界 · **HG-GRAPH-MODULES** |
+| `02_version.md` | task 关账 | 版本时间线一行 |
+| `99_mermaid_protocol.md` | 维护者 | 边标记与 compile 约定 |
+| `graph.json` | export | `pnpm graph:export` · CI 校验 |
+
+## 常用命令
+
+```bash
+pnpm graph:compile          # YAML → .md
+pnpm graph:compile:check    # CI：.md 须与 YAML 一致
+pnpm graph:export           # 写 graph.json
+pnpm graph:export:check     # CI：graph.json 须与 export 一致
+pnpm graph:issue-sync --task docs/tasks/active/<task>.md
+```
+
+## 已交付图（本仓）
+
+| graph_id | YAML | 说明 |
+|----------|------|------|
+| `00_main` | `00_main.graph.yaml` | 顶层索引 |
+| `10_flow_cli_session` | `10_flow_cli_session.graph.yaml` | CLI 会话 · #437 |
+| `10_flow_agent_turn` | `10_flow_agent_turn.graph.yaml` | Agent turn · #583 |
+| `10_flow_read_tool` | `10_flow_read_tool.graph.yaml` | Read tool · #94 |
+| `10_flow_context_tool_exchange` | `10_flow_context_tool_exchange.graph.yaml` | Context · #705 |
+| `10_flow_skill_load` | `10_flow_skill_load.graph.yaml` | Skill load · #580 |
+
+## 关联
+
+- 模块表：[`01_struct.md`](./01_struct.md)
+- Schema：[`graph_v2_schema.md`](./graph_v2_schema.md)

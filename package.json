@@ -27,6 +27,12 @@
     "version": "changeset version",
     "version:release": "changeset version",
     "publish": "pnpm run typecheck && pnpm run lint && pnpm run sherif && pnpm run test && pnpm run build && pnpm run lint:pkg && changeset publish",
+    "graph:compile": "python3 tools/tech_graph/graph_yaml_compile.py --all",
+    "graph:compile:check": "python3 tools/tech_graph/graph_yaml_compile.py --all --check",
+    "graph:export": "python3 tools/tech_graph/tech_graph_graph_export.py",
+    "graph:export:check": "python3 tools/tech_graph/tech_graph_graph_export.py --check",
+    "graph:equivalence": "python3 tools/tech_graph/tech_graph_graph_equivalence_check.py",
+    "graph:issue-sync": "python3 tools/tech_graph/graph_issue_sync.py",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {

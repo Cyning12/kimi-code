@@ -1,0 +1,1774 @@
+{
+  "edges": [
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AUTH",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_CTX",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_READ",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_TURN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "KA",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "KS",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "TELEM",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "TOOLS",
+      "type": "triggers"
+    },
+    {
+      "anchors": [],
+      "from": "CLI",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "FLOW_CLI",
+      "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "path": "apps/kimi-code",
+          "symbol": ""
+        }
+      ],
+      "from": "CLI",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SDK",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "FLOW_CLI",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_DOC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/node-sdk",
+          "symbol": ""
+        }
+      ],
+      "from": "SDK",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "TOOLS",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_SKILL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "U",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CLI",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_ERR",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_RESULT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_ERRTYPE",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_TRACK_ERR",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 787,
+          "path": "packages/agent-core/src/agent/turn/index.ts",
+          "symbol": "#L787"
+        }
+      ],
+      "from": "AT_EVENT",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_TRACK",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/agent-core/src/loop/tool-call.ts",
+          "symbol": ""
+        }
+      ],
+      "from": "AT_EXEC",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_SETTLE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_MARK",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_RESULT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_OC",
+      "graph_id": "10_flow_agent_turn",
+      "label": "cancelled",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_TRACK_CANCEL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_OC",
+      "graph_id": "10_flow_agent_turn",
+      "label": "error",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_TRACK_ERR",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_OC",
+      "graph_id": "10_flow_agent_turn",
+      "label": "success",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_TRACK_OK",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_OK",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_RESULT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_OUTCOME",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "AT_OC",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "AT_RESULT",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_EVENT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_SETTLE",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "AT_OK",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/agent-core/src/utils/abort.ts",
+          "symbol": ""
+        }
+      ],
+      "from": "AT_SETTLE",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "AT_UC",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/agent-core/src/agent/turn/tool-telemetry.ts",
+          "symbol": ""
+        }
+      ],
+      "from": "AT_TRACK",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_OUTCOME",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_TRACK_CANCEL",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "::archives",
+      "sync": true,
+      "to": "AT_TELEM",
+      "type": "archives"
+    },
+    {
+      "anchors": [],
+      "from": "AT_TRACK_ERR",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AT_ERRTYPE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/telemetry",
+          "symbol": ""
+        }
+      ],
+      "from": "AT_TRACK_ERR",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "::archives",
+      "sync": true,
+      "to": "AT_TELEM",
+      "type": "archives"
+    },
+    {
+      "anchors": [],
+      "from": "AT_TRACK_OK",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "::archives",
+      "sync": true,
+      "to": "AT_TELEM",
+      "type": "archives"
+    },
+    {
+      "anchors": [],
+      "from": "AT_UC",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "AT_ERR",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "AT_UC",
+      "graph_id": "10_flow_agent_turn",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "AT_MARK",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 96,
+          "path": "packages/agent-core/src/agent/permission/index.ts",
+          "symbol": "#L96"
+        }
+      ],
+      "from": "CS_AGENT",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_PERM",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 19,
+          "path": "apps/kimi-code/src/tui/reverse-rpc/approval/controller.ts",
+          "symbol": "#L19"
+        }
+      ],
+      "from": "CS_APPROVE_ONCE",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_CONTROLLER",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 7,
+          "path": "apps/kimi-code/src/tui/reverse-rpc/approval/adapter.ts",
+          "symbol": "#L7"
+        }
+      ],
+      "from": "CS_APPROVE_PANEL",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "CS_APPROVE_ONCE",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 155,
+          "path": "apps/kimi-code/src/tui/reverse-rpc/approval/adapter.ts",
+          "symbol": "#L155"
+        }
+      ],
+      "from": "CS_APPROVE_PANEL",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "CS_APPROVE_SESSION",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "CS_APPROVE_SESSION",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_CONTROLLER",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 192,
+          "path": "packages/agent-core/src/agent/permission/index.ts",
+          "symbol": "#L192"
+        }
+      ],
+      "from": "CS_CONTROLLER",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_SESSION_CACHE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_LOOP",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_EXIT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_LOOP",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_SDK_CALL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_PARSE",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_TUI",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_PERM",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "CS_PERM_ASK",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "CS_PERM",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "CS_TOOLS",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 1136,
+          "path": "apps/kimi-code/src/tui/kimi-tui.ts",
+          "symbol": "#L1136"
+        }
+      ],
+      "from": "CS_PERM_ASK",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_APPROVE_PANEL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_SDK_CALL",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_AGENT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 17,
+          "path": "packages/agent-core/src/agent/permission/policies/session-approval-history.ts",
+          "symbol": "#L17"
+        }
+      ],
+      "from": "CS_SESSION_CACHE",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_SESSION_HIST",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_SESSION_HIST",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_TOOLS",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_START",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_PARSE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_TOOLS",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_LOOP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CS_TUI",
+      "graph_id": "10_flow_cli_session",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CS_LOOP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 175,
+          "path": "packages/agent-core/src/agent/records/index.ts",
+          "symbol": "#L175"
+        }
+      ],
+      "from": "CTX_AR",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_REP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CTX_AUM",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "CTX_PEND",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 557,
+          "path": "packages/agent-core/src/agent/background/index.ts",
+          "symbol": "#L557"
+        }
+      ],
+      "from": "CTX_BG",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "CTX_STEER",
+      "type": "triggers"
+    },
+    {
+      "anchors": [],
+      "from": "CTX_FIN",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_GET",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CTX_FLUSH",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_AUM",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 5,
+          "path": "packages/agent-core/src/agent/context/projector.ts",
+          "symbol": "#L5"
+        }
+      ],
+      "from": "CTX_GET",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_PROJ",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 247,
+          "path": "packages/agent-core/src/agent/context/index.ts",
+          "symbol": "#L247"
+        }
+      ],
+      "from": "CTX_LOOP",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_TC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 282,
+          "path": "packages/agent-core/src/agent/context/index.ts",
+          "symbol": "#L282"
+        }
+      ],
+      "from": "CTX_PEND",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "CTX_DEFER",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CTX_PEND",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "CTX_HIST",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/agent-core/src/agent/turn/index.ts",
+          "symbol": ""
+        }
+      ],
+      "from": "CTX_PROJ",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_LLM",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "CTX_PROJ",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "CTX_ORPHAN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 275,
+          "path": "packages/agent-core/src/agent/turn/index.ts",
+          "symbol": "#L275"
+        }
+      ],
+      "from": "CTX_REP",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_FIN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 297,
+          "path": "packages/agent-core/src/agent/index.ts",
+          "symbol": "#L297"
+        }
+      ],
+      "from": "CTX_RES",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_AR",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 608,
+          "path": "packages/agent-core/src/agent/turn/index.ts",
+          "symbol": "#L608"
+        }
+      ],
+      "from": "CTX_STEER",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_FLUSH",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 263,
+          "path": "packages/agent-core/src/agent/context/index.ts",
+          "symbol": "#L263"
+        }
+      ],
+      "from": "CTX_TC",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_TR",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 196,
+          "path": "packages/agent-core/src/agent/context/index.ts",
+          "symbol": "#L196"
+        }
+      ],
+      "from": "CTX_TR",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "CTX_GET",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 74,
+          "path": "packages/agent-core/src/agent/context/projector.ts",
+          "symbol": "#L74"
+        }
+      ],
+      "from": "CTX_TRIM",
+      "graph_id": "10_flow_context_tool_exchange",
+      "label": "",
+      "mark": "::gates",
+      "sync": true,
+      "to": "CTX_INHERIT",
+      "type": "gates"
+    },
+    {
+      "anchors": [],
+      "from": "RT_BCAP",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "RT_MB",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_COLLECT",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "RT_LCAP",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "RT_COLLECT",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_RENDER",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_EOF",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "RT_PEOF",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_EXEC",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_ROUTE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 436,
+          "path": "packages/agent-core/src/tools/builtin/file/read.ts",
+          "symbol": "#L436"
+        }
+      ],
+      "from": "RT_FIN",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_MSG",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_FWD",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "::yields",
+      "sync": true,
+      "to": "RT_SCAN",
+      "type": "yields"
+    },
+    {
+      "anchors": [],
+      "from": "RT_LCAP",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "RT_ML",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_MB",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "::merges",
+      "sync": true,
+      "to": "RT_FIN",
+      "type": "merges"
+    },
+    {
+      "anchors": [],
+      "from": "RT_ML",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "::merges",
+      "sync": true,
+      "to": "RT_FIN",
+      "type": "merges"
+    },
+    {
+      "anchors": [
+        {
+          "line": 430,
+          "path": "packages/agent-core/src/tools/builtin/file/read.ts",
+          "symbol": "#L430"
+        }
+      ],
+      "from": "RT_MSG",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_OUT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_MSG",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "RT_STATUS",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "RT_PB",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "RT_EOF",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "RT_PB",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "RT_PBYTES",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_RENDER",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "RT_BCAP",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 253,
+          "path": "packages/agent-core/src/tools/builtin/file/read.ts",
+          "symbol": "#L253"
+        }
+      ],
+      "from": "RT_ROUTE",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "RT_FWD",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_ROUTE",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "RT_TAIL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_SCAN",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_COLLECT",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_STATUS",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_PB",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_STATUS",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "RT_PL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "RT_TAIL",
+      "graph_id": "10_flow_read_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "RT_FIN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "SK_AUTHOR",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "~>",
+      "sync": false,
+      "to": "SK_READ",
+      "type": "async_calls"
+    },
+    {
+      "anchors": [],
+      "from": "SK_FB",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SK_REG",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "SK_INVALID",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SK_SKIP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 139,
+          "path": "packages/agent-core/src/skill/parser.ts",
+          "symbol": "#L139"
+        }
+      ],
+      "from": "SK_META",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "SK_FB",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "SK_META",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "SK_INVALID",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/agent-core/src/skill/registry.ts",
+          "symbol": ""
+        }
+      ],
+      "from": "SK_OK",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "SK_REG",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 386,
+          "path": "packages/agent-core/src/skill/scanner.ts",
+          "symbol": "#L386"
+        }
+      ],
+      "from": "SK_OK",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "SK_SKIP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "SK_PARSE",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "SK_META",
+      "type": "condition"
+    },
+    {
+      "anchors": [],
+      "from": "SK_PARSE",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "SK_OK",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 107,
+          "path": "packages/agent-core/src/skill/parser.ts",
+          "symbol": "#L107"
+        }
+      ],
+      "from": "SK_READ",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SK_PARSE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 132,
+          "path": "packages/agent-core/src/skill/registry.ts",
+          "symbol": "#L132"
+        }
+      ],
+      "from": "SK_REG",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "::yields",
+      "sync": true,
+      "to": "SK_LIST",
+      "type": "yields"
+    },
+    {
+      "anchors": [
+        {
+          "line": 143,
+          "path": "packages/agent-core/src/skill/scanner.ts",
+          "symbol": "#L143"
+        }
+      ],
+      "from": "SK_SCAN",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SK_READ",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 149,
+          "path": "packages/agent-core/src/profile/default/system.md",
+          "symbol": "#L149"
+        }
+      ],
+      "from": "SK_SYS",
+      "graph_id": "10_flow_skill_load",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "SK_AUTHOR",
+      "type": "triggers"
+    }
+  ],
+  "freeze_id": "KIMI-META-GRAPH-V2-BATCH@0fa2d54f",
+  "generated_at": "2026-06-18T14:26:55Z",
+  "graphs": [
+    {
+      "id": "00_main",
+      "source_yaml_path": "docs/_tech_graph/00_main.graph.yaml",
+      "title": "顶层流程总图（kimi-code · 人类友好版）"
+    },
+    {
+      "id": "10_flow_agent_turn",
+      "source_yaml_path": "docs/_tech_graph/10_flow_agent_turn.graph.yaml",
+      "title": "Flow：Agent 轮次 · tool 结果与 telemetry（C2 #583 切片）"
+    },
+    {
+      "id": "10_flow_cli_session",
+      "source_yaml_path": "docs/_tech_graph/10_flow_cli_session.graph.yaml",
+      "title": "Flow：CLI 会话主循环 · approve-once vs session（#437 skeleton）"
+    },
+    {
+      "id": "10_flow_context_tool_exchange",
+      "source_yaml_path": "docs/_tech_graph/10_flow_context_tool_exchange.graph.yaml",
+      "title": "Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）"
+    },
+    {
+      "id": "10_flow_read_tool",
+      "source_yaml_path": "docs/_tech_graph/10_flow_read_tool.graph.yaml",
+      "title": "Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）"
+    },
+    {
+      "id": "10_flow_skill_load",
+      "source_yaml_path": "docs/_tech_graph/10_flow_skill_load.graph.yaml",
+      "title": "Flow：Skill 发现 · 解析 · 注册（C3 #580）"
+    }
+  ],
+  "nodes": [
+    {
+      "graph_id": "00_main",
+      "id": "AC",
+      "label": "agent-core<br/>Agent / Session / tools"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_ERR",
+      "label": "isError output 无 user 标记"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_ERRTYPE",
+      "label": "telemetryToolErrorType"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_EVENT",
+      "label": "LoopEvent tool.result"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_EXEC",
+      "label": "tool 执行"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_MARK",
+      "label": "cancelledByUser=true"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_OC",
+      "label": "outcome 分支"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_OK",
+      "label": "isError false"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_OUTCOME",
+      "label": "telemetryToolOutcome"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_RESULT",
+      "label": "ExecutableToolResult"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_SETTLE",
+      "label": "abort settle / 正常返回"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_TELEM",
+      "label": "telemetry.track tool_call"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_TRACK",
+      "label": "trackToolLifecycle"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_TRACK_CANCEL",
+      "label": "properties outcome cancelled"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_TRACK_ERR",
+      "label": "properties outcome error"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_TRACK_OK",
+      "label": "properties outcome success"
+    },
+    {
+      "graph_id": "10_flow_agent_turn",
+      "id": "AT_UC",
+      "label": "isUserCancellation?"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "AUTH",
+      "label": "oauth"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "CLI",
+      "label": "kimi CLI / TUI<br/>apps/kimi-code"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_AGENT",
+      "label": "agent-core 处理轮次"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_APPROVE_ONCE",
+      "label": "Approve once · 无 scope"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_APPROVE_PANEL",
+      "label": "ApprovalPanel · 四选项"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_APPROVE_SESSION",
+      "label": "Approve for session · scope=session"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_CONTROLLER",
+      "label": "ApprovalController 队列 autoResolve"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_EXIT",
+      "label": "退出 / 保存 checkpoint"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_LOOP",
+      "label": "用户输入 / 事件"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_PARSE",
+      "label": "解析 argv / 配置"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_PERM",
+      "label": "PermissionManager 策略链"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_PERM_ASK",
+      "label": "需用户审批 · policy ask"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_SDK_CALL",
+      "label": "经 node-sdk 创建/恢复 Session"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_SESSION_CACHE",
+      "label": "sessionApprovalRulePatterns 缓存"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_SESSION_HIST",
+      "label": "session-approval-history 复用"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_START",
+      "label": "进程启动 main"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_TOOLS",
+      "label": "工具 / 子 agent 执行"
+    },
+    {
+      "graph_id": "10_flow_cli_session",
+      "id": "CS_TUI",
+      "label": "TUI 或 ACP 模式"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_AR",
+      "label": "Agent.resume"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_AUM",
+      "label": "appendUserMessage"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_BG",
+      "label": "Background notify"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_DEFER",
+      "label": "deferredMessages"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_FIN",
+      "label": "turn.finishResume"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_FLUSH",
+      "label": "beforeStep flushSteerBuffer"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_GET",
+      "label": "ContextMemory.messages"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_HIST",
+      "label": "pushHistory"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_INHERIT",
+      "label": "仅 useProjectedHistoryFrom"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_LLM",
+      "label": "generate / compaction"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_LOOP",
+      "label": "appendLoopEvent"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_ORPHAN",
+      "label": "orphan tool_calls → provider 400"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_PEND",
+      "label": "pendingToolResultIds?"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_PROJ",
+      "label": "project · microCompaction"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_REP",
+      "label": "AgentRecords.replay"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_RES",
+      "label": "Session.resumeAgent"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_STEER",
+      "label": "TurnFlow.steer · buffer"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_TC",
+      "label": "tool.call · pending add"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_TR",
+      "label": "tool.result · pending delete"
+    },
+    {
+      "graph_id": "10_flow_context_tool_exchange",
+      "id": "CTX_TRIM",
+      "label": "trimTrailingOpenToolExchange"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_CLI",
+      "label": "CLI 会话主循环"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_CTX",
+      "label": ">10_flow_context_tool_exchange.md"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_DOC",
+      "label": ">10_flow_cli_session.md"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_READ",
+      "label": ">10_flow_read_tool.md"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_SKILL",
+      "label": ">10_flow_skill_load.md"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_TURN",
+      "label": ">10_flow_agent_turn.md"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "KA",
+      "label": "kaos · shell / 文件"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "KS",
+      "label": "kosong · LLM 调用"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_BCAP",
+      "label": "超过 MAX_BYTES?"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_COLLECT",
+      "label": "收集 selectedEntries"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_EOF",
+      "label": "!ML && !MB && 未到请求行数?"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_EXEC",
+      "label": "ReadTool.execution"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_FIN",
+      "label": "finishReadResult"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_FWD",
+      "label": "readForward"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_LCAP",
+      "label": "达到 MAX_LINES?"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_MB",
+      "label": "maxBytesReached = true"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_ML",
+      "label": "maxLinesReached = true"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_MSG",
+      "label": "finishMessage"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_OUT",
+      "label": "finishOutput · system 标签"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_PB",
+      "label": "maxBytesReached?"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_PBYTES",
+      "label": "parts += Max MAX_BYTES bytes"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_PEOF",
+      "label": "End of file reached."
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_PL",
+      "label": "parts += Max MAX_LINES lines"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_RENDER",
+      "label": "renderLine · 累计 bytes"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_ROUTE",
+      "label": "line_offset < 0?"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_SCAN",
+      "label": "kaos.readLines"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_STATUS",
+      "label": "maxLinesReached?"
+    },
+    {
+      "graph_id": "10_flow_read_tool",
+      "id": "RT_TAIL",
+      "label": "readTail"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "SDK",
+      "label": "@moonshot-ai/kimi-code-sdk<br/>packages/node-sdk"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_AUTHOR",
+      "label": "agent 创作 SKILL.md"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_FB",
+      "label": "name ?? skillDirName · description ?? descriptionFromBody"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_INVALID",
+      "label": "无效 YAML / 非 mapping"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_LIST",
+      "label": "getModelSkillListing → KIMI_SKILLS"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_META",
+      "label": "directory SKILL.md frontmatter / 字段"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_OK",
+      "label": "解析成功?"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_PARSE",
+      "label": "parseSkillText"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_READ",
+      "label": "读取 SKILL.md"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_REG",
+      "label": "SkillRegistry.byName"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_SCAN",
+      "label": "scanner.discoverSkills"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_SKIP",
+      "label": "warn · skip skill"
+    },
+    {
+      "graph_id": "10_flow_skill_load",
+      "id": "SK_SYS",
+      "label": "system.md Creating skills"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "TELEM",
+      "label": "telemetry"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "TOOLS",
+      "label": "skills · MCP · subagents"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "U",
+      "label": "用户终端"
+    }
+  ],
+  "schema_version": "graph_v2"
+}

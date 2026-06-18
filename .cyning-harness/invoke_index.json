@@ -1,0 +1,70 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-06-16T06:39:18.131Z",
+  "index": {
+    "cyning-harness-b-kimi-dogfood": {
+      "task_slug": "cyning-harness-b-kimi-dogfood",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/cyning-harness-b-kimi-dogfood/invoke_20260615_30_b-kimi-dogfood.md",
+          "mtime": 1781532293,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "fix-docs-node-565": {
+      "task_slug": "fix-docs-node-565",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-docs-node-565/invoke_20260610_30_fix-docs-node-565.md",
+          "mtime": 1781081743,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "fix-open-tool-calls-705": {
+      "task_slug": "fix-open-tool-calls-705",
+      "invokes": []
+    },
+    "fix-read-dual-limit-94": {
+      "task_slug": "fix-read-dual-limit-94",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-read-dual-limit-94/invoke_20260613_30_fix-read-dual-limit-94.md",
+          "mtime": 1781335786,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "fix-skill-frontmatter-580": {
+      "task_slug": "fix-skill-frontmatter-580",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-skill-frontmatter-580/invoke_20260611_30_fix-skill-frontmatter-580.md",
+          "mtime": 1781147836,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-skill-frontmatter-580/invoke_20260611_40_fix-skill-frontmatter-580.md",
+          "mtime": 1781148481,
+          "hat_id": "40"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-skill-frontmatter-580/invoke_20260611_50_fix-skill-frontmatter-580.md",
+          "mtime": 1781163512,
+          "hat_id": "50"
+        }
+      ]
+    },
+    "fix-telemetry-bash-cancel-583": {
+      "task_slug": "fix-telemetry-bash-cancel-583",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-telemetry-bash-cancel-583/invoke_20260610_30_fix-telemetry-bash-cancel-583.md",
+          "mtime": 1781095396,
+          "hat_id": "30"
+        }
+      ]
+    }
+  }
+}

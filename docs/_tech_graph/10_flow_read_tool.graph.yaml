@@ -1,0 +1,136 @@
+graph_id: 10_flow_read_tool
+title: 'Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）'
+description: ReadTool readForward/readTail · MAX_LINES/MAX_BYTES · finishMessage
+version: '2026-06-18'
+nodes:
+- id: RT_EXEC
+  label: ReadTool.execution
+- id: RT_ROUTE
+  label: line_offset < 0?
+- id: RT_TAIL
+  label: readTail
+- id: RT_FWD
+  label: readForward
+- id: RT_SCAN
+  label: kaos.readLines
+- id: RT_COLLECT
+  label: 收集 selectedEntries
+- id: RT_LCAP
+  label: 达到 MAX_LINES?
+- id: RT_ML
+  label: maxLinesReached = true
+- id: RT_RENDER
+  label: renderLine · 累计 bytes
+- id: RT_BCAP
+  label: 超过 MAX_BYTES?
+- id: RT_MB
+  label: maxBytesReached = true
+- id: RT_FIN
+  label: finishReadResult
+- id: RT_MSG
+  label: finishMessage
+- id: RT_STATUS
+  label: maxLinesReached?
+- id: RT_PL
+  label: parts += Max MAX_LINES lines
+- id: RT_PB
+  label: maxBytesReached?
+- id: RT_PBYTES
+  label: parts += Max MAX_BYTES bytes
+- id: RT_EOF
+  label: '!ML && !MB && 未到请求行数?'
+- id: RT_PEOF
+  label: End of file reached.
+- id: RT_OUT
+  label: finishOutput · system 标签
+edges:
+- from: RT_EXEC
+  to: RT_ROUTE
+  mark: ->
+- from: RT_ROUTE
+  to: RT_TAIL
+  mark: '[ok]'
+- from: RT_ROUTE
+  to: RT_FWD
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 253
+- from: RT_FWD
+  to: RT_SCAN
+  mark: ::yields
+  type: yields
+- from: RT_SCAN
+  to: RT_COLLECT
+  mark: ->
+- from: RT_COLLECT
+  to: RT_LCAP
+  mark: ?>
+  type: condition
+- from: RT_LCAP
+  to: RT_ML
+  mark: '[ok]'
+- from: RT_COLLECT
+  to: RT_RENDER
+  mark: ->
+- from: RT_RENDER
+  to: RT_BCAP
+  mark: ?>
+  type: condition
+- from: RT_BCAP
+  to: RT_MB
+  mark: '[ok]'
+- from: RT_ML
+  to: RT_FIN
+  mark: ::merges
+  type: merges
+- from: RT_MB
+  to: RT_FIN
+  mark: ::merges
+  type: merges
+- from: RT_TAIL
+  to: RT_FIN
+  mark: ->
+- from: RT_FIN
+  to: RT_MSG
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 436
+- from: RT_MSG
+  to: RT_STATUS
+  mark: ?>
+  type: condition
+- from: RT_STATUS
+  to: RT_PL
+  mark: '[ok]'
+- from: RT_STATUS
+  to: RT_PB
+  mark: ->
+- from: RT_PB
+  to: RT_PBYTES
+  mark: '[ok]'
+- from: RT_PB
+  to: RT_EOF
+  mark: ?>
+  type: condition
+- from: RT_EOF
+  to: RT_PEOF
+  mark: '[ok]'
+- from: RT_MSG
+  to: RT_OUT
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 430
+notes: '| 常量 | 值 |
+
+  |------|-----|
+
+  | MAX_LINES | 1000 |
+
+  | MAX_BYTES | 102400 (100 KiB) |
+
+  | MAX_LINE_LENGTH | 2000 |
+
+  '

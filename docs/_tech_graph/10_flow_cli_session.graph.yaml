@@ -1,0 +1,129 @@
+graph_id: 10_flow_cli_session
+title: Flow：CLI 会话主循环 · approve-once vs session（#437 skeleton）
+description: CLI 启动 → TUI 审批 → agent-core 权限 · #437 增量骨架
+version: '2026-06-18'
+nodes:
+- id: CS_START
+  label: 进程启动 main
+- id: CS_PARSE
+  label: 解析 argv / 配置
+- id: CS_TUI
+  label: TUI 或 ACP 模式
+- id: CS_LOOP
+  label: 用户输入 / 事件
+- id: CS_SDK_CALL
+  label: 经 node-sdk 创建/恢复 Session
+- id: CS_AGENT
+  label: agent-core 处理轮次
+- id: CS_PERM
+  label: PermissionManager 策略链
+- id: CS_PERM_ASK
+  label: 需用户审批 · policy ask
+- id: CS_APPROVE_PANEL
+  label: ApprovalPanel · 四选项
+- id: CS_APPROVE_ONCE
+  label: Approve once · 无 scope
+- id: CS_APPROVE_SESSION
+  label: Approve for session · scope=session
+- id: CS_CONTROLLER
+  label: ApprovalController 队列 autoResolve
+- id: CS_SESSION_CACHE
+  label: sessionApprovalRulePatterns 缓存
+- id: CS_SESSION_HIST
+  label: session-approval-history 复用
+- id: CS_TOOLS
+  label: 工具 / 子 agent 执行
+- id: CS_EXIT
+  label: 退出 / 保存 checkpoint
+edges:
+- from: CS_START
+  to: CS_PARSE
+  mark: ->
+- from: CS_PARSE
+  to: CS_TUI
+  mark: ->
+- from: CS_TUI
+  to: CS_LOOP
+  mark: ->
+- from: CS_LOOP
+  to: CS_SDK_CALL
+  mark: ->
+- from: CS_SDK_CALL
+  to: CS_AGENT
+  mark: ->
+- from: CS_AGENT
+  to: CS_PERM
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/permission/index.ts
+    line: 96
+- from: CS_PERM
+  to: CS_PERM_ASK
+  mark: '[ok]'
+  type: condition
+- from: CS_PERM
+  to: CS_TOOLS
+  mark: '[err]'
+  type: condition
+- from: CS_PERM_ASK
+  to: CS_APPROVE_PANEL
+  mark: ->
+  anchors:
+  - path: apps/kimi-code/src/tui/kimi-tui.ts
+    line: 1136
+- from: CS_APPROVE_PANEL
+  to: CS_APPROVE_ONCE
+  mark: '[ok]'
+  type: condition
+  anchors:
+  - path: apps/kimi-code/src/tui/reverse-rpc/approval/adapter.ts
+    line: 7
+- from: CS_APPROVE_PANEL
+  to: CS_APPROVE_SESSION
+  mark: '[err]'
+  type: condition
+  anchors:
+  - path: apps/kimi-code/src/tui/reverse-rpc/approval/adapter.ts
+    line: 155
+- from: CS_APPROVE_ONCE
+  to: CS_CONTROLLER
+  mark: ->
+  anchors:
+  - path: apps/kimi-code/src/tui/reverse-rpc/approval/controller.ts
+    line: 19
+- from: CS_APPROVE_SESSION
+  to: CS_CONTROLLER
+  mark: ->
+- from: CS_CONTROLLER
+  to: CS_SESSION_CACHE
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/permission/index.ts
+    line: 192
+- from: CS_SESSION_CACHE
+  to: CS_SESSION_HIST
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/permission/policies/session-approval-history.ts
+    line: 17
+- from: CS_SESSION_HIST
+  to: CS_TOOLS
+  mark: ->
+- from: CS_TOOLS
+  to: CS_LOOP
+  mark: ->
+- from: CS_LOOP
+  to: CS_EXIT
+  mark: ->
+notes: |
+  **#437 骨架（2026-06-18）**：Approve once 仅当次 · Approve for session 写入
+  `sessionApprovalRule` + `localSessionApprovalRulePatterns` · TUI 队列同 action
+  在 scope=session 时可 autoResolve（controller.autoResolveFor）。
+
+  **产品修复面（待 30）**：
+  - Write/Edit 等同目录多文件 · session 规则粒度（#437 comment）
+  - Bash 等同命令复用 · 已有 permission 测试覆盖
+
+  **锚点入口**：
+  - `apps/kimi-code/src/main.ts`
+  - `apps/kimi-code/src/tui/reverse-rpc/approval/handler.ts`

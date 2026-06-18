@@ -1,0 +1,120 @@
+graph_id: 10_flow_agent_turn
+title: 'Flow：Agent 轮次 · tool 结果与 telemetry（C2 #583 切片）'
+description: tool 中止 → tool.result → tool_call telemetry outcome
+version: '2026-06-18'
+nodes:
+- id: AT_EXEC
+  label: tool 执行
+- id: AT_SETTLE
+  label: abort settle / 正常返回
+- id: AT_UC
+  label: isUserCancellation?
+- id: AT_MARK
+  label: cancelledByUser=true
+- id: AT_ERR
+  label: isError output 无 user 标记
+- id: AT_OK
+  label: isError false
+- id: AT_RESULT
+  label: ExecutableToolResult
+- id: AT_EVENT
+  label: LoopEvent tool.result
+- id: AT_TRACK
+  label: trackToolLifecycle
+- id: AT_OUTCOME
+  label: telemetryToolOutcome
+- id: AT_OC
+  label: outcome 分支
+- id: AT_TRACK_OK
+  label: properties outcome success
+- id: AT_TRACK_CANCEL
+  label: properties outcome cancelled
+- id: AT_TRACK_ERR
+  label: properties outcome error
+- id: AT_ERRTYPE
+  label: telemetryToolErrorType
+- id: AT_TELEM
+  label: telemetry.track tool_call
+edges:
+- from: AT_EXEC
+  to: AT_SETTLE
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/loop/tool-call.ts
+- from: AT_SETTLE
+  to: AT_UC
+  mark: ?>
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/utils/abort.ts
+- from: AT_UC
+  to: AT_MARK
+  mark: '[ok]'
+- from: AT_UC
+  to: AT_ERR
+  mark: '[err]'
+- from: AT_MARK
+  to: AT_RESULT
+  mark: ->
+- from: AT_ERR
+  to: AT_RESULT
+  mark: ->
+- from: AT_SETTLE
+  to: AT_OK
+  mark: '[ok]'
+- from: AT_OK
+  to: AT_RESULT
+  mark: ->
+- from: AT_RESULT
+  to: AT_EVENT
+  mark: ->
+- from: AT_EVENT
+  to: AT_TRACK
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 787
+- from: AT_TRACK
+  to: AT_OUTCOME
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/tool-telemetry.ts
+- from: AT_OUTCOME
+  to: AT_OC
+  mark: ?>
+  type: condition
+- from: AT_OC
+  to: AT_TRACK_OK
+  mark: ->
+  label: success
+- from: AT_OC
+  to: AT_TRACK_CANCEL
+  mark: ->
+  label: cancelled
+- from: AT_OC
+  to: AT_TRACK_ERR
+  mark: ->
+  label: error
+- from: AT_TRACK_ERR
+  to: AT_ERRTYPE
+  mark: ->
+- from: AT_ERRTYPE
+  to: AT_TRACK_ERR
+  mark: ->
+- from: AT_TRACK_OK
+  to: AT_TELEM
+  mark: ::archives
+  type: archives
+- from: AT_TRACK_CANCEL
+  to: AT_TELEM
+  mark: ::archives
+  type: archives
+- from: AT_TRACK_ERR
+  to: AT_TELEM
+  mark: ::archives
+  type: archives
+  anchors:
+  - path: packages/telemetry
+notes: |
+  **#437 关联（permission · 非本图节点增量）**：Write/Edit approve-for-session
+  按工具名缓存 session 规则 · `packages/agent-core/src/agent/permission/index.ts`

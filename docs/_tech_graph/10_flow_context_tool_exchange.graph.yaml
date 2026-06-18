@@ -1,0 +1,139 @@
+graph_id: 10_flow_context_tool_exchange
+title: 'Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）'
+description: ContextMemory · projector · steer · resume · orphan tool_calls
+version: '2026-06-18'
+nodes:
+- id: CTX_LOOP
+  label: appendLoopEvent
+- id: CTX_TC
+  label: tool.call · pending add
+- id: CTX_TR
+  label: tool.result · pending delete
+- id: CTX_GET
+  label: ContextMemory.messages
+- id: CTX_PROJ
+  label: project · microCompaction
+- id: CTX_LLM
+  label: generate / compaction
+- id: CTX_BG
+  label: Background notify
+- id: CTX_STEER
+  label: TurnFlow.steer · buffer
+- id: CTX_FLUSH
+  label: beforeStep flushSteerBuffer
+- id: CTX_AUM
+  label: appendUserMessage
+- id: CTX_PEND
+  label: pendingToolResultIds?
+- id: CTX_DEFER
+  label: deferredMessages
+- id: CTX_HIST
+  label: pushHistory
+- id: CTX_RES
+  label: Session.resumeAgent
+- id: CTX_AR
+  label: Agent.resume
+- id: CTX_REP
+  label: AgentRecords.replay
+- id: CTX_FIN
+  label: turn.finishResume
+- id: CTX_ORPHAN
+  label: orphan tool_calls → provider 400
+- id: CTX_TRIM
+  label: trimTrailingOpenToolExchange
+- id: CTX_INHERIT
+  label: 仅 useProjectedHistoryFrom
+edges:
+- from: CTX_LOOP
+  to: CTX_TC
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 247
+- from: CTX_TC
+  to: CTX_TR
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 263
+- from: CTX_TR
+  to: CTX_GET
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 196
+- from: CTX_GET
+  to: CTX_PROJ
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/projector.ts
+    line: 5
+- from: CTX_PROJ
+  to: CTX_LLM
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+- from: CTX_BG
+  to: CTX_STEER
+  mark: ::triggers
+  type: triggers
+  anchors:
+  - path: packages/agent-core/src/agent/background/index.ts
+    line: 557
+- from: CTX_STEER
+  to: CTX_FLUSH
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 608
+- from: CTX_FLUSH
+  to: CTX_AUM
+  mark: ->
+- from: CTX_AUM
+  to: CTX_PEND
+  mark: ?>
+  type: condition
+- from: CTX_PEND
+  to: CTX_DEFER
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 282
+- from: CTX_PEND
+  to: CTX_HIST
+  mark: '[err]'
+- from: CTX_RES
+  to: CTX_AR
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/index.ts
+    line: 297
+- from: CTX_AR
+  to: CTX_REP
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/records/index.ts
+    line: 175
+- from: CTX_REP
+  to: CTX_FIN
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 275
+- from: CTX_FIN
+  to: CTX_GET
+  mark: ->
+- from: CTX_PROJ
+  to: CTX_ORPHAN
+  mark: '[err]'
+- from: CTX_TRIM
+  to: CTX_INHERIT
+  mark: ::gates
+  type: gates
+  anchors:
+  - path: packages/agent-core/src/agent/context/projector.ts
+    line: 74
+notes: '**Path A**：loop → LLM · **Path B**：steer #705 race · **Path C**：resume · **main gap**：orphan tool_calls / trim 仅 inherit
+  路径。
+
+  '
