@@ -11,25 +11,25 @@
 ## Harness 元信息
 
 
-| 字段                       | 值                                                                                                           |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| **task_slug**            | `fix-approve-once-437`                                                                                      |
-| **test_strategy**        | `required`                                                                                                  |
-| **test_strategy_note**   | TUI approval reverse-rpc · agent-core permission session 缓存 · Write 同目录复用                                   |
-| **code_quality_bar**     | `strict`                                                                                                    |
-| **track**                | `bugfix`                                                                                                    |
-| **orchestration**        | **10-task**（R0–R5）→ **20** → **30** → **40**                                                                |
-| **audit_profile**        | `human_only`                                                                                                |
-| **git_branch**           | `feature/fix-437-approve-once`（产品）· meta 图谱 `cyning/meta`                                                   |
-| **worktree_root**        | `/Users/cyning/Desktop/Projects/kimi-code`                                                                  |
-| **meta_worktree**        | `/Users/cyning/Desktop/Projects/kimi-code-meta`                                                             |
-| **product_worktree**     | `/Users/cyning/Desktop/Projects/kimi-code`                                                                  |
-| **product_base_ref**     | `upstream/main...HEAD`                                                                                      |
-| **module_id**            | `cli`                                                                                                       |
-| **graph_delta**          | `10_flow_cli_session.graph.yaml` · `10_flow_agent_turn.graph.yaml`                                          |
-| **graph_delta_note**     | —                                                                                                           |
-| **graph_gate**           | `yaml_edit_before_30` · `close_partial_or_final`                                                            |
-| **entry_invoke_10_task** | [`PROMPT_START_10_v1.md`](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md) |
+| 字段                       | 值                                                                                                   |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| **task_slug**            | `fix-approve-once-437`                                                                              |
+| **test_strategy**        | `required`                                                                                          |
+| **test_strategy_note**   | TUI approval reverse-rpc · agent-core permission session 缓存 · Write 同目录复用                           |
+| **code_quality_bar**     | `strict`                                                                                            |
+| **track**                | `bugfix`                                                                                            |
+| **orchestration**        | **10-task**（R0–R5）→ **20** → **30** → **40**                                                        |
+| **audit_profile**        | `human_only`                                                                                        |
+| **git_branch**           | `feature/fix-437-approve-once-clean`（产品 · 30 G0）· meta `cyning/meta` |
+| **worktree_root**        | `/Users/cyning/Desktop/Projects/kimi-code`                                                          |
+| **meta_worktree**        | `/Users/cyning/Desktop/Projects/kimi-code-meta`                                                     |
+| **product_worktree**     | `/Users/cyning/Desktop/Projects/kimi-code`                                                          |
+| **product_base_ref**     | `upstream/main...HEAD`                                                                              |
+| **module_id**            | `cli`                                                                                               |
+| **graph_delta**          | `10_flow_cli_session.graph.yaml` · `10_flow_agent_turn.graph.yaml`                                  |
+| **graph_delta_note**     | —                                                                                                   |
+| **graph_gate**           | `yaml_edit_before_30` · `close_partial_or_final`                                                    |
+| **entry_invoke_10_task** | `[PROMPT_START_10_v1.md](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md)` |
 
 
 ### 人工闸
@@ -38,7 +38,7 @@
 | human_gate_id | status   | blocks_hats | 说明                               |
 | ------------- | -------- | ----------- | -------------------------------- |
 | HG-TASK-DRAFT | approved | 20-R1, 30   | meta skeleton 已 commit · 可 30 产品 |
-| HG-AUDIT-R1   | pending  | 30          | 20 R1 + 人签                       |
+| HG-AUDIT-R1   | approved | 30          | 22 R1 复审通过 · 2026-06-18 维护者签 |
 
 
 ---
@@ -79,11 +79,11 @@ Issue comment：目录下多次 **Write** 选 session 仍多次提示。
 ## 4. 给 10-task 交接物
 
 
-| 字段              | 值                                           |
-| --------------- | ------------------------------------------- |
-| **Open Folder** | `kimi-code`                                 |
-| **必读**          | 本 task · `10_flow_cli_session` · Issue #437 · [`PROMPT_START_10_v1.md`](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md)（§5 回填） |
-| **禁止**          | 10 会话改产品码（可选补 §5）                           |
+| 字段              | 值                                                                                                                                                        |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Open Folder** | `kimi-code`                                                                                                                                              |
+| **必读**          | 本 task · `10_flow_cli_session` · Issue #437 · `[PROMPT_START_10_v1.md](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md)`（§5 回填） |
+| **禁止**          | 10 会话改产品码（可选补 §5）                                                                                                                                        |
 
 
 ### 必读路径
@@ -101,17 +101,19 @@ Issue comment：目录下多次 **Write** 选 session 仍多次提示。
 
 ## 5. Kimi Code Agent · 思考轮次（改码前 · R0–R5）
 
-> **回填协议**：[`FRAGMENT_rethink_backfill_task_v1_zh.md`](../../harness/FRAGMENT_rethink_backfill_task_v1_zh.md)  
-> **invoke 快照**：[`invoke_20260618_10_fix-approve-once-backfill.md`](../../harness/invokes/by-task/fix-approve-once-437/invoke_20260618_10_fix-approve-once-backfill.md)
+> **回填协议**：`[FRAGMENT_rethink_backfill_task_v1_zh.md](../../harness/FRAGMENT_rethink_backfill_task_v1_zh.md)`  
+> **invoke 快照**：`[invoke_20260618_10_fix-approve-once-backfill.md](../../harness/invokes/by-task/fix-approve-once-437/invoke_20260618_10_fix-approve-once-backfill.md)`
 
 ### 思考轮控制（Agent 填 · 22 审）
 
-| 字段 | 值 |
-|------|-----|
-| **actual_last_round** | `R5` |
-| **early_stop** | `no` |
-| **early_stop_reason** | — |
-| **residual_risks** | ① Write/Edit **工具名** session 缓存 vs Bash **命令级** 缓存 · manual 验收：Write A + Write B（不同 path）session 仅 1 次弹窗；Bash 不同 command 仍分别弹窗。② session 缓存 **不**覆盖 explicit deny rule（已有 `does not let session approval override an explicit deny rule`）。③ Approve once：第二次同类 Write **仍**弹窗（无 `scope: session` · 无 pattern 写入）。④ 脏分支 `feature/fix-437-approve-once` 可能含 #94 read · **30 须用 clean** `feature/fix-437-approve-once-clean` / `98f1fa5f`。 |
+
+| 字段                    | 值                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **actual_last_round** | `R5`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **early_stop**        | `no`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **early_stop_reason** | —                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **residual_risks**    | ① Write/Edit **工具名** session 缓存 vs Bash **命令级** 缓存 · manual 验收：Write A + Write B（不同 path）session 仅 1 次弹窗；Bash 不同 command 仍分别弹窗。② session 缓存 **不**覆盖 explicit deny rule（已有 `does not let session approval override an explicit deny rule`）。③ Approve once：第二次同类 Write **仍**弹窗（无 `scope: session` · 无 pattern 写入）。④ 脏分支 `feature/fix-437-approve-once` 可能含 #94 read · **30 须用 clean** `feature/fix-437-approve-once-clean` / `98f1fa5f`。 |
+
 
 ### R0 · 读 task
 
@@ -250,10 +252,11 @@ PR 策略（30）：
 ## 6. 验收标准
 
 - [x] meta：`10_flow_cli_session.graph.yaml` skeleton + compile
-- [ ] 产品：`feature/fix-437-approve-once` · 修复 + 测试
+- [ ] 产品：`feature/fix-437-approve-once-clean` · 修复 + 测试 · upstream PR
 - [ ] `pnpm graph:issue-sync` exit 0
 - [ ] 上游 PR · `Fixes #437`
-- [ ] `HG-AUDIT-R1` approved · task → `done/`
+- [x] `HG-AUDIT-R1` approved（2026-06-18）
+- [ ] task → `done/`（G3 关账后）
 
 ---
 
@@ -270,9 +273,9 @@ pnpm graph:issue-sync \
 
 # 产品
 cd ../kimi-code
-git checkout -b feature/fix-437-approve-once
+git checkout feature/fix-437-approve-once-clean
 pnpm --filter @moonshot-ai/agent-core test -- permission.test.ts
-pnpm --filter @moonshot-ai/kimi-code test -- test/tui/reverse-rpc/approval
+pnpm --filter @moonshot-ai/kimi-code test -- test/tui/reverse-rpc/approval-adapter.test.ts
 ```
 
 ---
@@ -280,10 +283,10 @@ pnpm --filter @moonshot-ai/kimi-code test -- test/tui/reverse-rpc/approval
 ## 8. 实现备忘
 
 
-| 项                   | 状态  | 备注                                   |
-| ------------------- | --- | ------------------------------------ |
-| meta skeleton YAML  | ✅   | `e08a56b2` · `d76c4da5` · `1a89ab2e` |
+| 项                   | 状态  | 备注                                      |
+| ------------------- | --- | --------------------------------------- |
+| meta skeleton YAML  | ✅   | `e08a56b2` · `d76c4da5` · `1a89ab2e`    |
 | 产品 Write session 粒度 | ✅   | 本地 clean `98f1fa5f` 已验证 · 待 upstream PR |
-| graph_issue_sync    | ✅   | L3 mock 绿 · 待 G3 关账 SHA |
+| graph_issue_sync    | ✅   | L3 mock 绿 · 待 G3 关账 SHA                 |
 
 
