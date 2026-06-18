@@ -20,4 +20,5 @@
 - [x] meta skeleton YAML（`cyning/meta` · `e08a56b2`）
 - [x] 产品修复草稿 `eedd430c`（须 cherry-pick 到干净分支）
 - [x] `graph:issue-sync` L1+L2+L3 PASS
-- [ ] 上游 PR · `HG-AUDIT-R1` · task → `done/`
+- [x] 10 §5 思考轮回填（`invoke_20260618_10` · 22 R1 复审 **通过**）
+- [ ] 维护者签 **HG-AUDIT-R1** · 上游 PR · task → `done/`

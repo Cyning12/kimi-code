@@ -7,7 +7,8 @@
 
 | 文档 | 说明 |
 |------|------|
-| [`task_fix_approve_once_437_v1_audit_R1_20260618.md`](./task_fix_approve_once_437_v1_audit_R1_20260618.md) | 22 R1 · #437 Approve once vs session · **不通过** · §5 待 10 回填 · HG-AUDIT-R1 pending |
+| [`task_fix_approve_once_437_v1_audit_R1_20260618_reaudit.md`](./task_fix_approve_once_437_v1_audit_R1_20260618_reaudit.md) | 22 R1 **复审** · #437 · **通过** · 建议签 HG-AUDIT-R1 · pending |
+| [`task_fix_approve_once_437_v1_audit_R1_20260618.md`](./task_fix_approve_once_437_v1_audit_R1_20260618.md) | 22 R1 初审 · **不通过** · §5 待 10 回填 |
 | [`task_meta_graph_issue_sync_gate_v1_audit_R1_20260618.md`](./task_meta_graph_issue_sync_gate_v1_audit_R1_20260618.md) | 20 R1 · Issue sync gate L2/L3 · **通过** · HG-AUDIT-R1 approved（2026-06-18） |
 | [`task_meta_graph_v2_batch_migrate_v1_audit_R1_20260618.md`](./task_meta_graph_v2_batch_migrate_v1_audit_R1_20260618.md) | 22 R1 · graph_v2 batch YAML 迁移 · HG-AUDIT-R1 待签 |
 | [`task_fix_read_dual_limit_94_audit_R1_20260612.md`](./task_fix_read_dual_limit_94_audit_R1_20260612.md) | 20 R1 审查 · 关账 PR [#708](https://github.com/MoonshotAI/kimi-code/pull/708) |
