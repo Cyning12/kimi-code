@@ -13,8 +13,8 @@ coverage/
 .conductor
 .kimi-stash-dir
 plugins/cdn/
-superpowers
 .worktrees/
+.kimi-code/local.toml
 
 Dockerfile
 docker-compose.yml
