@@ -1,7 +1,7 @@
 ---
 graph_id: 10_flow_read_tool
 version: 2026-06-18
-generated_at: 2026-06-18T14:26:55Z
+generated_at: 2026-06-26T07:36:26Z
 source: docs/_tech_graph/10_flow_read_tool.graph.yaml
 ---
 
@@ -70,7 +70,7 @@ flowchart TD
 
 | ID | Label | Kind |
 |----|-------|------|
-| RT_EXEC | ReadTool.execution |  |
+| RT_EXEC | ReadTool.execution | flow |
 | RT_ROUTE | line_offset < 0? |  |
 | RT_TAIL | readTail |  |
 | RT_FWD | readForward |  |

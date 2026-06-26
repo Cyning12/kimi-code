@@ -477,7 +477,12 @@
       "type": "depends_on"
     },
     {
-      "anchors": [],
+      "anchors": [
+        {
+          "path": "packages/node-sdk/src",
+          "symbol": ""
+        }
+      ],
       "from": "CS_LOOP",
       "graph_id": "10_flow_cli_session",
       "label": "",
@@ -1240,7 +1245,7 @@
     }
   ],
   "freeze_id": "KIMI-META-GRAPH-V2-BATCH@0fa2d54f",
-  "generated_at": "2026-06-18T14:26:55Z",
+  "generated_at": "2026-06-26T07:36:26Z",
   "graphs": [
     {
       "id": "00_main",
@@ -1277,7 +1282,9 @@
     {
       "graph_id": "00_main",
       "id": "AC",
-      "label": "agent-core<br/>Agent / Session / tools"
+      "kind": "struct",
+      "label": "agent-core<br/>Agent / Session / tools",
+      "module_id": "agent_core"
     },
     {
       "graph_id": "10_flow_agent_turn",
@@ -1297,7 +1304,9 @@
     {
       "graph_id": "10_flow_agent_turn",
       "id": "AT_EXEC",
-      "label": "tool 执行"
+      "kind": "flow",
+      "label": "tool 执行",
+      "module_id": "agent_core"
     },
     {
       "graph_id": "10_flow_agent_turn",
@@ -1362,17 +1371,23 @@
     {
       "graph_id": "00_main",
       "id": "AUTH",
-      "label": "oauth"
+      "kind": "struct",
+      "label": "oauth",
+      "module_id": "oauth"
     },
     {
       "graph_id": "00_main",
       "id": "CLI",
-      "label": "kimi CLI / TUI<br/>apps/kimi-code"
+      "kind": "struct",
+      "label": "kimi CLI / TUI<br/>apps/kimi-code",
+      "module_id": "cli"
     },
     {
       "graph_id": "10_flow_cli_session",
       "id": "CS_AGENT",
-      "label": "agent-core 处理轮次"
+      "kind": "flow",
+      "label": "agent-core 处理轮次",
+      "module_id": "agent_core"
     },
     {
       "graph_id": "10_flow_cli_session",
@@ -1422,7 +1437,9 @@
     {
       "graph_id": "10_flow_cli_session",
       "id": "CS_SDK_CALL",
-      "label": "经 node-sdk 创建/恢复 Session"
+      "kind": "flow",
+      "label": "经 node-sdk 创建/恢复 Session",
+      "module_id": "node_sdk"
     },
     {
       "graph_id": "10_flow_cli_session",
@@ -1437,7 +1454,9 @@
     {
       "graph_id": "10_flow_cli_session",
       "id": "CS_START",
-      "label": "进程启动 main"
+      "kind": "flow",
+      "label": "进程启动 main",
+      "module_id": "cli"
     },
     {
       "graph_id": "10_flow_cli_session",
@@ -1502,7 +1521,9 @@
     {
       "graph_id": "10_flow_context_tool_exchange",
       "id": "CTX_LOOP",
-      "label": "appendLoopEvent"
+      "kind": "flow",
+      "label": "appendLoopEvent",
+      "module_id": "agent_core"
     },
     {
       "graph_id": "10_flow_context_tool_exchange",
@@ -1552,42 +1573,59 @@
     {
       "graph_id": "00_main",
       "id": "FLOW_CLI",
+      "kind": "flow",
       "label": "CLI 会话主循环"
     },
     {
       "graph_id": "00_main",
       "id": "FLOW_CTX",
+      "kind": "flow",
       "label": ">10_flow_context_tool_exchange.md"
     },
     {
       "graph_id": "00_main",
       "id": "FLOW_DOC",
+      "kind": "flow",
       "label": ">10_flow_cli_session.md"
     },
     {
       "graph_id": "00_main",
       "id": "FLOW_READ",
+      "kind": "flow",
       "label": ">10_flow_read_tool.md"
     },
     {
       "graph_id": "00_main",
       "id": "FLOW_SKILL",
+      "kind": "flow",
       "label": ">10_flow_skill_load.md"
     },
     {
       "graph_id": "00_main",
       "id": "FLOW_TURN",
+      "kind": "flow",
       "label": ">10_flow_agent_turn.md"
     },
     {
       "graph_id": "00_main",
       "id": "KA",
-      "label": "kaos · shell / 文件"
+      "kind": "struct",
+      "label": "kaos · shell / 文件",
+      "module_id": "kaos"
     },
     {
       "graph_id": "00_main",
       "id": "KS",
-      "label": "kosong · LLM 调用"
+      "kind": "struct",
+      "label": "kosong · LLM 调用",
+      "module_id": "kosong"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "MONO",
+      "kind": "struct",
+      "label": "monorepo · docs/tools/harness",
+      "module_id": "monorepo_root"
     },
     {
       "graph_id": "10_flow_read_tool",
@@ -1607,7 +1645,9 @@
     {
       "graph_id": "10_flow_read_tool",
       "id": "RT_EXEC",
-      "label": "ReadTool.execution"
+      "kind": "flow",
+      "label": "ReadTool.execution",
+      "module_id": "agent_core"
     },
     {
       "graph_id": "10_flow_read_tool",
@@ -1692,7 +1732,9 @@
     {
       "graph_id": "00_main",
       "id": "SDK",
-      "label": "@moonshot-ai/kimi-code-sdk<br/>packages/node-sdk"
+      "kind": "struct",
+      "label": "@moonshot-ai/kimi-code-sdk<br/>packages/node-sdk",
+      "module_id": "node_sdk"
     },
     {
       "graph_id": "10_flow_skill_load",
@@ -1742,7 +1784,9 @@
     {
       "graph_id": "10_flow_skill_load",
       "id": "SK_SCAN",
-      "label": "scanner.discoverSkills"
+      "kind": "flow",
+      "label": "scanner.discoverSkills",
+      "module_id": "agent_core"
     },
     {
       "graph_id": "10_flow_skill_load",
@@ -1757,16 +1801,20 @@
     {
       "graph_id": "00_main",
       "id": "TELEM",
-      "label": "telemetry"
+      "kind": "struct",
+      "label": "telemetry",
+      "module_id": "telemetry"
     },
     {
       "graph_id": "00_main",
       "id": "TOOLS",
+      "kind": "flow",
       "label": "skills · MCP · subagents"
     },
     {
       "graph_id": "00_main",
       "id": "U",
+      "kind": "external",
       "label": "用户终端"
     }
   ],

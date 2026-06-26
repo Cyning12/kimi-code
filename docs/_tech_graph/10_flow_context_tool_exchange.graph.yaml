@@ -5,6 +5,8 @@ version: '2026-06-18'
 nodes:
 - id: CTX_LOOP
   label: appendLoopEvent
+  module_id: agent_core
+  kind: flow
 - id: CTX_TC
   label: tool.call · pending add
 - id: CTX_TR

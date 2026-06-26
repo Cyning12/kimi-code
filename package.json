@@ -33,6 +33,8 @@
     "graph:export": "python3 tools/tech_graph/tech_graph_graph_export.py",
     "graph:export:check": "python3 tools/tech_graph/tech_graph_graph_export.py --check",
     "graph:equivalence": "python3 tools/tech_graph/tech_graph_graph_equivalence_check.py",
+    "graph:completeness": "python3 tools/tech_graph/graph_completeness_check.py",
+    "graph:ci": "pnpm graph:compile:check && pnpm graph:export:check && pnpm graph:equivalence && pnpm graph:completeness",
     "graph:issue-sync": "python3 tools/tech_graph/graph_issue_sync.py",
     "prepare": "simple-git-hooks"
   },

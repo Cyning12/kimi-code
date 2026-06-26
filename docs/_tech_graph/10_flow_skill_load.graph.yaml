@@ -5,6 +5,8 @@ version: '2026-06-18'
 nodes:
 - id: SK_SCAN
   label: scanner.discoverSkills
+  module_id: agent_core
+  kind: flow
 - id: SK_READ
   label: 读取 SKILL.md
 - id: SK_PARSE

@@ -157,13 +157,16 @@ def build_yaml_graph_v2(
         graphs.append(graph_entry)
 
         for n in data.get("nodes", []):
-            nodes.append(
-                {
-                    "id": n["id"],
-                    "label": n.get("label", n["id"]),
-                    "graph_id": graph_id,
-                }
-            )
+            entry: dict[str, Any] = {
+                "id": n["id"],
+                "label": n.get("label", n["id"]),
+                "graph_id": graph_id,
+            }
+            if n.get("kind"):
+                entry["kind"] = n["kind"]
+            if n.get("module_id"):
+                entry["module_id"] = n["module_id"]
+            nodes.append(entry)
 
         for e in data.get("edges", []):
             mark, typ, sync, label = _yaml_edge_to_graph_v2(e)

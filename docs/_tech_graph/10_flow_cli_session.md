@@ -1,7 +1,7 @@
 ---
 graph_id: 10_flow_cli_session
 version: 2026-06-18
-generated_at: 2026-06-18T14:26:55Z
+generated_at: 2026-06-26T07:36:26Z
 source: docs/_tech_graph/10_flow_cli_session.graph.yaml
 ---
 
@@ -34,6 +34,7 @@ flowchart TD
     CS_PARSE --> CS_TUI
     CS_TUI --> CS_LOOP
     CS_LOOP --> CS_SDK_CALL
+    // → packages/node-sdk/src
     CS_SDK_CALL --> CS_AGENT
     CS_AGENT --> CS_PERM
     // → packages/agent-core/src/agent/permission/index.ts#L96
@@ -67,12 +68,12 @@ flowchart TD
 
 | ID | Label | Kind |
 |----|-------|------|
-| CS_START | 进程启动 main |  |
+| CS_START | 进程启动 main | flow |
 | CS_PARSE | 解析 argv / 配置 |  |
 | CS_TUI | TUI 或 ACP 模式 |  |
 | CS_LOOP | 用户输入 / 事件 |  |
-| CS_SDK_CALL | 经 node-sdk 创建/恢复 Session |  |
-| CS_AGENT | agent-core 处理轮次 |  |
+| CS_SDK_CALL | 经 node-sdk 创建/恢复 Session | flow |
+| CS_AGENT | agent-core 处理轮次 | flow |
 | CS_PERM | PermissionManager 策略链 |  |
 | CS_PERM_ASK | 需用户审批 · policy ask |  |
 | CS_APPROVE_PANEL | ApprovalPanel · 四选项 |  |
@@ -91,7 +92,7 @@ flowchart TD
 | CS_START | CS_PARSE | -> | depends_on |  |  |
 | CS_PARSE | CS_TUI | -> | depends_on |  |  |
 | CS_TUI | CS_LOOP | -> | depends_on |  |  |
-| CS_LOOP | CS_SDK_CALL | -> | depends_on |  |  |
+| CS_LOOP | CS_SDK_CALL | -> | depends_on |  | 1 anchor(s) |
 | CS_SDK_CALL | CS_AGENT | -> | depends_on |  |  |
 | CS_AGENT | CS_PERM | -> | depends_on |  | 1 anchor(s) |
 | CS_PERM | CS_PERM_ASK | [ok] | condition |  |  |

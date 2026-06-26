@@ -20,6 +20,9 @@ pnpm graph:compile          # YAML → .md
 pnpm graph:compile:check    # CI：.md 须与 YAML 一致
 pnpm graph:export           # 写 graph.json
 pnpm graph:export:check     # CI：graph.json 须与 export 一致
+pnpm graph:equivalence      # YAML 与 graph.json 拓扑等价
+pnpm graph:completeness     # 模块覆盖率 · P0 边 · N_min
+pnpm graph:ci               # 一键：compile + export + equivalence + completeness
 pnpm graph:issue-sync --task docs/tasks/active/<task>.md
 ```
 

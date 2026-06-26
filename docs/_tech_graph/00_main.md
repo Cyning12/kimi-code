@@ -1,7 +1,7 @@
 ---
 graph_id: 00_main
-version: 2026-06-18
-generated_at: 2026-06-18T14:26:55Z
+version: 2026-06-26
+generated_at: 2026-06-26T07:36:26Z
 source: docs/_tech_graph/00_main.graph.yaml
 ---
 
@@ -28,6 +28,7 @@ flowchart TD
     FLOW_DOC[>10_flow_cli_session.md]
     TELEM[telemetry]
     AUTH[oauth]
+    MONO[monorepo · docs/tools/harness]
 
     U --> CLI
     CLI --> SDK
@@ -59,21 +60,22 @@ flowchart TD
 
 | ID | Label | Kind |
 |----|-------|------|
-| U | 用户终端 |  |
-| CLI | kimi CLI / TUI<br/>apps/kimi-code |  |
-| SDK | @moonshot-ai/kimi-code-sdk<br/>packages/node-sdk |  |
-| AC | agent-core<br/>Agent / Session / tools |  |
-| KS | kosong · LLM 调用 |  |
-| KA | kaos · shell / 文件 |  |
-| TOOLS | skills · MCP · subagents |  |
-| FLOW_SKILL | >10_flow_skill_load.md |  |
-| FLOW_TURN | >10_flow_agent_turn.md |  |
-| FLOW_READ | >10_flow_read_tool.md |  |
-| FLOW_CTX | >10_flow_context_tool_exchange.md |  |
-| FLOW_CLI | CLI 会话主循环 |  |
-| FLOW_DOC | >10_flow_cli_session.md |  |
-| TELEM | telemetry |  |
-| AUTH | oauth |  |
+| U | 用户终端 | external |
+| CLI | kimi CLI / TUI<br/>apps/kimi-code | struct |
+| SDK | @moonshot-ai/kimi-code-sdk<br/>packages/node-sdk | struct |
+| AC | agent-core<br/>Agent / Session / tools | struct |
+| KS | kosong · LLM 调用 | struct |
+| KA | kaos · shell / 文件 | struct |
+| TOOLS | skills · MCP · subagents | flow |
+| FLOW_SKILL | >10_flow_skill_load.md | flow |
+| FLOW_TURN | >10_flow_agent_turn.md | flow |
+| FLOW_READ | >10_flow_read_tool.md | flow |
+| FLOW_CTX | >10_flow_context_tool_exchange.md | flow |
+| FLOW_CLI | CLI 会话主循环 | flow |
+| FLOW_DOC | >10_flow_cli_session.md | flow |
+| TELEM | telemetry | struct |
+| AUTH | oauth | struct |
+| MONO | monorepo · docs/tools/harness | struct |
 
 ### Edges
 

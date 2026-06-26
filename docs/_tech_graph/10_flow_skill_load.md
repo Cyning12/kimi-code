@@ -1,7 +1,7 @@
 ---
 graph_id: 10_flow_skill_load
 version: 2026-06-18
-generated_at: 2026-06-18T14:26:55Z
+generated_at: 2026-06-26T07:36:26Z
 source: docs/_tech_graph/10_flow_skill_load.graph.yaml
 ---
 
@@ -58,7 +58,7 @@ flowchart TD
 
 | ID | Label | Kind |
 |----|-------|------|
-| SK_SCAN | scanner.discoverSkills |  |
+| SK_SCAN | scanner.discoverSkills | flow |
 | SK_READ | 读取 SKILL.md |  |
 | SK_PARSE | parseSkillText |  |
 | SK_OK | 解析成功? |  |

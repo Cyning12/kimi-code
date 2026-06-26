@@ -5,6 +5,8 @@ version: '2026-06-18'
 nodes:
 - id: CS_START
   label: 进程启动 main
+  module_id: cli
+  kind: flow
 - id: CS_PARSE
   label: 解析 argv / 配置
 - id: CS_TUI
@@ -13,8 +15,12 @@ nodes:
   label: 用户输入 / 事件
 - id: CS_SDK_CALL
   label: 经 node-sdk 创建/恢复 Session
+  module_id: node_sdk
+  kind: flow
 - id: CS_AGENT
   label: agent-core 处理轮次
+  module_id: agent_core
+  kind: flow
 - id: CS_PERM
   label: PermissionManager 策略链
 - id: CS_PERM_ASK
@@ -48,6 +54,8 @@ edges:
 - from: CS_LOOP
   to: CS_SDK_CALL
   mark: ->
+  anchors:
+  - path: packages/node-sdk/src
 - from: CS_SDK_CALL
   to: CS_AGENT
   mark: ->

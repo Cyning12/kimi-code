@@ -13,3 +13,4 @@
 | 2026-06-18 | **graph_v2 batch CLOSE**：6 图 `*.graph.yaml` 唯一编辑源 · compile → `.md` · export `graph.json` v2 · task `meta-graph-v2-batch-migrate` |
 | 2026-06-18 | **issue sync gate CLOSE**：L2/L3 门禁 · `graph_module_flow_map.yaml` · `pnpm graph:issue-sync` · `KIMI-META-GRAPH-SYNC-GATE@ecc7b9dc` |
 | 2026-06-18 | C3 #437：`10_flow_cli_session` **skeleton** · approve-once vs session · task `fix-approve-once-437` |
+| 2026-06-26 | **meta-graph-interview-complete Epic CLOSE**：WS-0–5 · `graph:ci` · flow_map 全模块 · 00 复检 |

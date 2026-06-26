@@ -5,6 +5,8 @@ version: '2026-06-18'
 nodes:
 - id: AT_EXEC
   label: tool 执行
+  module_id: agent_core
+  kind: flow
 - id: AT_SETTLE
   label: abort settle / 正常返回
 - id: AT_UC

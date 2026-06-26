@@ -26,6 +26,7 @@
     "symbol": "string",
     "line": "integer",
     "kind": "string",
+    "module_id": "string",
     "graph_id": "string",
     "source_ai_path": "string",
     "source_yaml_path": "string",
