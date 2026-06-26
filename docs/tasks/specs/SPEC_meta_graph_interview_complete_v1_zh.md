@@ -1,6 +1,6 @@
 # SPEC · meta 图谱一次性补齐 + 本地 CI 门禁（面试加速 · v1）
 
-> **状态**：`10-spec-complete`（初版 + 思考轮 R0–R6 已回填 · 待 20-spec-audit → **HG-SPEC-SIGNOFF**）  
+> **状态**：`spec-signed`（初版 + 思考轮 R0–R6 + 20-spec-audit **conditional_pass** · **HG-SPEC-SIGNOFF approved 2026-06-26** · 待 00 拆 task）  
 > **track**：`epic`  
 > **域**：Track C · `Cyning12/kimi-code` @ **`cyning/meta`** · 本地目录 **`kimi-code-meta/`**  
 > **关联图谱**：`docs/_tech_graph/` · [`01_struct.md`](../../_tech_graph/01_struct.md) · [`graph_module_flow_map.yaml`](../../_tech_graph/graph_module_flow_map.yaml)  
@@ -20,7 +20,7 @@
 | **orchestration** | **00 @ `Projects/` 自编排** · 维护者仅签收 SPEC / 思考轮 / 成品 |
 | **git_branch** | `cyning/meta` |
 | **worktree_root** | `kimi-code-meta/` |
-| **human_gate（维护者）** | `HG-SPEC-SIGNOFF`（初版 §1–§6 **approved** 2026-06-26 · 思考轮待签）· `HG-GRAPH-INTERVIEW-CLOSE` |
+| **human_gate（维护者）** | `HG-SPEC-SIGNOFF`（初版 §1–§6 + 思考轮 R0–R6 + 20-spec-audit · **approved 2026-06-26**）· `HG-GRAPH-INTERVIEW-CLOSE`（pending） |
 | **10-spec rounds** | [`Projects/docs/harness/invokes/by-task/meta-graph-interview-complete/rounds/`](../../../../docs/harness/invokes/by-task/meta-graph-interview-complete/rounds/) |
 | **entry_invoke_10_spec** | [`Projects/docs/harness/invokes/by-task/meta-graph-interview-complete/PROMPT_10_spec_rethink_R1_R5.md`](../../../../docs/harness/invokes/by-task/meta-graph-interview-complete/PROMPT_10_spec_rethink_R1_R5.md) |
 | **handoff_prompt** | [`PROMPT_START_handoff_new_agent_v1_zh.md`](../../../../docs/harness/invokes/by-task/meta-graph-interview-complete/PROMPT_START_handoff_new_agent_v1_zh.md) · **已移交新 Agent** |
@@ -195,7 +195,7 @@
 | 序 | 节点 | 维护者动作 |
 | --- | --- | --- |
 | 1 | **初版 SPEC** | 读 §1–§6 · **approved 2026-06-26** |
-| 2 | **多轮思考文档** | 读 `rounds/` R0–R6 + 20-spec-audit · **HG-SPEC-SIGNOFF pending** |
+| 2 | **多轮思考文档** | 读 `rounds/` R0–R6 + 20-spec-audit（conditional_pass）· **HG-SPEC-SIGNOFF approved 2026-06-26** |
 | 3 | **成品** | `pnpm graph:ci` 绿 · 图谱 PR 合并 · `HG-GRAPH-INTERVIEW-CLOSE` |
 
 ---
@@ -206,3 +206,4 @@
 | --- | --- |
 | 2026-06-21 | 00 起草 · 面试加速 · 批量补齐 + 本地 CI · 00 自编排并行 |
 | 2026-06-26 | 维护者初版签收 + B1–B4 · 10-spec R0–R6 回填 · 子 Agent 思考轮纪律 |
+| 2026-06-26 | 20-spec-audit R1 **conditional_pass**（4 非阻塞移交 WS-0/WS-1/WS-5）· 维护者 **HG-SPEC-SIGNOFF approved** · 状态 → `spec-signed` · 待 00 拆 task |
