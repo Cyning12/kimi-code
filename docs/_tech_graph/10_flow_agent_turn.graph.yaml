@@ -1,122 +1,296 @@
 graph_id: 10_flow_agent_turn
-title: 'Flow：Agent 轮次 · tool 结果与 telemetry（C2 #583 切片）'
-description: tool 中止 → tool.result → tool_call telemetry outcome
-version: '2026-06-18'
+title: 'Flow：Agent 轮次 · TurnFlow.runOneTurn / runStepLoop'
+description: prompt/launch → turnWorker → runOneTurn → runStepLoop → runTurn（折叠 turn-step）→ authorize/finalize → turn.ended；#583 telemetry 为侧链
+version: '2026-08-28'
 nodes:
-- id: AT_EXEC
-  label: tool 执行
+- id: AT_LAUNCH
+  label: TurnFlow.prompt / launch
   module_id: agent_core
   kind: flow
-- id: AT_SETTLE
-  label: abort settle / 正常返回
-- id: AT_UC
-  label: isUserCancellation?
-- id: AT_MARK
-  label: cancelledByUser=true
-- id: AT_ERR
-  label: isError output 无 user 标记
-- id: AT_OK
-  label: isError false
-- id: AT_RESULT
-  label: ExecutableToolResult
-- id: AT_EVENT
-  label: LoopEvent tool.result
+- id: AT_WORKER
+  label: turnWorker
+- id: AT_GOAL
+  label: driveGoal 续轮
+- id: AT_ONE
+  label: runOneTurn
+- id: AT_HOOK
+  label: applyUserPromptHook
+- id: AT_LOOP
+  label: runStepLoop
+- id: AT_STEP
+  label: runTurn 步循环（折叠 turn-step）
+- id: AT_AUTH
+  label: prepare + authorizeToolExecution
+- id: AT_EXEC
+  label: runToolCallBatch / execute
+- id: AT_ABORT_TOOL
+  label: abort settle / isUserCancellation
+- id: AT_FINAL
+  label: finalizeToolResult / budget
+- id: AT_CONT
+  label: shouldContinueAfterStop?
+- id: AT_ENDED
+  label: turn.ended
+- id: AT_ABORT
+  label: cancelled / isAbortError
+- id: AT_FAIL
+  label: failed / maxSteps / api_error
 - id: AT_TRACK
-  label: trackToolLifecycle
-- id: AT_OUTCOME
-  label: telemetryToolOutcome
+  label: trackToolLifecycle（#583 侧链）
 - id: AT_OC
-  label: outcome 分支
-- id: AT_TRACK_OK
-  label: properties outcome success
-- id: AT_TRACK_CANCEL
-  label: properties outcome cancelled
-- id: AT_TRACK_ERR
-  label: properties outcome error
-- id: AT_ERRTYPE
-  label: telemetryToolErrorType
+  label: telemetryToolOutcome
 - id: AT_TELEM
   label: telemetry.track tool_call
 edges:
-- from: AT_EXEC
-  to: AT_SETTLE
-  mark: ->
-  anchors:
-  - path: packages/agent-core/src/loop/tool-call.ts
-- from: AT_SETTLE
-  to: AT_UC
-  mark: ?>
-  type: condition
-  anchors:
-  - path: packages/agent-core/src/utils/abort.ts
-- from: AT_UC
-  to: AT_MARK
-  mark: '[ok]'
-- from: AT_UC
-  to: AT_ERR
-  mark: '[err]'
-- from: AT_MARK
-  to: AT_RESULT
-  mark: ->
-- from: AT_ERR
-  to: AT_RESULT
-  mark: ->
-- from: AT_SETTLE
-  to: AT_OK
-  mark: '[ok]'
-- from: AT_OK
-  to: AT_RESULT
-  mark: ->
-- from: AT_RESULT
-  to: AT_EVENT
-  mark: ->
-- from: AT_EVENT
-  to: AT_TRACK
+- from: AT_LAUNCH
+  to: AT_WORKER
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/turn/index.ts
-    line: 787
-- from: AT_TRACK
-  to: AT_OUTCOME
-  mark: ->
-  anchors:
-  - path: packages/agent-core/src/agent/turn/tool-telemetry.ts
-- from: AT_OUTCOME
-  to: AT_OC
+    line: 123
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 151
+- from: AT_WORKER
+  to: AT_ONE
   mark: ?>
   type: condition
-- from: AT_OC
-  to: AT_TRACK_OK
-  mark: ->
-  label: success
-- from: AT_OC
-  to: AT_TRACK_CANCEL
-  mark: ->
-  label: cancelled
-- from: AT_OC
-  to: AT_TRACK_ERR
-  mark: ->
-  label: error
-- from: AT_TRACK_ERR
-  to: AT_ERRTYPE
-  mark: ->
-- from: AT_ERRTYPE
-  to: AT_TRACK_ERR
-  mark: ->
-- from: AT_TRACK_OK
-  to: AT_TELEM
-  mark: ::archives
-  type: archives
-- from: AT_TRACK_CANCEL
-  to: AT_TELEM
-  mark: ::archives
-  type: archives
-- from: AT_TRACK_ERR
-  to: AT_TELEM
-  mark: ::archives
-  type: archives
+  label: 无 active goal
   anchors:
-  - path: packages/telemetry
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 320
+- from: AT_WORKER
+  to: AT_GOAL
+  mark: ?>
+  type: condition
+  label: goal.active
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 318
+- from: AT_GOAL
+  to: AT_ONE
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 358
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 380
+- from: AT_ONE
+  to: AT_HOOK
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 445
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 472
+- from: AT_HOOK
+  to: AT_LOOP
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 477
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 622
+- from: AT_HOOK
+  to: AT_ENDED
+  mark: '[err]'
+  label: UserPromptSubmit blocked
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 568
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 586
+- from: AT_LOOP
+  to: AT_STEP
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 626
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 630
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 637
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 48
+- from: AT_LOOP
+  to: AT_LOOP
+  mark: '[err]'
+  label: CONTEXT_OVERFLOW compaction retry
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 765
+- from: AT_LOOP
+  to: AT_FAIL
+  mark: '[err]'
+  label: maxStepsExceeded
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 770
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 78
+- from: AT_LOOP
+  to: AT_ABORT
+  mark: '[err]'
+  label: stopReason aborted
+  anchors:
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 119
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 481
+- from: AT_STEP
+  to: AT_AUTH
+  mark: ?>
+  type: condition
+  label: tool_use
+  anchors:
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 99
+  - path: packages/agent-core/src/loop/turn-step.ts
+    line: 46
+- from: AT_STEP
+  to: AT_CONT
+  mark: '[ok]'
+  label: 非 tool_use
+  anchors:
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 103
+- from: AT_AUTH
+  to: AT_EXEC
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 717
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 726
+  - path: packages/agent-core/src/agent/turn/tool-dedup.ts
+    line: 176
+  - path: packages/agent-core/src/agent/permission/index.ts
+    line: 96
+  - path: packages/agent-core/src/loop/tool-call.ts
+    line: 426
+- from: AT_EXEC
+  to: AT_FINAL
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/loop/tool-call.ts
+    line: 122
+  - path: packages/agent-core/src/loop/tool-call.ts
+    line: 507
+- from: AT_EXEC
+  to: AT_ABORT_TOOL
+  mark: '[err]'
+  label: abort settle
+  anchors:
+  - path: packages/agent-core/src/loop/tool-call.ts
+    line: 56
+  - path: packages/agent-core/src/loop/tool-call.ts
+    line: 306
+  - path: packages/agent-core/src/utils/abort.ts
+    line: 31
+- from: AT_ABORT_TOOL
+  to: AT_FINAL
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/loop/tool-call.ts
+    line: 512
+- from: AT_FINAL
+  to: AT_CONT
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 729
+  - path: packages/agent-core/src/agent/turn/tool-result-budget.ts
+    line: 19
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 671
+- from: AT_CONT
+  to: AT_STEP
+  mark: '[ok]'
+  label: continue
+  anchors:
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 109
+- from: AT_CONT
+  to: AT_ENDED
+  mark: '[ok]'
+  label: stop
+  anchors:
+  - path: packages/agent-core/src/loop/run-turn.ts
+    line: 116
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 537
+- from: AT_ONE
+  to: AT_ABORT
+  mark: '[err]'
+  label: isAbortError
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 489
+- from: AT_ONE
+  to: AT_FAIL
+  mark: '[err]'
+  label: failed
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 491
+- from: AT_ABORT
+  to: AT_ENDED
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 537
+- from: AT_FAIL
+  to: AT_ENDED
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 498
+- from: AT_FINAL
+  to: AT_TRACK
+  mark: ::archives
+  type: archives
+  label: '#583 侧链'
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 816
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 839
+- from: AT_TRACK
+  to: AT_OC
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 852
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 1160
+- from: AT_OC
+  to: AT_TELEM
+  mark: ?>
+  type: condition
+  label: success
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 869
+- from: AT_OC
+  to: AT_TELEM
+  mark: ?>
+  type: condition
+  label: cancelled
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 1160
+- from: AT_OC
+  to: AT_TELEM
+  mark: ?>
+  type: condition
+  label: error
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 1170
 notes: |
-  **#437 关联（permission · 非本图节点增量）**：Write/Edit approve-for-session
-  按工具名缓存 session 规则 · `packages/agent-core/src/agent/permission/index.ts`
+  **主干**：`TurnFlow.prompt/launch` → `turnWorker` → `runOneTurn` → `runStepLoop` → `runTurn`（`turn-step` 折叠）→ `authorizeToolExecution`/`finalizeToolResult` → `turn.ended`。
+  **#583 telemetry**（`trackToolLifecycle` / `telemetryToolOutcome` 三色）挂 `::archives` **侧链**，不得充当唯一主干。
+  删除虚构 `tool-telemetry.ts`（函数在 `turn/index.ts`）；`cancelledByUser` 字段不存在，改为 `isUserCancellation` / `UserCancellationError`。
+  `00_main` 待补表状态字留给 W-close，本波不改 `00_main.graph.yaml`。

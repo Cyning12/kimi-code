@@ -1,7 +1,7 @@
 ---
 graph_id: 00_main
 version: 2026-08-28
-generated_at: 2026-08-28T08:27:10Z
+generated_at: 2026-08-28T08:55:17Z
 source: docs/_tech_graph/00_main.graph.yaml
 ---
 
@@ -167,13 +167,13 @@ flowchart TD
 
 | flow 文件 | 状态 | 说明 |
 |-----------|------|------|
-| `10_flow_cli_session.md` | **骨架** | 编辑源：[10_flow_cli_session.graph.yaml](10_flow_cli_session.graph.yaml) · #437 主落点 |
-| `10_flow_agent_turn.md` | **partial** | 编辑源：[10_flow_agent_turn.graph.yaml](10_flow_agent_turn.graph.yaml) · C2 #583 |
-| `10_flow_read_tool.md` | **partial** | 编辑源：[10_flow_read_tool.graph.yaml](10_flow_read_tool.graph.yaml) · C3 #94 |
-| `10_flow_context_tool_exchange.md` | **skeleton** | 编辑源：[10_flow_context_tool_exchange.graph.yaml](10_flow_context_tool_exchange.graph.yaml) · C3 #705 |
-| `10_flow_skill_load.md` | **partial · fork** | 编辑源：[10_flow_skill_load.graph.yaml](10_flow_skill_load.graph.yaml) · C3 #580 |
-| `10_flow_mcp_tool.md` | **skeleton** | 编辑源：[10_flow_mcp_tool.graph.yaml](10_flow_mcp_tool.graph.yaml) · MCP connect/discover |
-| `10_flow_subagent.md` | **skeleton** | 编辑源：[10_flow_subagent.graph.yaml](10_flow_subagent.graph.yaml) · spawn/batch/lifecycle |
+| `10_flow_cli_session.md` | **deep** | 编辑源：[10_flow_cli_session.graph.yaml](10_flow_cli_session.graph.yaml) · #437 主落点 |
+| `10_flow_agent_turn.md` | **deep** | 编辑源：[10_flow_agent_turn.graph.yaml](10_flow_agent_turn.graph.yaml) · C2 #583 |
+| `10_flow_read_tool.md` | **deep** | 编辑源：[10_flow_read_tool.graph.yaml](10_flow_read_tool.graph.yaml) · C3 #94 |
+| `10_flow_context_tool_exchange.md` | **deep** | 编辑源：[10_flow_context_tool_exchange.graph.yaml](10_flow_context_tool_exchange.graph.yaml) · C3 #705 |
+| `10_flow_skill_load.md` | **deep** | 编辑源：[10_flow_skill_load.graph.yaml](10_flow_skill_load.graph.yaml) · C3 #580 |
+| `10_flow_mcp_tool.md` | **deep** | 编辑源：[10_flow_mcp_tool.graph.yaml](10_flow_mcp_tool.graph.yaml) · MCP connect/discover |
+| `10_flow_subagent.md` | **deep** | 编辑源：[10_flow_subagent.graph.yaml](10_flow_subagent.graph.yaml) · spawn/batch/lifecycle |
 
 ## Sub-graph Links
 

@@ -1,99 +1,196 @@
 graph_id: 10_flow_skill_load
-title: 'Flow：Skill 发现 · 解析 · 注册（C3 #580）'
-description: scanner → parser → registry · directory SKILL.md frontmatter fallback
-version: '2026-06-18'
+title: 'Flow：Skill 多根发现 · 解析 · 注册'
+description: resolveSkillRoots 多根 → discoverSkills/walkSkillDir → parseSkillText → registry · invalid YAML [err]
+version: '2026-08-28'
 nodes:
-- id: SK_SCAN
-  label: scanner.discoverSkills
+- id: SK_SESS
+  label: Session.loadSkills
   module_id: agent_core
   kind: flow
+- id: SK_EXPL
+  label: resolveSkillRoots · explicitDirs?
+- id: SK_CONV
+  label: project/user 约定根 · brand+generic
+- id: SK_MORE
+  label: extraDirs + pluginSkillRoots + builtinDir
+- id: SK_SCAN
+  label: loadRoots → discoverSkills · walkSkillDir
 - id: SK_READ
-  label: 读取 SKILL.md
+  label: 读 SKILL.md bundle / 顶层 flat .md
 - id: SK_PARSE
-  label: parseSkillText
+  label: parseSkillFromFile / parseSkillText
 - id: SK_OK
-  label: 解析成功?
+  label: parseAndRegister 成功?
 - id: SK_REG
-  label: SkillRegistry.byName
+  label: byName first-wins
 - id: SK_SKIP
-  label: warn · skip skill
-- id: SK_SYS
-  label: system.md Creating skills
-- id: SK_AUTHOR
-  label: agent 创作 SKILL.md
+  label: warn · skip skill / policy
 - id: SK_META
-  label: directory SKILL.md frontmatter / 字段
+  label: frontmatter 顶层 mapping?
 - id: SK_INVALID
   label: 无效 YAML / 非 mapping
 - id: SK_FB
-  label: name ?? skillDirName · description ?? descriptionFromBody
+  label: flat .md · name ?? skillDirName · description ?? body
+- id: SK_BI
+  label: registerBuiltinSkills
 - id: SK_LIST
   label: getModelSkillListing → KIMI_SKILLS
+- id: SK_SYS
+  label: 'system.md # Skills'
+- id: SK_AUTHOR
+  label: agent 创作 SKILL.md
 edges:
+- from: SK_SESS
+  to: SK_EXPL
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/session/index.ts
+    line: 637
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 61
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 452
+- from: SK_EXPL
+  to: SK_MORE
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 75
+- from: SK_EXPL
+  to: SK_CONV
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 86
+- from: SK_CONV
+  to: SK_MORE
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 86
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 96
+- from: SK_MORE
+  to: SK_SCAN
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 108
+  - path: packages/agent-core/src/skill/registry.ts
+    line: 41
 - from: SK_SCAN
   to: SK_READ
   mark: ->
   anchors:
   - path: packages/agent-core/src/skill/scanner.ts
-    line: 143
+    line: 132
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 168
+- from: SK_SCAN
+  to: SK_SKIP
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 157
 - from: SK_READ
   to: SK_PARSE
-  mark: ->
+  mark: ~>
+  type: async_calls
   anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 73
   - path: packages/agent-core/src/skill/parser.ts
     line: 107
 - from: SK_PARSE
   to: SK_OK
   mark: ?>
   type: condition
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 376
 - from: SK_OK
   to: SK_REG
   mark: '[ok]'
   anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 396
   - path: packages/agent-core/src/skill/registry.ts
+    line: 54
 - from: SK_OK
   to: SK_SKIP
   mark: '[err]'
   anchors:
   - path: packages/agent-core/src/skill/scanner.ts
-    line: 386
+    line: 409
+- from: SK_PARSE
+  to: SK_META
+  mark: ?>
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 127
+- from: SK_META
+  to: SK_INVALID
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 101
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 129
+- from: SK_INVALID
+  to: SK_SKIP
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/skill/scanner.ts
+    line: 409
+- from: SK_META
+  to: SK_FB
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 150
+- from: SK_FB
+  to: SK_REG
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/skill/parser.ts
+    line: 150
+- from: SK_REG
+  to: SK_BI
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/session/index.ts
+    line: 651
+  - path: packages/agent-core/src/skill/builtin/index.ts
+    line: 13
+- from: SK_BI
+  to: SK_LIST
+  mark: ::yields
+  type: yields
+  anchors:
+  - path: packages/agent-core/src/skill/registry.ts
+    line: 133
+  - path: packages/agent-core/src/profile/default/system.md
+    line: 143
 - from: SK_SYS
   to: SK_AUTHOR
   mark: ::triggers
   type: triggers
   anchors:
   - path: packages/agent-core/src/profile/default/system.md
-    line: 149
+    line: 120
 - from: SK_AUTHOR
   to: SK_READ
-  mark: ~>
-  type: async_calls
-- from: SK_PARSE
-  to: SK_META
-  mark: ?>
-  type: condition
-- from: SK_META
-  to: SK_INVALID
-  mark: '[err]'
-- from: SK_INVALID
-  to: SK_SKIP
-  mark: ->
-- from: SK_META
-  to: SK_FB
-  mark: '[ok]'
+  mark: ::triggers
+  type: triggers
   anchors:
-  - path: packages/agent-core/src/skill/parser.ts
-    line: 139
-- from: SK_FB
-  to: SK_REG
-  mark: ->
-- from: SK_REG
-  to: SK_LIST
-  mark: ::yields
-  type: yields
-  anchors:
-  - path: packages/agent-core/src/skill/registry.ts
-    line: 132
-notes: '**fork 真值**（516958cb）：directory `SKILL.md` 缺 frontmatter 时 parse fallback 注册；upstream main 未合并。
-
-  '
+  - path: packages/agent-core/src/profile/default/system.md
+    line: 122
+notes: |
+  **多根**（折叠，不另开图）：`explicitDirs` 非空则只 push 配置根（source=user）；否则 `PROJECT_BRAND_DIRS`（`.kimi-code/skills`）+ `PROJECT_GENERIC_DIRS`（`.agents/skills`）+ user brand `skills/` + `USER_GENERIC_DIRS`。随后叠加 `extraDirs` / `pluginSkillRoots` / `builtinDir`。`walkSkillDir` depth≤8；同名 first-wins。
+  **invalid YAML [err]**：`loadYaml` 抛 `FrontmatterError` 或顶层非 mapping → `SkillParseError` → `parseAndRegister` warn skip。directory `SKILL.md` 缺 fence / 缺 name|description 同走 parse [err]（现码无 directory fallback）。
+  **flat .md** 才 `name ?? skillDirName` · `description ?? descriptionFromBody`。UnsupportedSkillType → `onSkippedByPolicy`，并入 SK_SKIP。
+  **#580 fork 史**：516958cb 曾对缺 frontmatter fallback 注册；本图按现码。builtin 登记不走扫描。
+  `00_main` 索引边留给 W-close。

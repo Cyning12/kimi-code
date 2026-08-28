@@ -1,12 +1,22 @@
 graph_id: 10_flow_read_tool
 title: 'Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）'
-description: ReadTool readForward/readTail · MAX_LINES/MAX_BYTES · finishMessage
-version: '2026-06-18'
+description: ReadTool execution 守卫 · readForward/readTail · MAX_LINES/MAX_BYTES · finishMessage
+version: '2026-08-28'
 nodes:
+- id: RT_SCHEMA
+  label: ReadInputSchema · parameters
+  module_id: agent_core
+  kind: flow
+- id: RT_SCHEMA_ERR
+  label: schema 校验失败
 - id: RT_EXEC
   label: ReadTool.execution
   module_id: agent_core
   kind: flow
+- id: RT_ENOENT
+  label: file does not exist
+- id: RT_NOTFILE
+  label: is not a file
 - id: RT_ROUTE
   label: line_offset < 0?
 - id: RT_TAIL
@@ -46,93 +56,175 @@ nodes:
 - id: RT_OUT
   label: finishOutput · system 标签
 edges:
-- from: RT_EXEC
-  to: RT_ROUTE
-  mark: ->
-- from: RT_ROUTE
-  to: RT_TAIL
+- from: RT_SCHEMA
+  to: RT_EXEC
   mark: '[ok]'
-- from: RT_ROUTE
-  to: RT_FWD
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 237
+- from: RT_SCHEMA
+  to: RT_SCHEMA_ERR
   mark: '[err]'
   anchors:
   - path: packages/agent-core/src/tools/builtin/file/read.ts
-    line: 253
+    line: 25
+- from: RT_EXEC
+  to: RT_ENOENT
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 271
+- from: RT_EXEC
+  to: RT_NOTFILE
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 276
+- from: RT_EXEC
+  to: RT_ROUTE
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 298
+- from: RT_ROUTE
+  to: RT_TAIL
+  mark: '[ok]'
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 299
+- from: RT_ROUTE
+  to: RT_FWD
+  mark: ->
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 306
 - from: RT_FWD
   to: RT_SCAN
   mark: ::yields
   type: yields
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 368
 - from: RT_SCAN
   to: RT_COLLECT
   mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 388
 - from: RT_COLLECT
   to: RT_LCAP
   mark: ?>
   type: condition
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 381
 - from: RT_LCAP
   to: RT_ML
   mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 383
 - from: RT_COLLECT
   to: RT_RENDER
   mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 398
 - from: RT_RENDER
   to: RT_BCAP
   mark: ?>
   type: condition
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 179
 - from: RT_BCAP
   to: RT_MB
   mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 180
 - from: RT_ML
   to: RT_FIN
   mark: ::merges
   type: merges
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 400
 - from: RT_MB
   to: RT_FIN
   mark: ::merges
   type: merges
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 400
 - from: RT_TAIL
   to: RT_FIN
   mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 517
 - from: RT_FIN
   to: RT_MSG
   mark: ->
   anchors:
   - path: packages/agent-core/src/tools/builtin/file/read.ts
-    line: 436
+    line: 531
 - from: RT_MSG
   to: RT_STATUS
   mark: ?>
   type: condition
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 552
 - from: RT_STATUS
   to: RT_PL
   mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 553
 - from: RT_STATUS
   to: RT_PB
   mark: ->
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 554
 - from: RT_PB
   to: RT_PBYTES
   mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 555
 - from: RT_PB
   to: RT_EOF
   mark: ?>
   type: condition
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 556
 - from: RT_EOF
   to: RT_PEOF
   mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    line: 557
 - from: RT_MSG
   to: RT_OUT
   mark: ->
   anchors:
   - path: packages/agent-core/src/tools/builtin/file/read.ts
-    line: 430
-notes: '| 常量 | 值 |
+    line: 535
+notes: '| 常量 | 值 | 锚 |
 
-  |------|-----|
+  |------|-----|-----|
 
-  | MAX_LINES | 1000 |
+  | MAX_LINES | 1000 | read.ts#L16 |
 
-  | MAX_BYTES | 102400 (100 KiB) |
+  | MAX_BYTES | 102400 (100 KiB) | read.ts#L18 |
 
-  | MAX_LINE_LENGTH | 2000 |
+  | MAX_LINE_LENGTH | 2000 | read.ts#L17 |
+
+  schema 运行时校验在 loop/tool-call.ts validateExecutableToolArgs（本图不展开）。media/unknown/decode/nul 同 isError，折叠进侧链说明、不另开节点。RT_ROUTE→RT_FWD 为 else readForward，非失败。
 
   '

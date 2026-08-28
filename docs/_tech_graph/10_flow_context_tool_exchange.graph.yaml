@@ -1,7 +1,7 @@
 graph_id: 10_flow_context_tool_exchange
 title: 'Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）'
-description: ContextMemory · projector · steer · resume · orphan tool_calls
-version: '2026-06-18'
+description: ContextMemory · projector · steer · resume · orphan tool_calls；trim 仅 inherit
+version: '2026-08-28'
 nodes:
 - id: CTX_LOOP
   label: appendLoopEvent
@@ -38,7 +38,7 @@ nodes:
 - id: CTX_REP
   label: AgentRecords.replay
 - id: CTX_FIN
-  label: turn.finishResume
+  label: finishResume · closePendingToolResults
 - id: CTX_ORPHAN
   label: orphan tool_calls → provider 400
 - id: CTX_TRIM
@@ -51,91 +51,169 @@ edges:
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/context/index.ts
-    line: 247
+    line: 300
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 360
 - from: CTX_TC
   to: CTX_TR
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/context/index.ts
-    line: 263
+    line: 376
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 387
 - from: CTX_TR
   to: CTX_GET
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/context/index.ts
-    line: 196
+    line: 263
 - from: CTX_GET
   to: CTX_PROJ
   mark: ->
   anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 259
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 263
   - path: packages/agent-core/src/agent/context/projector.ts
-    line: 5
+    line: 6
 - from: CTX_PROJ
   to: CTX_LLM
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/turn/index.ts
+    line: 641
 - from: CTX_BG
   to: CTX_STEER
   mark: ::triggers
   type: triggers
   anchors:
   - path: packages/agent-core/src/agent/background/index.ts
-    line: 557
+    line: 652
+  - path: packages/agent-core/src/agent/background/index.ts
+    line: 655
 - from: CTX_STEER
   to: CTX_FLUSH
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/turn/index.ts
-    line: 608
+    line: 134
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 657
 - from: CTX_FLUSH
   to: CTX_AUM
   mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 282
+  - path: packages/agent-core/src/agent/turn/index.ts
+    line: 286
 - from: CTX_AUM
   to: CTX_PEND
   mark: ?>
   type: condition
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 51
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 399
 - from: CTX_PEND
   to: CTX_DEFER
   mark: '[ok]'
   anchors:
   - path: packages/agent-core/src/agent/context/index.ts
-    line: 282
+    line: 399
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 400
 - from: CTX_PEND
   to: CTX_HIST
-  mark: '[err]'
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 403
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 415
+- from: CTX_DEFER
+  to: CTX_HIST
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 388
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 406
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 410
+- from: CTX_HIST
+  to: CTX_GET
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 418
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 263
 - from: CTX_RES
   to: CTX_AR
   mark: ->
   anchors:
-  - path: packages/agent-core/src/agent/index.ts
-    line: 297
+  - path: packages/agent-core/src/session/index.ts
+    line: 775
+  - path: packages/agent-core/src/session/index.ts
+    line: 812
 - from: CTX_AR
   to: CTX_REP
   mark: ->
   anchors:
-  - path: packages/agent-core/src/agent/records/index.ts
-    line: 175
+  - path: packages/agent-core/src/agent/index.ts
+    line: 263
+  - path: packages/agent-core/src/agent/index.ts
+    line: 264
 - from: CTX_REP
   to: CTX_FIN
   mark: ->
   anchors:
+  - path: packages/agent-core/src/agent/index.ts
+    line: 271
   - path: packages/agent-core/src/agent/turn/index.ts
-    line: 275
+    line: 292
 - from: CTX_FIN
   to: CTX_GET
   mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 272
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 284
 - from: CTX_PROJ
   to: CTX_ORPHAN
   mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 263
+  - path: packages/agent-core/src/agent/context/projector.ts
+    line: 6
+- from: CTX_PROJ
+  to: CTX_TRIM
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 267
+  - path: packages/agent-core/src/agent/context/index.ts
+    line: 269
 - from: CTX_TRIM
   to: CTX_INHERIT
   mark: ::gates
   type: gates
   anchors:
   - path: packages/agent-core/src/agent/context/projector.ts
-    line: 74
-notes: '**Path A**：loop → LLM · **Path B**：steer #705 race · **Path C**：resume · **main gap**：orphan tool_calls / trim 仅 inherit
-  路径。
-
-  '
+    line: 96
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 230
+notes: |
+  **deep**（2026-08-28 对照 context/turn/resume 现码 · 节点 20 未增 · 只补缺口边+行号）。
+  核对 #705 三路径均已在现码闭合，禁止为深而深加节点：
+  - **Path A** loop→LLM：`appendLoopEvent` `tool.call`/`tool.result` → `messages` → `project` → `runStepLoop.buildMessages`。
+  - **Path B** steer 竞态：`notifyBackgroundTask` → `turn.steer` → `beforeStep.flushSteerBuffer` → `appendUserMessage`；open exchange 入 `deferredMessages`，闭合后 `flushDeferredMessagesIfToolExchangeClosed` 回 `pushHistory` 再汇入 `messages`。
+  - **Path C** resume：`Session.resumeAgent` → `Agent.resume` → `records.replay` → `context.finishResume`（`closePendingToolResults` 合成 interrupted tool.result）+ `turn.finishResume`。task_705 表「resume 无 orphan cleanup」已过时。
+  - **trim**：`trimTrailingOpenToolExchange` **仅** `useProjectedHistoryFrom`（subagent inherit · `subagent-host.ts`）；live `messages` **不 trim**。未配对 `assistant.tool_calls` 直通 provider（CTX_ORPHAN [err]）。
+  - 行号相对 task_705 / 旧 yaml 已漂移，已按现码重锚。D3 硬边 18 · path 100% · line 100%。`00_main` 索引字 **skeleton→deep** 留给 W-close。

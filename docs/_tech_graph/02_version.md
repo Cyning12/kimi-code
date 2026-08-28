@@ -15,3 +15,4 @@
 | 2026-06-18 | C3 #437：`10_flow_cli_session` **skeleton** · approve-once vs session · task `fix-approve-once-437` |
 | 2026-06-26 | **meta-graph-interview-complete Epic CLOSE**：WS-0–5 · `graph:ci` · flow_map 全模块 · 00 复检 |
 | 2026-08-28 | **meta-graph-full-coverage Epic CLOSE**：W0–W3 + W-close · 8 图扁平 `*.graph.yaml` · `FLOW_MCP`/`FLOW_SUB` 索引 · C1–C4；C5 见自检 |
+| 2026-08-28 | **meta-graph-flow-deepen Epic CLOSE**：7 张 `10_flow_*` 待补表 → **deep** · D3 path/line 抽检 100% · 仍 8 张扁平 `*.graph.yaml` · `graph:ci` |

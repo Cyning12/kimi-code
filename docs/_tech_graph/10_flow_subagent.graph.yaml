@@ -1,6 +1,6 @@
 graph_id: 10_flow_subagent
-title: 'Flow：Subagent 装配 · spawn/batch · 生命周期（切片）'
-description: Session 装配 SessionSubagentHost → spawn/resume/retry 或 runQueued(SubagentBatch) → lifecycle events
+title: 'Flow：Subagent 装配 · spawn/batch · timeout / user-cancel / rate-limit'
+description: Session 装配 SessionSubagentHost → spawn/resume/retry 或 runQueued(SubagentBatch) → 完成；侧链 timeout / user-cancel / rate-limit（TUI 可选消费）
 version: '2026-08-28'
 nodes:
 - id: SA_ASM
@@ -25,8 +25,14 @@ nodes:
   label: subagent.completed
 - id: SA_ERR
   label: subagent.failed
+- id: SA_RL
+  label: isProviderRateLimitError?
 - id: SA_SUSP
   label: rate-limit · suspended · requeue
+- id: SA_TO
+  label: task timeout · fail slot
+- id: SA_CANCEL
+  label: user-cancel · aborted
 - id: SA_TUI
   label: TUI SubAgentEventHandler（可选消费）
 edges:
@@ -55,6 +61,8 @@ edges:
   anchors:
   - path: packages/agent-core/src/session/subagent-batch.ts
     line: 179
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 304
 - from: SA_KIND
   to: SA_SPAWN
   mark: '[ok]'
@@ -101,12 +109,57 @@ edges:
   anchors:
   - path: packages/agent-core/src/session/subagent-host.ts
     line: 453
-- from: SA_QUEUE
-  to: SA_SUSP
-  mark: '[err]'
+- from: SA_TURN
+  to: SA_TO
+  mark: '[timeout]'
   anchors:
   - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 627
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 653
+- from: SA_QUEUE
+  to: SA_CANCEL
+  mark: '[err]'
+  label: user-cancel
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 171
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 553
+- from: SA_HOST
+  to: SA_CANCEL
+  mark: ::triggers
+  type: triggers
+  label: cancelAll
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 239
+- from: SA_TURN
+  to: SA_RL
+  mark: ?>
+  type: condition
+  label: rate-limit
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 346
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 475
+- from: SA_RL
+  to: SA_SUSP
+  mark: ->
+  label: requeue
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 403
+  - path: packages/agent-core/src/session/subagent-batch.ts
     line: 426
+- from: SA_RL
+  to: SA_ERR
+  mark: '[err]'
+  label: only unfinished
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 394
 - from: SA_SUSP
   to: SA_KIND
   mark: ::triggers
@@ -114,22 +167,35 @@ edges:
   anchors:
   - path: packages/agent-core/src/session/subagent-host.ts
     line: 204
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 463
 - from: SA_OK
   to: SA_TUI
   mark: ::yields
   type: yields
   anchors:
   - path: apps/kimi-code/src/tui/controllers/subagent-event-handler.ts
-    line: 133
+    line: 273
 - from: SA_ERR
   to: SA_TUI
   mark: ::yields
   type: yields
   anchors:
   - path: apps/kimi-code/src/tui/controllers/subagent-event-handler.ts
-    line: 54
+    line: 302
+- from: SA_SUSP
+  to: SA_TUI
+  mark: ::yields
+  type: yields
+  anchors:
+  - path: apps/kimi-code/src/tui/controllers/subagent-event-handler.ts
+    line: 265
 notes: |
-  **切片**：swarm 调度细节（首批 5、700ms ramp、rate-limit capacity）不画全；见 `subagent-batch.ts` 文件头契约。
-  **TUI** 仅为可选消费节点，不单独成图。`startBtw` / `cancelAll` 未展开。
+  **主干**：`Session.createAgent` 装配 `SessionSubagentHost` → `runQueued`/`spawn` → `runPromptTurn` → `subagent.completed`。
+  **timeout**：`linkAttemptSignals` 按 `task.timeout` abort；`attemptErrorMessage` 返回 `Subagent timed out.`；只失败该 slot，不进入 rate-limit phase、不停其它任务。
+  **user-cancel**：batch 首个 `signal` 即 batch signal；`isUserCancellation` → `finishWithUserCancellation`（保留已完成结果，未完成 aborted/started 或 aborted/not_started）。非用户 abort 走 `fail` reject。Host `cancelAll` 为可选触发，不另开图。
+  **rate-limit**：`isProviderRateLimitError` 后若是唯一未完成任务则 `failed`；否则 `requeueRateLimited` + `enterRateLimitMode`（capacity/3min recovery 折叠，不展开）。
+  **折叠**：首批 5、700ms ramp（`scheduleNormalLaunch`）与 `startBtw` 不展开。
+  **TUI** 仅为可选消费（completed / failed / suspended），不单独成图。
   **佐证**：`packages/agent-core/test/session/subagent-host.test.ts`。
   本波不改 `00_main.graph.yaml`（FLOW_SUB 索引留给 W-close）。

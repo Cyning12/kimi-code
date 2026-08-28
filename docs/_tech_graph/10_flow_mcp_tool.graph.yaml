@@ -1,6 +1,6 @@
 graph_id: 10_flow_mcp_tool
-title: 'Flow：MCP 连接 · 发现 tool · 挂到 ToolManager（skeleton）'
-description: connectAll → connectOne/createClient（stdio/sse/http 折叠）→ status → attachMcpTools
+title: 'Flow：MCP 连接 · 发现 tool · needs-auth / reconnect'
+description: connectAll → connectOne/createClient（stdio/sse/http 折叠）→ status → attachMcpTools；needs-auth 走 createMcpAuthTool → reconnect 侧链
 version: '2026-08-28'
 nodes:
 - id: MCP_SKILL
@@ -28,7 +28,9 @@ nodes:
 - id: MCP_REG
   label: registerMcpServer · qualify
 - id: MCP_AUTH
-  label: createMcpAuthTool
+  label: createMcpAuthTool · OAuth 折叠
+- id: MCP_RECONN
+  label: reconnect
 - id: MCP_LOOP
   label: loopTools 合并 mcp
 - id: MCP_CALL
@@ -49,6 +51,10 @@ edges:
   anchors:
   - path: packages/agent-core/src/mcp/connection-manager.ts
     line: 156
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 213
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 226
 - from: MCP_ONE
   to: MCP_DISC
   mark: ~>
@@ -58,6 +64,12 @@ edges:
     line: 258
   - path: packages/agent-core/src/mcp/connection-manager.ts
     line: 332
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 334
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 337
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 344
 - from: MCP_DISC
   to: MCP_ST
   mark: ?>
@@ -65,6 +77,14 @@ edges:
   anchors:
   - path: packages/agent-core/src/mcp/connection-manager.ts
     line: 379
+- from: MCP_DISC
+  to: MCP_FAIL
+  mark: '[timeout]'
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 267
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 495
 - from: MCP_ST
   to: MCP_OK
   mark: '[ok]'
@@ -78,12 +98,22 @@ edges:
   anchors:
   - path: packages/agent-core/src/mcp/connection-manager.ts
     line: 289
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 367
 - from: MCP_ST
   to: MCP_FAIL
   mark: '[err]'
   anchors:
   - path: packages/agent-core/src/mcp/connection-manager.ts
     line: 293
+- from: MCP_OK
+  to: MCP_FAIL
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 305
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 315
 - from: MCP_SKILL
   to: MCP_NA
   mark: ::triggers
@@ -98,6 +128,8 @@ edges:
   anchors:
   - path: packages/agent-core/src/agent/tool/index.ts
     line: 68
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 307
 - from: MCP_NA
   to: MCP_ATT
   mark: ::triggers
@@ -105,12 +137,16 @@ edges:
   anchors:
   - path: packages/agent-core/src/agent/tool/index.ts
     line: 75
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 311
 - from: MCP_ATT
   to: MCP_REG
   mark: '[ok]'
   anchors:
   - path: packages/agent-core/src/agent/tool/index.ts
     line: 367
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 236
 - from: MCP_ATT
   to: MCP_AUTH
   mark: ?>
@@ -123,13 +159,61 @@ edges:
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/tool/index.ts
-    line: 236
+    line: 544
 - from: MCP_AUTH
   to: MCP_LOOP
   mark: ->
   anchors:
   - path: packages/agent-core/src/agent/tool/index.ts
     line: 348
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 544
+- from: MCP_AUTH
+  to: MCP_RECONN
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/mcp/auth-tool.ts
+    line: 83
+  - path: packages/agent-core/src/mcp/auth-tool.ts
+    line: 102
+  - path: packages/agent-core/src/mcp/auth-tool.ts
+    line: 142
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 352
+  - path: packages/agent-core/src/mcp/oauth/service.ts
+    line: 102
+- from: MCP_RECONN
+  to: MCP_ONE
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 232
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 248
+- from: MCP_AUTH
+  to: MCP_FAIL
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/mcp/auth-tool.ts
+    line: 112
+  - path: packages/agent-core/src/mcp/auth-tool.ts
+    line: 168
+- from: MCP_AUTH
+  to: MCP_FAIL
+  mark: '[timeout]'
+  anchors:
+  - path: packages/agent-core/src/mcp/auth-tool.ts
+    line: 135
+- from: MCP_RECONN
+  to: MCP_FAIL
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 234
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 238
 - from: MCP_LOOP
   to: MCP_CALL
   mark: ::yields
@@ -140,6 +224,7 @@ edges:
   - path: packages/agent-core/src/agent/tool/index.ts
     line: 544
 notes: |
-  **切片 skeleton/partial**：stdio / sse / http 折叠进 `createClient`，不为每个 transport 另开图。
-  daemon `IMcpService`（`packages/agent-core/src/services/mcp/mcp.ts` · `mcpService.ts`）不另开图；本图只注协议适配。
+  **deep**：needs-auth → `createMcpAuthTool`（OAuth beginAuthorization/complete 折叠）→ `reconnect` → `connectOne` 侧链已补；connected 后 unexpected close 挂 `[err]`。
+  stdio / sse / http 仍折叠进 `createClient`（connection-manager L334/L337/L344），不为每个 transport 另开图。
+  daemon `IMcpService`（`packages/agent-core/src/services/mcp/mcp.ts` · `mcpService.ts`）不另开图。
   `00_main` 索引边 `FLOW_MCP` 留给 W-close，本波不改 `00_main.graph.yaml`。
