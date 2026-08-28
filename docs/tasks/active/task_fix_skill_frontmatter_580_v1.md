@@ -26,6 +26,8 @@
 | **graph_delta** | `10_flow_skill_load.md` |
 | **graph_delta_note** | — |
 | **graph_gate** | `skeleton_before_30` · `close_partial_or_final` |
+| **wiki_delta** | `none` |
+| **wiki_delta_note** | 既有 #580 bugfix · 本 Epic 不改其 wiki；补字段以满足 lint-wiki-delta |
 | **upstream_social** | 已 comment @puppylpg · 知悉 ktwu01 不竞争 · **PR 暂缓至 2026-06-13**（见 §9） |
 
 ### 人工闸

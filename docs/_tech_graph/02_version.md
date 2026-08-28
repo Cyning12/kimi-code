@@ -14,3 +14,4 @@
 | 2026-06-18 | **issue sync gate CLOSE**：L2/L3 门禁 · `graph_module_flow_map.yaml` · `pnpm graph:issue-sync` · `KIMI-META-GRAPH-SYNC-GATE@ecc7b9dc` |
 | 2026-06-18 | C3 #437：`10_flow_cli_session` **skeleton** · approve-once vs session · task `fix-approve-once-437` |
 | 2026-06-26 | **meta-graph-interview-complete Epic CLOSE**：WS-0–5 · `graph:ci` · flow_map 全模块 · 00 复检 |
+| 2026-08-28 | **meta-graph-full-coverage Epic CLOSE**：W0–W3 + W-close · 8 图扁平 `*.graph.yaml` · `FLOW_MCP`/`FLOW_SUB` 索引 · C1–C4；C5 见自检 |

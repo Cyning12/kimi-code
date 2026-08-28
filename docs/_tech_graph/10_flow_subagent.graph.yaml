@@ -1,0 +1,135 @@
+graph_id: 10_flow_subagent
+title: 'Flow：Subagent 装配 · spawn/batch · 生命周期（切片）'
+description: Session 装配 SessionSubagentHost → spawn/resume/retry 或 runQueued(SubagentBatch) → lifecycle events
+version: '2026-08-28'
+nodes:
+- id: SA_ASM
+  label: Session.createAgent 装配 subagentHost
+  module_id: agent_core
+  kind: flow
+- id: SA_HOST
+  label: SessionSubagentHost
+- id: SA_QUEUE
+  label: runQueued → SubagentBatch.run
+- id: SA_KIND
+  label: spawn / resume / retry?
+- id: SA_SPAWN
+  label: spawn · createAgent + resolveProfile
+- id: SA_RESUME
+  label: resume / retry idle child
+- id: SA_CFG
+  label: configureChild · inheritUserTools
+- id: SA_TURN
+  label: runPromptTurn · waitForChildCompletion
+- id: SA_OK
+  label: subagent.completed
+- id: SA_ERR
+  label: subagent.failed
+- id: SA_SUSP
+  label: rate-limit · suspended · requeue
+- id: SA_TUI
+  label: TUI SubAgentEventHandler（可选消费）
+edges:
+- from: SA_ASM
+  to: SA_HOST
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/session/index.ts
+    line: 732
+- from: SA_HOST
+  to: SA_QUEUE
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 199
+- from: SA_HOST
+  to: SA_SPAWN
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 114
+- from: SA_QUEUE
+  to: SA_KIND
+  mark: ?>
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 179
+- from: SA_KIND
+  to: SA_SPAWN
+  mark: '[ok]'
+  label: spawn
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 329
+- from: SA_KIND
+  to: SA_RESUME
+  mark: ->
+  label: resume / retry
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 320
+- from: SA_SPAWN
+  to: SA_CFG
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 360
+- from: SA_CFG
+  to: SA_TURN
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 300
+- from: SA_RESUME
+  to: SA_TURN
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 141
+- from: SA_TURN
+  to: SA_OK
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 349
+- from: SA_TURN
+  to: SA_ERR
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 453
+- from: SA_QUEUE
+  to: SA_SUSP
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/session/subagent-batch.ts
+    line: 426
+- from: SA_SUSP
+  to: SA_KIND
+  mark: ::triggers
+  type: triggers
+  anchors:
+  - path: packages/agent-core/src/session/subagent-host.ts
+    line: 204
+- from: SA_OK
+  to: SA_TUI
+  mark: ::yields
+  type: yields
+  anchors:
+  - path: apps/kimi-code/src/tui/controllers/subagent-event-handler.ts
+    line: 133
+- from: SA_ERR
+  to: SA_TUI
+  mark: ::yields
+  type: yields
+  anchors:
+  - path: apps/kimi-code/src/tui/controllers/subagent-event-handler.ts
+    line: 54
+notes: |
+  **切片**：swarm 调度细节（首批 5、700ms ramp、rate-limit capacity）不画全；见 `subagent-batch.ts` 文件头契约。
+  **TUI** 仅为可选消费节点，不单独成图。`startBtw` / `cancelAll` 未展开。
+  **佐证**：`packages/agent-core/test/session/subagent-host.test.ts`。
+  本波不改 `00_main.graph.yaml`（FLOW_SUB 索引留给 W-close）。

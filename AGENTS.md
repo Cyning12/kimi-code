@@ -15,6 +15,7 @@ This is a TypeScript monorepo built for agent-assisted development. Keep the roo
 ## Project Map
 
 - `apps/kimi-code`: the CLI / TUI application. It consumes core capabilities through `@moonshot-ai/kimi-code-sdk` and must not depend directly on `@moonshot-ai/agent-core`. When writing or modifying its terminal UI, use the `write-tui` skill (`.agents/skills/write-tui/SKILL.md`).
+- `apps/kimi-web`: Vue browser client. Runtime talks to the local server over HTTP/WS; must not depend on `@moonshot-ai/agent-core`.
 - `apps/vis`, `apps/vis/server`, `apps/vis/web`: visual debugging tools for sessions and replays.
 - `packages/agent-core`: the unified agent engine, including Agent, Session, profile, skills, tools, plan, permission, background, records, and other core capabilities.
 - `packages/node-sdk`: the public TypeScript SDK and harness.
@@ -22,6 +23,9 @@ This is a TypeScript monorepo built for agent-assisted development. Keep the roo
 - `packages/kaos`: the execution environment and file/process abstractions.
 - `packages/oauth`: Kimi OAuth and managed auth utilities.
 - `packages/telemetry`: shared client-side telemetry infrastructure.
+- `packages/protocol`: shared REST and WebSocket schema.
+- `packages/server`: local REST+WS server that hosts agent-core and can serve kimi-web static assets.
+- `packages/server-e2e`: wire E2E tests against the protocol.
 
 ## Environment Requirements
 

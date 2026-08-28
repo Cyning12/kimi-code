@@ -180,8 +180,8 @@ def generate_sub_graph_links(graph_id: str) -> str:
 | `10_flow_read_tool.md` | **partial** | 编辑源：[10_flow_read_tool.graph.yaml](10_flow_read_tool.graph.yaml) · C3 #94 |
 | `10_flow_context_tool_exchange.md` | **skeleton** | 编辑源：[10_flow_context_tool_exchange.graph.yaml](10_flow_context_tool_exchange.graph.yaml) · C3 #705 |
 | `10_flow_skill_load.md` | **partial · fork** | 编辑源：[10_flow_skill_load.graph.yaml](10_flow_skill_load.graph.yaml) · C3 #580 |
-| `10_flow_mcp_tool.md` | 待补 | 仅本清单 · 首个触达 Issue 再建 `.graph.yaml` |
-| `10_flow_subagent.md` | 待补 | 仅本清单 · 首个触达 Issue 再建 `.graph.yaml` |
+| `10_flow_mcp_tool.md` | **skeleton** | 编辑源：[10_flow_mcp_tool.graph.yaml](10_flow_mcp_tool.graph.yaml) · MCP connect/discover |
+| `10_flow_subagent.md` | **skeleton** | 编辑源：[10_flow_subagent.graph.yaml](10_flow_subagent.graph.yaml) · spawn/batch/lifecycle |
 
 ## Sub-graph Links
 

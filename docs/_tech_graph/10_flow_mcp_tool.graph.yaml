@@ -1,0 +1,145 @@
+graph_id: 10_flow_mcp_tool
+title: 'Flow：MCP 连接 · 发现 tool · 挂到 ToolManager（skeleton）'
+description: connectAll → connectOne/createClient（stdio/sse/http 折叠）→ status → attachMcpTools
+version: '2026-08-28'
+nodes:
+- id: MCP_SKILL
+  label: MCP_CONFIG_SKILL builtin
+  module_id: agent_core
+  kind: flow
+- id: MCP_IDX
+  label: mcp/index re-export
+- id: MCP_CONN
+  label: McpConnectionManager.connectAll
+- id: MCP_ONE
+  label: connectOne · createClient 折叠 transport
+- id: MCP_DISC
+  label: connectAndDiscoverTools
+- id: MCP_ST
+  label: status 分支
+- id: MCP_OK
+  label: connected
+- id: MCP_NA
+  label: needs-auth
+- id: MCP_FAIL
+  label: failed
+- id: MCP_ATT
+  label: attachMcpTools
+- id: MCP_REG
+  label: registerMcpServer · qualify
+- id: MCP_AUTH
+  label: createMcpAuthTool
+- id: MCP_LOOP
+  label: loopTools 合并 mcp
+- id: MCP_CALL
+  label: callTool → mcpResultToExecutableOutput
+edges:
+- from: MCP_IDX
+  to: MCP_CONN
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/mcp/index.ts
+    line: 1
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 72
+- from: MCP_CONN
+  to: MCP_ONE
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 156
+- from: MCP_ONE
+  to: MCP_DISC
+  mark: ~>
+  type: async_calls
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 258
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 332
+- from: MCP_DISC
+  to: MCP_ST
+  mark: ?>
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 379
+- from: MCP_ST
+  to: MCP_OK
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 280
+- from: MCP_ST
+  to: MCP_NA
+  mark: ?>
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 289
+- from: MCP_ST
+  to: MCP_FAIL
+  mark: '[err]'
+  anchors:
+  - path: packages/agent-core/src/mcp/connection-manager.ts
+    line: 293
+- from: MCP_SKILL
+  to: MCP_NA
+  mark: ::triggers
+  type: triggers
+  anchors:
+  - path: packages/agent-core/src/skill/builtin/mcp-config.ts
+    line: 14
+- from: MCP_OK
+  to: MCP_ATT
+  mark: ::triggers
+  type: triggers
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 68
+- from: MCP_NA
+  to: MCP_ATT
+  mark: ::triggers
+  type: triggers
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 75
+- from: MCP_ATT
+  to: MCP_REG
+  mark: '[ok]'
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 367
+- from: MCP_ATT
+  to: MCP_AUTH
+  mark: ?>
+  type: condition
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 336
+- from: MCP_REG
+  to: MCP_LOOP
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 236
+- from: MCP_AUTH
+  to: MCP_LOOP
+  mark: ->
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 348
+- from: MCP_LOOP
+  to: MCP_CALL
+  mark: ::yields
+  type: yields
+  anchors:
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 279
+  - path: packages/agent-core/src/agent/tool/index.ts
+    line: 544
+notes: |
+  **切片 skeleton/partial**：stdio / sse / http 折叠进 `createClient`，不为每个 transport 另开图。
+  daemon `IMcpService`（`packages/agent-core/src/services/mcp/mcp.ts` · `mcpService.ts`）不另开图；本图只注协议适配。
+  `00_main` 索引边 `FLOW_MCP` 留给 W-close，本波不改 `00_main.graph.yaml`。

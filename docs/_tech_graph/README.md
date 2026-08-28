@@ -36,6 +36,8 @@ pnpm graph:issue-sync --task docs/tasks/active/<task>.md
 | `10_flow_read_tool` | `10_flow_read_tool.graph.yaml` | Read tool · #94 |
 | `10_flow_context_tool_exchange` | `10_flow_context_tool_exchange.graph.yaml` | Context · #705 |
 | `10_flow_skill_load` | `10_flow_skill_load.graph.yaml` | Skill load · #580 |
+| `10_flow_mcp_tool` | `10_flow_mcp_tool.graph.yaml` | MCP connect/discover · W3 |
+| `10_flow_subagent` | `10_flow_subagent.graph.yaml` | Subagent spawn/batch · W3 |
 
 ## 关联
 

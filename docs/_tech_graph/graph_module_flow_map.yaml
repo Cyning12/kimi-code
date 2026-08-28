@@ -55,6 +55,26 @@ rules:
     severity: required
     priority: 10
 
+  - module_id: agent_core
+    path_globs:
+      - "packages/agent-core/**/mcp/**"
+    path_substrings:
+      - mcp
+      - McpConnection
+    default_flow: 10_flow_mcp_tool.graph.yaml
+    severity: required
+    priority: 10
+
+  - module_id: agent_core
+    path_globs:
+      - "packages/agent-core/**/session/subagent-*.ts"
+    path_substrings:
+      - subagent
+      - SessionSubagentHost
+    default_flow: 10_flow_subagent.graph.yaml
+    severity: required
+    priority: 10
+
   - module_id: node_sdk
     path_globs:
       - "packages/node-sdk/**"
@@ -108,5 +128,29 @@ rules:
   - module_id: migration_legacy
     path_globs:
       - "packages/migration-legacy/**"
+    default_flow: none
+    severity: skip
+
+  - module_id: kimi_web
+    path_globs:
+      - "apps/kimi-web/**"
+    default_flow: none
+    severity: warn
+
+  - module_id: protocol
+    path_globs:
+      - "packages/protocol/**"
+    default_flow: none
+    severity: warn
+
+  - module_id: server
+    path_globs:
+      - "packages/server/**"
+    default_flow: none
+    severity: warn
+
+  - module_id: server_e2e
+    path_globs:
+      - "packages/server-e2e/**"
     default_flow: none
     severity: skip

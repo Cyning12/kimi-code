@@ -61,6 +61,21 @@
       "type": "depends_on"
     },
     {
+      "anchors": [
+        {
+          "path": "packages/agent-core/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "AC",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "PROTO",
+      "type": "depends_on"
+    },
+    {
       "anchors": [],
       "from": "AC",
       "graph_id": "00_main",
@@ -79,6 +94,51 @@
       "sync": true,
       "to": "TOOLS",
       "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/acp-adapter/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "ACP",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/acp-adapter/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "ACP",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "KA",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/acp-adapter/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "ACP",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SDK",
+      "type": "depends_on"
     },
     {
       "anchors": [],
@@ -106,6 +166,51 @@
       "type": "depends_on"
     },
     {
+      "anchors": [
+        {
+          "path": "apps/kimi-code/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "CLI",
+      "graph_id": "00_main",
+      "label": "devDep / bundle (kimi server run)",
+      "mark": "->",
+      "sync": true,
+      "to": "SRV",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "apps/kimi-code/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "CLI",
+      "graph_id": "00_main",
+      "label": "devDep / bundle",
+      "mark": "->",
+      "sync": true,
+      "to": "WEB",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/server-e2e/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "E2E",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "PROTO",
+      "type": "depends_on"
+    },
+    {
       "anchors": [],
       "from": "FLOW_CLI",
       "graph_id": "00_main",
@@ -113,6 +218,21 @@
       "mark": "->",
       "sync": true,
       "to": "FLOW_DOC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/migration-legacy/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "MIG",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AC",
       "type": "depends_on"
     },
     {
@@ -131,6 +251,46 @@
       "type": "depends_on"
     },
     {
+      "anchors": [
+        {
+          "path": "packages/server/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "SRV",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "packages/server/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "SRV",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "PROTO",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
+      "from": "TOOLS",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_MCP",
+      "type": "depends_on"
+    },
+    {
       "anchors": [],
       "from": "TOOLS",
       "graph_id": "00_main",
@@ -142,6 +302,16 @@
     },
     {
       "anchors": [],
+      "from": "TOOLS",
+      "graph_id": "00_main",
+      "label": "加载",
+      "mark": "->",
+      "sync": true,
+      "to": "FLOW_SUB",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [],
       "from": "U",
       "graph_id": "00_main",
       "label": "",
@@ -149,6 +319,51 @@
       "sync": true,
       "to": "CLI",
       "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "apps/vis/server/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "VIS",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "AC",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "apps/vis/server/package.json",
+          "symbol": ""
+        }
+      ],
+      "from": "VIS",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "KS",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "path": "apps/kimi-web",
+          "symbol": ""
+        }
+      ],
+      "from": "WEB",
+      "graph_id": "00_main",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "SRV",
+      "type": "calls"
     },
     {
       "anchors": [],
@@ -845,6 +1060,261 @@
       "type": "gates"
     },
     {
+      "anchors": [
+        {
+          "line": 336,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L336"
+        }
+      ],
+      "from": "MCP_ATT",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "MCP_AUTH",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 367,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L367"
+        }
+      ],
+      "from": "MCP_ATT",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "MCP_REG",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 348,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L348"
+        }
+      ],
+      "from": "MCP_AUTH",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "MCP_LOOP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 156,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L156"
+        }
+      ],
+      "from": "MCP_CONN",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "~>",
+      "sync": false,
+      "to": "MCP_ONE",
+      "type": "async_calls"
+    },
+    {
+      "anchors": [
+        {
+          "line": 379,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L379"
+        }
+      ],
+      "from": "MCP_DISC",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "MCP_ST",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 1,
+          "path": "packages/agent-core/src/mcp/index.ts",
+          "symbol": "#L1"
+        },
+        {
+          "line": 72,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L72"
+        }
+      ],
+      "from": "MCP_IDX",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "MCP_CONN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 279,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L279"
+        },
+        {
+          "line": 544,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L544"
+        }
+      ],
+      "from": "MCP_LOOP",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "::yields",
+      "sync": true,
+      "to": "MCP_CALL",
+      "type": "yields"
+    },
+    {
+      "anchors": [
+        {
+          "line": 75,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L75"
+        }
+      ],
+      "from": "MCP_NA",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "MCP_ATT",
+      "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "line": 68,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L68"
+        }
+      ],
+      "from": "MCP_OK",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "MCP_ATT",
+      "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "line": 258,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L258"
+        },
+        {
+          "line": 332,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L332"
+        }
+      ],
+      "from": "MCP_ONE",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "~>",
+      "sync": false,
+      "to": "MCP_DISC",
+      "type": "async_calls"
+    },
+    {
+      "anchors": [
+        {
+          "line": 236,
+          "path": "packages/agent-core/src/agent/tool/index.ts",
+          "symbol": "#L236"
+        }
+      ],
+      "from": "MCP_REG",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "MCP_LOOP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 14,
+          "path": "packages/agent-core/src/skill/builtin/mcp-config.ts",
+          "symbol": "#L14"
+        }
+      ],
+      "from": "MCP_SKILL",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "MCP_NA",
+      "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "line": 293,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L293"
+        }
+      ],
+      "from": "MCP_ST",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "MCP_FAIL",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 289,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L289"
+        }
+      ],
+      "from": "MCP_ST",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "MCP_NA",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 280,
+          "path": "packages/agent-core/src/mcp/connection-manager.ts",
+          "symbol": "#L280"
+        }
+      ],
+      "from": "MCP_ST",
+      "graph_id": "10_flow_mcp_tool",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "MCP_OK",
+      "type": "depends_on"
+    },
+    {
       "anchors": [],
       "from": "RT_BCAP",
       "graph_id": "10_flow_read_tool",
@@ -1242,10 +1712,250 @@
       "sync": true,
       "to": "SK_AUTHOR",
       "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "line": 732,
+          "path": "packages/agent-core/src/session/index.ts",
+          "symbol": "#L732"
+        }
+      ],
+      "from": "SA_ASM",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SA_HOST",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 300,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L300"
+        }
+      ],
+      "from": "SA_CFG",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "~>",
+      "sync": false,
+      "to": "SA_TURN",
+      "type": "async_calls"
+    },
+    {
+      "anchors": [
+        {
+          "line": 54,
+          "path": "apps/kimi-code/src/tui/controllers/subagent-event-handler.ts",
+          "symbol": "#L54"
+        }
+      ],
+      "from": "SA_ERR",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "::yields",
+      "sync": true,
+      "to": "SA_TUI",
+      "type": "yields"
+    },
+    {
+      "anchors": [
+        {
+          "line": 199,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L199"
+        }
+      ],
+      "from": "SA_HOST",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SA_QUEUE",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 114,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L114"
+        }
+      ],
+      "from": "SA_HOST",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SA_SPAWN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 320,
+          "path": "packages/agent-core/src/session/subagent-batch.ts",
+          "symbol": "#L320"
+        }
+      ],
+      "from": "SA_KIND",
+      "graph_id": "10_flow_subagent",
+      "label": "resume / retry",
+      "mark": "->",
+      "sync": true,
+      "to": "SA_RESUME",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 329,
+          "path": "packages/agent-core/src/session/subagent-batch.ts",
+          "symbol": "#L329"
+        }
+      ],
+      "from": "SA_KIND",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "SA_SPAWN",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 133,
+          "path": "apps/kimi-code/src/tui/controllers/subagent-event-handler.ts",
+          "symbol": "#L133"
+        }
+      ],
+      "from": "SA_OK",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "::yields",
+      "sync": true,
+      "to": "SA_TUI",
+      "type": "yields"
+    },
+    {
+      "anchors": [
+        {
+          "line": 179,
+          "path": "packages/agent-core/src/session/subagent-batch.ts",
+          "symbol": "#L179"
+        }
+      ],
+      "from": "SA_QUEUE",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "?>",
+      "sync": true,
+      "to": "SA_KIND",
+      "type": "condition"
+    },
+    {
+      "anchors": [
+        {
+          "line": 426,
+          "path": "packages/agent-core/src/session/subagent-batch.ts",
+          "symbol": "#L426"
+        }
+      ],
+      "from": "SA_QUEUE",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "SA_SUSP",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 141,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L141"
+        }
+      ],
+      "from": "SA_RESUME",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "~>",
+      "sync": false,
+      "to": "SA_TURN",
+      "type": "async_calls"
+    },
+    {
+      "anchors": [
+        {
+          "line": 360,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L360"
+        }
+      ],
+      "from": "SA_SPAWN",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "->",
+      "sync": true,
+      "to": "SA_CFG",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 204,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L204"
+        }
+      ],
+      "from": "SA_SUSP",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "::triggers",
+      "sync": true,
+      "to": "SA_KIND",
+      "type": "triggers"
+    },
+    {
+      "anchors": [
+        {
+          "line": 453,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L453"
+        }
+      ],
+      "from": "SA_TURN",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "[err]",
+      "sync": true,
+      "to": "SA_ERR",
+      "type": "depends_on"
+    },
+    {
+      "anchors": [
+        {
+          "line": 349,
+          "path": "packages/agent-core/src/session/subagent-host.ts",
+          "symbol": "#L349"
+        }
+      ],
+      "from": "SA_TURN",
+      "graph_id": "10_flow_subagent",
+      "label": "",
+      "mark": "[ok]",
+      "sync": true,
+      "to": "SA_OK",
+      "type": "depends_on"
     }
   ],
   "freeze_id": "KIMI-META-GRAPH-V2-BATCH@0fa2d54f",
-  "generated_at": "2026-06-26T07:36:26Z",
+  "generated_at": "2026-08-28T08:27:10Z",
   "graphs": [
     {
       "id": "00_main",
@@ -1268,6 +1978,11 @@
       "title": "Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）"
     },
     {
+      "id": "10_flow_mcp_tool",
+      "source_yaml_path": "docs/_tech_graph/10_flow_mcp_tool.graph.yaml",
+      "title": "Flow：MCP 连接 · 发现 tool · 挂到 ToolManager（skeleton）"
+    },
+    {
       "id": "10_flow_read_tool",
       "source_yaml_path": "docs/_tech_graph/10_flow_read_tool.graph.yaml",
       "title": "Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）"
@@ -1276,6 +1991,11 @@
       "id": "10_flow_skill_load",
       "source_yaml_path": "docs/_tech_graph/10_flow_skill_load.graph.yaml",
       "title": "Flow：Skill 发现 · 解析 · 注册（C3 #580）"
+    },
+    {
+      "id": "10_flow_subagent",
+      "source_yaml_path": "docs/_tech_graph/10_flow_subagent.graph.yaml",
+      "title": "Flow：Subagent 装配 · spawn/batch · 生命周期（切片）"
     }
   ],
   "nodes": [
@@ -1285,6 +2005,13 @@
       "kind": "struct",
       "label": "agent-core<br/>Agent / Session / tools",
       "module_id": "agent_core"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "ACP",
+      "kind": "struct",
+      "label": "acp-adapter<br/>packages/acp-adapter",
+      "module_id": "acp_adapter"
     },
     {
       "graph_id": "10_flow_agent_turn",
@@ -1572,6 +2299,13 @@
     },
     {
       "graph_id": "00_main",
+      "id": "E2E",
+      "kind": "struct",
+      "label": "server-e2e<br/>packages/server-e2e",
+      "module_id": "server_e2e"
+    },
+    {
+      "graph_id": "00_main",
       "id": "FLOW_CLI",
       "kind": "flow",
       "label": "CLI 会话主循环"
@@ -1590,6 +2324,12 @@
     },
     {
       "graph_id": "00_main",
+      "id": "FLOW_MCP",
+      "kind": "flow",
+      "label": ">10_flow_mcp_tool.md"
+    },
+    {
+      "graph_id": "00_main",
       "id": "FLOW_READ",
       "kind": "flow",
       "label": ">10_flow_read_tool.md"
@@ -1599,6 +2339,12 @@
       "id": "FLOW_SKILL",
       "kind": "flow",
       "label": ">10_flow_skill_load.md"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "FLOW_SUB",
+      "kind": "flow",
+      "label": ">10_flow_subagent.md"
     },
     {
       "graph_id": "00_main",
@@ -1621,11 +2367,97 @@
       "module_id": "kosong"
     },
     {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_ATT",
+      "label": "attachMcpTools"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_AUTH",
+      "label": "createMcpAuthTool"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_CALL",
+      "label": "callTool → mcpResultToExecutableOutput"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_CONN",
+      "label": "McpConnectionManager.connectAll"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_DISC",
+      "label": "connectAndDiscoverTools"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_FAIL",
+      "label": "failed"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_IDX",
+      "label": "mcp/index re-export"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_LOOP",
+      "label": "loopTools 合并 mcp"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_NA",
+      "label": "needs-auth"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_OK",
+      "label": "connected"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_ONE",
+      "label": "connectOne · createClient 折叠 transport"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_REG",
+      "label": "registerMcpServer · qualify"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_SKILL",
+      "kind": "flow",
+      "label": "MCP_CONFIG_SKILL builtin",
+      "module_id": "agent_core"
+    },
+    {
+      "graph_id": "10_flow_mcp_tool",
+      "id": "MCP_ST",
+      "label": "status 分支"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "MIG",
+      "kind": "struct",
+      "label": "migration-legacy<br/>packages/migration-legacy",
+      "module_id": "migration_legacy"
+    },
+    {
       "graph_id": "00_main",
       "id": "MONO",
       "kind": "struct",
       "label": "monorepo · docs/tools/harness",
       "module_id": "monorepo_root"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "PROTO",
+      "kind": "struct",
+      "label": "protocol · REST+WS schema<br/>packages/protocol",
+      "module_id": "protocol"
     },
     {
       "graph_id": "10_flow_read_tool",
@@ -1730,6 +2562,68 @@
       "label": "readTail"
     },
     {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_ASM",
+      "kind": "flow",
+      "label": "Session.createAgent 装配 subagentHost",
+      "module_id": "agent_core"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_CFG",
+      "label": "configureChild · inheritUserTools"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_ERR",
+      "label": "subagent.failed"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_HOST",
+      "label": "SessionSubagentHost"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_KIND",
+      "label": "spawn / resume / retry?"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_OK",
+      "label": "subagent.completed"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_QUEUE",
+      "label": "runQueued → SubagentBatch.run"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_RESUME",
+      "label": "resume / retry idle child"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_SPAWN",
+      "label": "spawn · createAgent + resolveProfile"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_SUSP",
+      "label": "rate-limit · suspended · requeue"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_TUI",
+      "label": "TUI SubAgentEventHandler（可选消费）"
+    },
+    {
+      "graph_id": "10_flow_subagent",
+      "id": "SA_TURN",
+      "label": "runPromptTurn · waitForChildCompletion"
+    },
+    {
       "graph_id": "00_main",
       "id": "SDK",
       "kind": "struct",
@@ -1800,6 +2694,13 @@
     },
     {
       "graph_id": "00_main",
+      "id": "SRV",
+      "kind": "struct",
+      "label": "server · REST+WS<br/>packages/server",
+      "module_id": "server"
+    },
+    {
+      "graph_id": "00_main",
       "id": "TELEM",
       "kind": "struct",
       "label": "telemetry",
@@ -1816,6 +2717,20 @@
       "id": "U",
       "kind": "external",
       "label": "用户终端"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "VIS",
+      "kind": "struct",
+      "label": "vis · Session 可视化<br/>apps/vis",
+      "module_id": "vis"
+    },
+    {
+      "graph_id": "00_main",
+      "id": "WEB",
+      "kind": "struct",
+      "label": "kimi-web<br/>apps/kimi-web",
+      "module_id": "kimi_web"
     }
   ],
   "schema_version": "graph_v2"
