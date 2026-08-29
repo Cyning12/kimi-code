@@ -1,3 +1,13 @@
+---
+name: harness-30-execute
+description: 在 Harness task 边界内实现代码并自检（hat 30+40 闭环）。仅当存在 active task 且其人工闸表 HG-AUDIT-R1=approved、npx dsh-coding-kit verify --task PASS 时使用；激活后首动作必须是 GATE_VERIFY 闸扫描。不要用于：无 task 的直接改码请求；任何 blocks-30 闸 pending 的状态（此时只能输出 STOP 与签闸指引）；起草 task/SPEC（用 harness-10-task / harness-10-spec）。
+license: MIT
+compatibility: Requires npx dsh-coding-kit CLI（verify / task close）· docs/tasks/active/ 与 docs/harness/invokes/ 目录约定
+metadata:
+  hat_id: "30"
+  track: starter-experimental
+---
+
 # 帽子：执行编码（Harness · Starter 子集）
 
 > **完整版 POINTER**（Ink 工作区）：`docs/harness/prompts/30-execute-code.md` · `40-self-check.md`  
@@ -14,13 +24,16 @@
 3. 任一 **blocks 30** 的闸为 `pending` → **拒开工**（仅 STOP + 签闸指引）；**禁止**改业务码、禁止落 30 invoke
 4. **真值在 task 表**；维护者 / invoke 聊天 **不能**替代 `HG-AUDIT-R1` = `approved`
 5. **声称 vs 表冲突**（用户或 invoke 写 approved 但 task 表 pending）→ **STOP** · 输出冲突表 · **以 task 表为准**
+6. **用户「开工」≠ 闸**：须 `verify --task` PASS（含 **v2.14+ pre-30 invoke**）；缺 10 不得直进 30
 
 ## 只做什么
 
 - 读 task **必读列表** + `AGENTS.md` + `_tech_graph/` + L2（涉码）
 - `test_strategy: required` → **先** 可失败测试再改实现
 - 闸扫描通过后：运行 task **验证命令**；回填 `### 自检结论（执行者）`
-- invoke 快照落盘 `docs/harness/invokes/by-task/<task_slug>/`
+- invoke 快照落盘 `docs/harness/invokes/by-task/<task_slug>/`（须覆盖 task 要求的 hats；40 可与 30 合并为 `invoke_*_30_40_*.md`；**pre-30** 须在 30 改码前落盘，见 verify v2.14+）
+- 归档（active→done）**只能**走 `npx dsh-coding-kit task close --file <task> --yes`：仅 **`--yes` 成功**后打印 `CLOSE: PASS`；无 `--yes` 为 dry-run，打印 **`CLOSE: READY`**（不得当作已关账）。机械校验 **invoke hats 集合** / 自检结论 / 验收勾选 / slug / 状态 / R1 review / graph_delta / KPI / experience / **wiki_delta**（及晋升指针）/ **close_pr_merged** / **close_hub_index**，任一不过 **不执行** mv（v2.2+ · hats 集合 v2.12+ · wiki v2.18+ · doc-health v1.7.0+）——上述机械校验本包**已接线**（src/cli-checks.ts evalCloseGuard · task close 真求值 · PRD_DEF-003 阶段二 T6 · test/cli-task-close-guards.test.ts 钉死；wiki 晋升指针闸 close_wiki_promotion 已接线 · PRD_DEF-003 后续棒）。禁止拆成「验收写 PASS、归档另议」。
+- 关账前答 **`wiki_delta`**（`path` | `none` | `n/a` + note）；若有可复用教训，更新 `docs/coding_wiki/`，并在经验节写指针（`Wiki:` / `wiki_promoted:` / 含 `coding_wiki`）
 
 ## 禁止什么
 
@@ -38,7 +51,8 @@
 ## 输出形状
 
 - （拒开工）仅闸扫描 STOP 模板
-- （通过）diff + PR 验证说明 + invoke + task 自检回填 + 下一棒 40 Prompt
+- （通过）diff + 验证说明 + invoke + **40 自检闭环**（同上下文跑命令 · 不通过则改码重跑 · 回填 `### 自检结论`）
+- **40 不强制新开对话**；须 task 验证命令全绿后再交 50 / CLOSE
 
 ## 交接物
 
