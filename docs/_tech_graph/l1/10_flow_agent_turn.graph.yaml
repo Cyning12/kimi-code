@@ -2,6 +2,7 @@ graph_id: 10_flow_agent_turn
 title: 'Flow：Agent 轮次 · TurnFlow.runOneTurn / runStepLoop'
 description: prompt/launch → turnWorker → runOneTurn → runStepLoop → runTurn（折叠 turn-step）→ authorize/finalize → turn.ended；#583 telemetry 为侧链
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: AT_LAUNCH
   label: TurnFlow.prompt / launch

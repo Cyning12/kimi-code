@@ -1,8 +1,8 @@
 ---
 graph_id: 10_flow_subagent
 version: 2026-08-28
-generated_at: 2026-08-28T08:55:17Z
-source: docs/_tech_graph/10_flow_subagent.graph.yaml
+generated_at: 2026-10-09T13:37:29Z
+source: docs/_tech_graph/l1/10_flow_subagent.graph.yaml
 ---
 
 # Flow：Subagent 装配 · spawn/batch · timeout / user-cancel / rate-limit

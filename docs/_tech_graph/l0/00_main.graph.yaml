@@ -5,6 +5,7 @@ graph_id: "00_main"
 title: "顶层流程总图（kimi-code · 人类友好版）"
 description: "CLI Agent 主干与子流程路由"
 version: "2026-08-28"
+layer: "G-L0"
 
 nodes:
   - id: "U"

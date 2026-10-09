@@ -25,6 +25,7 @@ from tech_graph_graph_export import (
     _resolve_export_repo_root,
 )
 from tech_graph_graph_v2_schema import SCHEMA_VERSION_V2
+from graph_sync_common import iter_graph_yaml, resolve_graph_yaml
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -49,7 +50,7 @@ def _load_yaml(path: Path) -> dict[str, Any]:
 
 
 def _all_graph_ids(input_root: Path) -> list[str]:
-    return sorted(p.name[: -len(".graph.yaml")] for p in input_root.glob("*.graph.yaml"))
+    return sorted(p.name[: -len(".graph.yaml")] for p in iter_graph_yaml(input_root))
 
 
 def _normalize_anchors(anchors: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -142,8 +143,8 @@ def build_yaml_graph_v2(
     graphs: list[dict[str, Any]] = []
 
     for graph_id in graph_ids:
-        yaml_path = input_root / f"{graph_id}.graph.yaml"
-        ai_path = input_root / f"{graph_id}.ai.md"
+        yaml_path = resolve_graph_yaml(input_root, graph_id)
+        ai_path = yaml_path.with_name(f"{graph_id}.ai.md")
         data = _load_yaml(yaml_path)
         title = data.get("title", graph_id)
 

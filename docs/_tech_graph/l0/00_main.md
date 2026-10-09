@@ -1,8 +1,8 @@
 ---
 graph_id: 00_main
 version: 2026-08-28
-generated_at: 2026-08-28T08:55:17Z
-source: docs/_tech_graph/00_main.graph.yaml
+generated_at: 2026-10-09T13:37:29Z
+source: docs/_tech_graph/l0/00_main.graph.yaml
 ---
 
 # 顶层流程总图（kimi-code · 人类友好版）
@@ -163,22 +163,22 @@ flowchart TD
 
 
 
-## 待补 flow 清单（分步增量 · 非 bootstrap 一次画完）
+## 已交付 flow 清单（G-L1 · `l1/`）
 
 | flow 文件 | 状态 | 说明 |
 |-----------|------|------|
-| `10_flow_cli_session.md` | **deep** | 编辑源：[10_flow_cli_session.graph.yaml](10_flow_cli_session.graph.yaml) · #437 主落点 |
-| `10_flow_agent_turn.md` | **deep** | 编辑源：[10_flow_agent_turn.graph.yaml](10_flow_agent_turn.graph.yaml) · C2 #583 |
-| `10_flow_read_tool.md` | **deep** | 编辑源：[10_flow_read_tool.graph.yaml](10_flow_read_tool.graph.yaml) · C3 #94 |
-| `10_flow_context_tool_exchange.md` | **deep** | 编辑源：[10_flow_context_tool_exchange.graph.yaml](10_flow_context_tool_exchange.graph.yaml) · C3 #705 |
-| `10_flow_skill_load.md` | **deep** | 编辑源：[10_flow_skill_load.graph.yaml](10_flow_skill_load.graph.yaml) · C3 #580 |
-| `10_flow_mcp_tool.md` | **deep** | 编辑源：[10_flow_mcp_tool.graph.yaml](10_flow_mcp_tool.graph.yaml) · MCP connect/discover |
-| `10_flow_subagent.md` | **deep** | 编辑源：[10_flow_subagent.graph.yaml](10_flow_subagent.graph.yaml) · spawn/batch/lifecycle |
+| `../l1/10_flow_cli_session.md` | **deep** | 编辑源：[yaml](../l1/10_flow_cli_session.graph.yaml) · #437 |
+| `../l1/10_flow_agent_turn.md` | **deep** | 编辑源：[yaml](../l1/10_flow_agent_turn.graph.yaml) · #583 |
+| `../l1/10_flow_read_tool.md` | **deep** | 编辑源：[yaml](../l1/10_flow_read_tool.graph.yaml) · #94 |
+| `../l1/10_flow_context_tool_exchange.md` | **deep** | 编辑源：[yaml](../l1/10_flow_context_tool_exchange.graph.yaml) · #705 |
+| `../l1/10_flow_skill_load.md` | **deep** | 编辑源：[yaml](../l1/10_flow_skill_load.graph.yaml) · #580 |
+| `../l1/10_flow_mcp_tool.md` | **deep** | 编辑源：[yaml](../l1/10_flow_mcp_tool.graph.yaml) · MCP |
+| `../l1/10_flow_subagent.md` | **deep** | 编辑源：[yaml](../l1/10_flow_subagent.graph.yaml) · spawn/batch |
 
 ## Sub-graph Links
 
-- `Struct`: [`01_struct.md`](01_struct.md)（规范层 · 手写 Markdown）
-- `Version`: [`02_version.md`](02_version.md)（timeline · 手写 Markdown）
-- `Mermaid Protocol`: [`99_mermaid_protocol.md`](99_mermaid_protocol.md)
-- 模块表：[`01_struct.md`](01_struct.md) · 上游代码地图：[`AGENTS.md`](../../AGENTS.md)
+- 模块表（G-L1）：[`../l1/01_modules.md`](../l1/01_modules.md) · 根 stub [`../01_struct.md`](../01_struct.md)
+- Version：[`../02_version.md`](../02_version.md)
+- Mermaid Protocol：[`../shared/99_mermaid_protocol.md`](../shared/99_mermaid_protocol.md)
+- 上游代码地图：[`../../../AGENTS.md`](../../../AGENTS.md)
 

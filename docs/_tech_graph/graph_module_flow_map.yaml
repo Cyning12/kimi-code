@@ -1,14 +1,14 @@
 # graph_module_flow_map.yaml · L3 模块→flow 映射（machine-readable）
 #
 # 维护规则：
-# - 新增 module_id 须同步更新 docs/_tech_graph/01_struct.md 与本文件
-# - flow 文件名须对应 docs/_tech_graph/*.graph.yaml 真值
+# - 新增 module_id 须同步更新 docs/_tech_graph/l1/01_modules.md 与本文件
+# - flow 文件名须对应 docs/_tech_graph/l1/*.graph.yaml 真值（工具按 basename 解析）
 # - agent_core 专链规则 priority 高于默认 turn flow
 
 schema_version: graph_module_flow_map_v1
 source_of_truth:
-  module_table: docs/_tech_graph/01_struct.md
-  flow_registry: docs/_tech_graph/*.graph.yaml
+  module_table: docs/_tech_graph/l1/01_modules.md
+  flow_registry: docs/_tech_graph/**/*.graph.yaml
 
 rules:
   - module_id: cli

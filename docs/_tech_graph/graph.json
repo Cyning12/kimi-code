@@ -3466,46 +3466,46 @@
     }
   ],
   "freeze_id": "KIMI-META-GRAPH-V2-BATCH@0fa2d54f",
-  "generated_at": "2026-08-28T08:55:17Z",
+  "generated_at": "2026-10-09T13:37:29Z",
   "graphs": [
     {
       "id": "00_main",
-      "source_yaml_path": "docs/_tech_graph/00_main.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l0/00_main.graph.yaml",
       "title": "顶层流程总图（kimi-code · 人类友好版）"
     },
     {
       "id": "10_flow_agent_turn",
-      "source_yaml_path": "docs/_tech_graph/10_flow_agent_turn.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_agent_turn.graph.yaml",
       "title": "Flow：Agent 轮次 · TurnFlow.runOneTurn / runStepLoop"
     },
     {
       "id": "10_flow_cli_session",
-      "source_yaml_path": "docs/_tech_graph/10_flow_cli_session.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_cli_session.graph.yaml",
       "title": "Flow：CLI 会话主循环 · TUI/ACP · approve-once vs session"
     },
     {
       "id": "10_flow_context_tool_exchange",
-      "source_yaml_path": "docs/_tech_graph/10_flow_context_tool_exchange.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_context_tool_exchange.graph.yaml",
       "title": "Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）"
     },
     {
       "id": "10_flow_mcp_tool",
-      "source_yaml_path": "docs/_tech_graph/10_flow_mcp_tool.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_mcp_tool.graph.yaml",
       "title": "Flow：MCP 连接 · 发现 tool · needs-auth / reconnect"
     },
     {
       "id": "10_flow_read_tool",
-      "source_yaml_path": "docs/_tech_graph/10_flow_read_tool.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_read_tool.graph.yaml",
       "title": "Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）"
     },
     {
       "id": "10_flow_skill_load",
-      "source_yaml_path": "docs/_tech_graph/10_flow_skill_load.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_skill_load.graph.yaml",
       "title": "Flow：Skill 多根发现 · 解析 · 注册"
     },
     {
       "id": "10_flow_subagent",
-      "source_yaml_path": "docs/_tech_graph/10_flow_subagent.graph.yaml",
+      "source_yaml_path": "docs/_tech_graph/l1/10_flow_subagent.graph.yaml",
       "title": "Flow：Subagent 装配 · spawn/batch · timeout / user-cancel / rate-limit"
     }
   ],

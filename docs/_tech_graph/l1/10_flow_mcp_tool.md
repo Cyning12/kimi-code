@@ -1,8 +1,8 @@
 ---
 graph_id: 10_flow_mcp_tool
 version: 2026-08-28
-generated_at: 2026-08-28T08:55:17Z
-source: docs/_tech_graph/10_flow_mcp_tool.graph.yaml
+generated_at: 2026-10-09T13:37:29Z
+source: docs/_tech_graph/l1/10_flow_mcp_tool.graph.yaml
 ---
 
 # Flow：MCP 连接 · 发现 tool · needs-auth / reconnect

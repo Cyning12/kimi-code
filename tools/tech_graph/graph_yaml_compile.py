@@ -22,13 +22,20 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 TECH_GRAPH_DIR = REPO_ROOT / "docs" / "_tech_graph"
 GRAPH_JSON_PATH = TECH_GRAPH_DIR / "graph.json"
 
+import sys as _sys
+_TG_DIR = Path(__file__).resolve().parent
+if str(_TG_DIR) not in _sys.path:
+    _sys.path.insert(0, str(_TG_DIR))
+from graph_sync_common import iter_graph_yaml, resolve_graph_yaml  # noqa: E402
+
 
 def yaml_path_for(graph_id: str) -> Path:
-    return TECH_GRAPH_DIR / f"{graph_id}.graph.yaml"
+    return resolve_graph_yaml(TECH_GRAPH_DIR, graph_id)
 
 
 def md_path_for(graph_id: str) -> Path:
-    return TECH_GRAPH_DIR / f"{graph_id}.md"
+    y = yaml_path_for(graph_id)
+    return y.with_name(f"{graph_id}.md")
 
 
 def load_yaml(graph_id: str):
@@ -171,24 +178,24 @@ def generate_sub_graph_links(graph_id: str) -> str:
     """Return sub-graph links section; only 00_main gets the full hub."""
     if graph_id != "00_main":
         return ""
-    return """## 待补 flow 清单（分步增量 · 非 bootstrap 一次画完）
+    return """## 已交付 flow 清单（G-L1 · `l1/`）
 
 | flow 文件 | 状态 | 说明 |
 |-----------|------|------|
-| `10_flow_cli_session.md` | **deep** | 编辑源：[10_flow_cli_session.graph.yaml](10_flow_cli_session.graph.yaml) · #437 主落点 |
-| `10_flow_agent_turn.md` | **deep** | 编辑源：[10_flow_agent_turn.graph.yaml](10_flow_agent_turn.graph.yaml) · C2 #583 |
-| `10_flow_read_tool.md` | **deep** | 编辑源：[10_flow_read_tool.graph.yaml](10_flow_read_tool.graph.yaml) · C3 #94 |
-| `10_flow_context_tool_exchange.md` | **deep** | 编辑源：[10_flow_context_tool_exchange.graph.yaml](10_flow_context_tool_exchange.graph.yaml) · C3 #705 |
-| `10_flow_skill_load.md` | **deep** | 编辑源：[10_flow_skill_load.graph.yaml](10_flow_skill_load.graph.yaml) · C3 #580 |
-| `10_flow_mcp_tool.md` | **deep** | 编辑源：[10_flow_mcp_tool.graph.yaml](10_flow_mcp_tool.graph.yaml) · MCP connect/discover |
-| `10_flow_subagent.md` | **deep** | 编辑源：[10_flow_subagent.graph.yaml](10_flow_subagent.graph.yaml) · spawn/batch/lifecycle |
+| `../l1/10_flow_cli_session.md` | **deep** | 编辑源：[yaml](../l1/10_flow_cli_session.graph.yaml) · #437 |
+| `../l1/10_flow_agent_turn.md` | **deep** | 编辑源：[yaml](../l1/10_flow_agent_turn.graph.yaml) · #583 |
+| `../l1/10_flow_read_tool.md` | **deep** | 编辑源：[yaml](../l1/10_flow_read_tool.graph.yaml) · #94 |
+| `../l1/10_flow_context_tool_exchange.md` | **deep** | 编辑源：[yaml](../l1/10_flow_context_tool_exchange.graph.yaml) · #705 |
+| `../l1/10_flow_skill_load.md` | **deep** | 编辑源：[yaml](../l1/10_flow_skill_load.graph.yaml) · #580 |
+| `../l1/10_flow_mcp_tool.md` | **deep** | 编辑源：[yaml](../l1/10_flow_mcp_tool.graph.yaml) · MCP |
+| `../l1/10_flow_subagent.md` | **deep** | 编辑源：[yaml](../l1/10_flow_subagent.graph.yaml) · spawn/batch |
 
 ## Sub-graph Links
 
-- `Struct`: [`01_struct.md`](01_struct.md)（规范层 · 手写 Markdown）
-- `Version`: [`02_version.md`](02_version.md)（timeline · 手写 Markdown）
-- `Mermaid Protocol`: [`99_mermaid_protocol.md`](99_mermaid_protocol.md)
-- 模块表：[`01_struct.md`](01_struct.md) · 上游代码地图：[`AGENTS.md`](../../AGENTS.md)
+- 模块表（G-L1）：[`../l1/01_modules.md`](../l1/01_modules.md) · 根 stub [`../01_struct.md`](../01_struct.md)
+- Version：[`../02_version.md`](../02_version.md)
+- Mermaid Protocol：[`../shared/99_mermaid_protocol.md`](../shared/99_mermaid_protocol.md)
+- 上游代码地图：[`../../../AGENTS.md`](../../../AGENTS.md)
 """
 
 
@@ -213,11 +220,12 @@ def generate_md(data: dict) -> str:
     version = data.get("version", "")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+    yaml_rel = yaml_path_for(graph_id).relative_to(REPO_ROOT).as_posix()
     frontmatter = f"""---
 graph_id: {graph_id}
 version: {version}
 generated_at: {generated_at}
-source: docs/_tech_graph/{graph_id}.graph.yaml
+source: {yaml_rel}
 ---
 """
 
@@ -330,7 +338,7 @@ def check_graph(graph_id: str) -> bool:
 
 
 def all_graph_ids() -> list[str]:
-    return sorted(p.name[: -len(".graph.yaml")] for p in TECH_GRAPH_DIR.glob("*.graph.yaml"))
+    return sorted(p.name[: -len(".graph.yaml")] for p in iter_graph_yaml(TECH_GRAPH_DIR))
 
 
 def main():

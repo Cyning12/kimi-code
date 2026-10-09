@@ -1,8 +1,8 @@
 ---
 graph_id: 10_flow_read_tool
 version: 2026-08-28
-generated_at: 2026-08-28T08:55:17Z
-source: docs/_tech_graph/10_flow_read_tool.graph.yaml
+generated_at: 2026-10-09T13:37:29Z
+source: docs/_tech_graph/l1/10_flow_read_tool.graph.yaml
 ---
 
 # Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）

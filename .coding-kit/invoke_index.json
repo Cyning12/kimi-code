@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "generated_at": "2026-10-09T12:52:41.488Z",
+  "generated_at": "2026-10-09T13:40:46.611Z",
   "index": {
     "cyning-harness-b-kimi-dogfood": {
       "task_slug": "cyning-harness-b-kimi-dogfood",
@@ -182,6 +182,25 @@
           "hat_id": "30"
         }
       ]
+    },
+    "meta-graph-glayer": {
+      "task_slug": "meta-graph-glayer",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-glayer/invoke_20261009_10_meta-graph-glayer.md",
+          "mtime": 1791552302,
+          "hat_id": "10"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-glayer/invoke_20261009_30_40_meta-graph-glayer.md",
+          "mtime": 1791553103,
+          "hat_id": "30"
+        }
+      ],
+      "task_markdown": "docs/tasks/done/task_meta_graph_glayer_v1.md",
+      "entry_points": {
+        "10": "docs/harness/invokes/by-task/meta-graph-glayer/README.md"
+      }
     },
     "meta-graph-issue-sync-gate": {
       "task_slug": "meta-graph-issue-sync-gate",

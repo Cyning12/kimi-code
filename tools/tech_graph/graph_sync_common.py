@@ -14,6 +14,36 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 TECH_GRAPH_DIR = REPO_ROOT / "docs" / "_tech_graph"
 FLOW_MAP_PATH = TECH_GRAPH_DIR / "graph_module_flow_map.yaml"
 VERSION_PATH = TECH_GRAPH_DIR / "02_version.md"
+
+
+def iter_graph_yaml(input_root: Path) -> list[Path]:
+    """递归发现 *.graph.yaml（G-L 物理分层 · l0/l1/...）。"""
+    return sorted(input_root.rglob("*.graph.yaml"))
+
+
+def resolve_graph_yaml(input_root: Path, graph_id: str) -> Path:
+    """按 graph_id 解析 yaml 路径；同名多份时优先较浅路径。"""
+    name = f"{graph_id}.graph.yaml"
+    matches = [p for p in iter_graph_yaml(input_root) if p.name == name]
+    if not matches:
+        # 兼容旧调用方：返回根下约定路径（可能尚不存在）
+        return input_root / name
+    matches.sort(key=lambda p: (len(p.relative_to(input_root).parts), str(p)))
+    return matches[0]
+
+
+def resolve_flow_rel(tech_graph_dir: Path, flow_name: str) -> str:
+    """flow_map 中的 default_flow（可为 basename 或相对子路径）→ 相对 tech_graph 的 posix 路径。"""
+    direct = tech_graph_dir / flow_name
+    if direct.is_file():
+        return direct.relative_to(tech_graph_dir).as_posix()
+    base = Path(flow_name).name
+    for p in iter_graph_yaml(tech_graph_dir):
+        if p.name == base:
+            return p.relative_to(tech_graph_dir).as_posix()
+    return flow_name.replace("\\", "/")
+
+
 COMPILE_SCRIPT = REPO_ROOT / "tools" / "tech_graph" / "graph_yaml_compile.py"
 
 PRODUCT_PREFIXES = ("apps/", "packages/")
@@ -174,7 +204,8 @@ def meta_graph_files_with_diff(
     changed = collect_changed_files(repo_root)
     result: dict[str, bool] = {}
     for flow_name in flow_names:
-        rel = normalize_posix(str(graph_dir.relative_to(repo_root) / flow_name))
+        flow_rel = resolve_flow_rel(graph_dir, flow_name)
+        rel = normalize_posix(str(graph_dir.relative_to(repo_root) / flow_rel))
         result[flow_name] = rel in changed
     return result
 

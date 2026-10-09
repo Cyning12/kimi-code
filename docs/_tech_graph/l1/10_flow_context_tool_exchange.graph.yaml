@@ -2,6 +2,7 @@ graph_id: 10_flow_context_tool_exchange
 title: 'Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）'
 description: ContextMemory · projector · steer · resume · orphan tool_calls；trim 仅 inherit
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: CTX_LOOP
   label: appendLoopEvent

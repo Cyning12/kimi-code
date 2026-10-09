@@ -2,6 +2,7 @@ graph_id: 10_flow_subagent
 title: 'Flow：Subagent 装配 · spawn/batch · timeout / user-cancel / rate-limit'
 description: Session 装配 SessionSubagentHost → spawn/resume/retry 或 runQueued(SubagentBatch) → 完成；侧链 timeout / user-cancel / rate-limit（TUI 可选消费）
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: SA_ASM
   label: Session.createAgent 装配 subagentHost

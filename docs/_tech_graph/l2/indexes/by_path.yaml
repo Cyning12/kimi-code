@@ -1,0 +1,7 @@
+# G-L2 path → flow/node 倒排（壳 · 试点）
+schema_version: gl2_by_path_v1
+entries:
+  - path: packages/agent-core/src/tools/builtin/file/read.ts
+    module_id: agent_core
+    flow_id: 10_flow_read_tool
+    note: pilot entry · meta-graph-glayer

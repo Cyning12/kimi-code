@@ -1,8 +1,8 @@
 ---
 graph_id: 10_flow_cli_session
 version: 2026-08-28
-generated_at: 2026-08-28T08:55:17Z
-source: docs/_tech_graph/10_flow_cli_session.graph.yaml
+generated_at: 2026-10-09T13:37:29Z
+source: docs/_tech_graph/l1/10_flow_cli_session.graph.yaml
 ---
 
 # Flow：CLI 会话主循环 · TUI/ACP · approve-once vs session

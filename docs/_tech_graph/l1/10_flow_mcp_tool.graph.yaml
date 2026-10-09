@@ -2,6 +2,7 @@ graph_id: 10_flow_mcp_tool
 title: 'Flow：MCP 连接 · 发现 tool · needs-auth / reconnect'
 description: connectAll → connectOne/createClient（stdio/sse/http 折叠）→ status → attachMcpTools；needs-auth 走 createMcpAuthTool → reconnect 侧链
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: MCP_SKILL
   label: MCP_CONFIG_SKILL builtin

@@ -2,6 +2,7 @@ graph_id: 10_flow_read_tool
 title: 'Flow：Read 工具 · 行/字节截断与 status 组装（C3 #94）'
 description: ReadTool execution 守卫 · readForward/readTail · MAX_LINES/MAX_BYTES · finishMessage
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: RT_SCHEMA
   label: ReadInputSchema · parameters

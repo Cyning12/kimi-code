@@ -2,6 +2,7 @@ graph_id: 10_flow_cli_session
 title: Flow：CLI 会话主循环 · TUI/ACP · approve-once vs session
 description: main 启动 → uiMode/ACP 分叉 → SDK createSession → TUI ApprovalPanel 四选项 · once vs session
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: CS_START
   label: 进程启动 main

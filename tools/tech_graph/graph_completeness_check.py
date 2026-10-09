@@ -18,7 +18,7 @@ from typing import Any
 _SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = _SCRIPT_DIR.parent.parent
 DEFAULT_GRAPH = REPO_ROOT / "docs" / "_tech_graph" / "graph.json"
-DEFAULT_STRUCT = REPO_ROOT / "docs" / "_tech_graph" / "01_struct.md"
+DEFAULT_STRUCT = REPO_ROOT / "docs" / "_tech_graph" / "l1" / "01_modules.md"
 
 P0_MODULES = frozenset({"cli", "agent_core", "node_sdk", "monorepo_root"})
 P1_MODULES = frozenset({"kosong", "kaos", "oauth", "telemetry"})

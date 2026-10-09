@@ -1,4 +1,4 @@
-"""tech_graph 工具链 smoke tests（meta graph_v2 batch）."""
+"""tech_graph 工具链 smoke tests（meta graph_v2 batch · G-L 子目录）。"""
 
 from __future__ import annotations
 
@@ -10,6 +10,9 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 TECH_GRAPH = REPO_ROOT / "docs" / "_tech_graph"
 TOOLS = REPO_ROOT / "tools" / "tech_graph"
 
+sys.path.insert(0, str(TOOLS))
+from graph_sync_common import resolve_graph_yaml  # noqa: E402
+
 EXPECTED_GRAPHS = [
     "00_main",
     "10_flow_cli_session",
@@ -17,12 +20,14 @@ EXPECTED_GRAPHS = [
     "10_flow_read_tool",
     "10_flow_context_tool_exchange",
     "10_flow_skill_load",
+    "10_flow_mcp_tool",
+    "10_flow_subagent",
 ]
 
 
 def test_all_graph_yaml_sources_exist() -> None:
     for graph_id in EXPECTED_GRAPHS:
-        path = TECH_GRAPH / f"{graph_id}.graph.yaml"
+        path = resolve_graph_yaml(TECH_GRAPH, graph_id)
         assert path.is_file(), f"missing {path}"
 
 
@@ -35,7 +40,7 @@ def test_graph_yaml_compile_all() -> None:
     )
     assert result.returncode == 0, result.stderr or result.stdout
     for graph_id in EXPECTED_GRAPHS:
-        md = TECH_GRAPH / f"{graph_id}.md"
+        md = resolve_graph_yaml(TECH_GRAPH, graph_id).with_name(f"{graph_id}.md")
         assert md.is_file(), f"missing compiled {md}"
 
 
@@ -67,3 +72,9 @@ def test_equivalence_check_passes() -> None:
         text=True,
     )
     assert result.returncode == 0, result.stderr or result.stdout
+
+
+def test_layer_headers_present() -> None:
+    for graph_id in EXPECTED_GRAPHS:
+        text = resolve_graph_yaml(TECH_GRAPH, graph_id).read_text(encoding="utf-8")
+        assert "layer:" in text, f"{graph_id} missing layer"

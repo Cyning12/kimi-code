@@ -17,7 +17,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-SCHEMA_PATH = REPO_ROOT / "docs" / "_tech_graph" / "graph_v2.schema.json"
+SCHEMA_PATH = REPO_ROOT / "docs" / "_tech_graph" / "shared" / "graph_v2.schema.json"
 
 
 def _load_schema(path: Path = SCHEMA_PATH) -> dict[str, Any]:

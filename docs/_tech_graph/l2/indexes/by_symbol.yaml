@@ -1,0 +1,7 @@
+# G-L2 symbol → flow/node 倒排（壳 · 试点）
+schema_version: gl2_by_symbol_v1
+entries:
+  - symbol: finishMessage
+    path: packages/agent-core/src/tools/builtin/file/read.ts
+    flow_id: 10_flow_read_tool
+    note: pilot · dual-limit #94

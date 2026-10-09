@@ -1,8 +1,8 @@
 ---
 graph_id: 10_flow_context_tool_exchange
 version: 2026-08-28
-generated_at: 2026-08-28T08:55:17Z
-source: docs/_tech_graph/10_flow_context_tool_exchange.graph.yaml
+generated_at: 2026-10-09T13:37:29Z
+source: docs/_tech_graph/l1/10_flow_context_tool_exchange.graph.yaml
 ---
 
 # Flow：Context · tool_call / tool_result 配对与 LLM 投影（C3 #705）

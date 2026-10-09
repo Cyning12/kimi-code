@@ -2,6 +2,7 @@ graph_id: 10_flow_skill_load
 title: 'Flow：Skill 多根发现 · 解析 · 注册'
 description: resolveSkillRoots 多根 → discoverSkills/walkSkillDir → parseSkillText → registry · invalid YAML [err]
 version: '2026-08-28'
+layer: "G-L1"
 nodes:
 - id: SK_SESS
   label: Session.loadSkills
