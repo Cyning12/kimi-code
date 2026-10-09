@@ -38,6 +38,8 @@
 
 ### 人工闸
 
+> 闸表须 **4 列**（末列为 `说明`）。**id 单元格内不要用粗体**（内嵌 `**` 会导致整行解析失败；外层整格包裹 `**HG-…**` 仍可解析）。
+
 | human_gate_id | status | blocks_hats | 说明 |
 |---------------|--------|-------------|------|
 | HG-TASK-DRAFT | pending | 22-R1, 30 | 初稿人扫 |
@@ -73,7 +75,7 @@
 ## 验收标准
 
 - [ ] 全量测试命令通过（**与本仓 CI workflow 一致**；按仓实际栈填写，如 `pytest tests -q` / `pnpm test`）
-- [ ] `npx --yes dsh-coding-kit task lint-wiki-delta --target .` 通过（wiki_delta 预检 · 与 PR CI sample `run:` 行逐字一致）
+- [ ] `npx --yes spec-wave task lint-wiki-delta --target .` 通过（wiki_delta 预检 · 与 PR CI sample `run:` 行逐字一致）
 - [ ] …
 
 ---

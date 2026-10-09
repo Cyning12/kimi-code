@@ -86,6 +86,7 @@ rules:
       - "docs/**"
       - "tools/tech_graph/**"
       - ".cyning-harness/**"
+      - ".coding-kit/**"
     default_flow: none
     severity: skip
 

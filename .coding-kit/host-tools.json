@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "host_ids": [
+    "cursor",
+    "claude",
+    "dsh",
+    "agents",
+    "copilot",
+    "codex",
+    "windsurf",
+    "gemini"
+  ],
+  "profile": "core",
+  "updated_at": "2026-10-09T12:47:36.986Z",
+  "kit_semver": "3.0.2",
+  "table_source": {
+    "kind": "builtin"
+  }
+}

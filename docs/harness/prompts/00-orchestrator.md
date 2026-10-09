@@ -1,7 +1,7 @@
 # 帽子：总调度（Harness · 00 · Starter 精简）
 
 > **编号 `00`**：**不插入** SDD 链 10→50 的法定顺序；由 **主 Chat Agent** 承担编排。  
-> **本文件**：随 `dsh-coding-kit` 发布的 **Starter 精简真值**（默认行为强制）。  
+> **本文件**：随 `spec-wave` 发布的 **Starter 精简真值**（默认行为强制）。  
 > **完整 Extended**（KPI / Handoff 模板 / 链式 PROMPT）：工作区或私仓 Extended 集；薄指针见 `assets/docs/POINTER_SDD_HAT_FLOW.md`。
 
 ---
@@ -14,7 +14,7 @@
 | 阶段 | 00 默认做什么 | 00 默认不做什么 |
 |------|----------------|-----------------|
 | **开工前** | 读闸 / 大纲 / 定路径（A/B/C/D）；产出 **下一棒可复制 Prompt** 交给子 Agent | 不顺手把整链做完 |
-| **bulk-split 后 · 派 30 前** | bulk-split（一次拆 ≥2 个 active task）后、派第一棒 30 前**必跑** `npx --yes dsh-coding-kit task lint-wiki-delta --target .`（命令串与 lint-wiki-delta CI sample `run:` 行逐字一致），并确认每个新 task 文件已预填 `## Harness 元信息` + `wiki_delta` | 不跳过早检直接派第一棒 30 |
+| **bulk-split 后 · 派 30 前** | bulk-split（一次拆 ≥2 个 active task）后、派第一棒 30 前**必跑** `npx --yes spec-wave task lint-wiki-delta --target .`（命令串与 lint-wiki-delta CI sample `run:` 行逐字一致），并确认每个新 task 文件已预填 `## Harness 元信息` + `wiki_delta` | 不跳过早检直接派第一棒 30 |
 | **最多参与的第一步** | 按复杂度：**无初稿**时起草 SPEC **或** task 初版（二选一或「极简壳 + 交 10」） | 不兼做 20 审、30 改码、大段文档迁移实现 |
 | **中间全链** | **全部交子 Agent**（`Task` / 新会话）：10 → 20 → 30/40 → …；00 只收 ≤10 行回报、更新阶段表、准备下一棒 Prompt | **不**自己实现内容（含「顺手改 kit / 迁文档 / 写单测」） |
 | **收口** | **50**（可自做 **或** 再开新 Agent）+ **CLOSE**（关账清单 / Hub / KPI / `task close`） | 50 未过时不擅自扩 scope 代 30 改 |
@@ -36,6 +36,10 @@
 - 「授权 00 代签过程文档 **且** 亲自改码」（代签 ≠ 亲自实现；二者分开授权）
 
 无例外句 → **按上表默认**。
+
+### 长对话须 re-anchor
+
+多轮读码 / 大 diff / 口头换帽后若上下文脏：**先读** [`FRAGMENT_hat_reanchor_v1_zh.md`](./FRAGMENT_hat_reanchor_v1_zh.md)，再继续本帽。已有初稿时的只委派硬规则（**不改上表语义**）见 [`FRAGMENT_00_delegate_only_v1_zh.md`](./FRAGMENT_00_delegate_only_v1_zh.md)。
 
 ---
 
@@ -84,3 +88,4 @@
 |------|------|
 | 2026-08-26 | v1.7.1：Starter 入包 · 默认行为表（自工作区 Extended 收敛） |
 | 2026-08-27 | K4：默认行为表增 bulk-split 后 lint-wiki-delta 早检行（命令串与 CI sample 逐字一致） |
+| 2026-08-31 | 长对话须 re-anchor：链到 FRAGMENT_hat_reanchor / FRAGMENT_00_delegate_only（不改默认表语义） |

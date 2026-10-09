@@ -1,0 +1,86 @@
+# SpecWave FULL-reviews 存量过渡豁免（legacy-gate-exempt）
+# 消费面：裸 verify（done 面 failClosed）· 四字段强制 · authorized_by 须过 A1
+# 背景：本仓在 SpecWave 3.0 reviews 闸接线前已关账；迁移时登记，不追溯改写历史审查文。
+version: "1"
+
+reviews:
+  - slug: fix_approve_once_437
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: fix_docs_node_565
+    reason: SpecWave 3.0 FULL-reviews 接线前历史关账 · 无 R<n> 审查文（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: fix_telemetry_bash_cancel_583
+    reason: SpecWave 3.0 FULL-reviews 接线前历史关账 · 无 R<n> 审查文（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: graph_bootstrap_kimi_code
+    reason: SpecWave 3.0 FULL-reviews 接线前历史关账 · 无 R<n> 审查文（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_ai_md_retire
+    reason: SpecWave 3.0 FULL-reviews 接线前历史关账 · 无 R<n> 审查文（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_cli
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_close
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_ctx
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_mcp
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_read
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_skill
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_sub
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_flow_deepen_turn
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_full_coverage_w0
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_full_coverage_w1
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_full_coverage_w2
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_full_coverage_w3_mcp
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_full_coverage_w3_subagent
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_full_coverage_w_close
+    reason: SpecWave 3.0 结论级机读口径接线前历史审查文 · 无合规「## 结论/签收」节或缺 SUBJ（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）
+  - slug: meta_graph_interview_complete
+    reason: SpecWave 3.0 FULL-reviews 接线前历史关账 · 无 R<n> 审查文（存量不追溯 · SpecWave 迁移会话登记）
+    date: '2026-10-09'
+    authorized_by: 00（2026-10-09 SpecWave 迁移维护者会话授权）

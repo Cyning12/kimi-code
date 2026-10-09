@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "npx spec-wave hook-guard --trigger pre-commit"
+      },
+      {
+        "command": "npx spec-wave hook-guard --trigger pre-archive"
+      }
+    ]
+  }
+}

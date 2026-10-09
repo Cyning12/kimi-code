@@ -1,0 +1,329 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-10-09T12:52:41.488Z",
+  "index": {
+    "cyning-harness-b-kimi-dogfood": {
+      "task_slug": "cyning-harness-b-kimi-dogfood",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/cyning-harness-b-kimi-dogfood/invoke_20260615_30_b-kimi-dogfood.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "fix-approve-once-437": {
+      "task_slug": "fix-approve-once-437",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-approve-once-437/invoke_20260618_10_fix-approve-once-backfill.md",
+          "mtime": 1782457887,
+          "hat_id": "10"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-approve-once-437/invoke_20260618_22_fix-approve-once-r1-reaudit.md",
+          "mtime": 1782457887,
+          "hat_id": "22"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-approve-once-437/invoke_20260618_22_fix-approve-once-r1.md",
+          "mtime": 1782457887,
+          "hat_id": "22"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-approve-once-437/invoke_20260618_30_fix-approve-once.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        }
+      ],
+      "task_markdown": "docs/tasks/done/task_fix_approve_once_437_v1.md",
+      "entry_points": {
+        "10": "[PROMPT_START_10_v1.md](../../harness/invokes/by-task/fix-approve-once-437/PROMPT_START_10_v1.md)"
+      }
+    },
+    "fix-docs-node-565": {
+      "task_slug": "fix-docs-node-565",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-docs-node-565/invoke_20260610_30_fix-docs-node-565.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "fix-open-tool-calls-705": {
+      "task_slug": "fix-open-tool-calls-705",
+      "invokes": [],
+      "task_markdown": "docs/tasks/active/task_fix_open_tool_calls_705_v1.md",
+      "entry_points": {
+        "10": "[`PROMPT_kimi_agent_rethink_R1_R5.md`](../../harness/invokes/by-task/fix-open-tool-calls-705/PROMPT_kimi_agent_rethink_R1_R5.md)"
+      }
+    },
+    "fix-read-dual-limit-94": {
+      "task_slug": "fix-read-dual-limit-94",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-read-dual-limit-94/invoke_20260613_30_fix-read-dual-limit-94.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        }
+      ],
+      "task_markdown": "docs/tasks/done/task_fix_read_dual_limit_94_v1.md",
+      "entry_points": {
+        "10": "[PROMPT_kimi_agent_rethink_R1_R5.md](../../harness/invokes/by-task/fix-read-dual-limit-94/PROMPT_kimi_agent_rethink_R1_R5.md)"
+      }
+    },
+    "fix-skill-frontmatter-580": {
+      "task_slug": "fix-skill-frontmatter-580",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-skill-frontmatter-580/invoke_20260611_30_fix-skill-frontmatter-580.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-skill-frontmatter-580/invoke_20260611_40_fix-skill-frontmatter-580.md",
+          "mtime": 1782457887,
+          "hat_id": "40"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/fix-skill-frontmatter-580/invoke_20260611_50_fix-skill-frontmatter-580.md",
+          "mtime": 1782457887,
+          "hat_id": "50"
+        }
+      ]
+    },
+    "fix-telemetry-bash-cancel-583": {
+      "task_slug": "fix-telemetry-bash-cancel-583",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/fix-telemetry-bash-cancel-583/invoke_20260610_30_fix-telemetry-bash-cancel-583.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "meta-graph-flow-deepen": {
+      "task_slug": "meta-graph-flow-deepen",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_cli.md",
+          "mtime": 1787907041,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_close.md",
+          "mtime": 1787907378,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_ctx.md",
+          "mtime": 1787907197,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_mcp.md",
+          "mtime": 1787907038,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_read.md",
+          "mtime": 1787906984,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_skill.md",
+          "mtime": 1787906956,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_sub.md",
+          "mtime": 1787906960,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-flow-deepen/invoke_20260828_30_turn.md",
+          "mtime": 1787906979,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "meta-graph-full-coverage": {
+      "task_slug": "meta-graph-full-coverage",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-full-coverage/invoke_20260828_30_w_close.md",
+          "mtime": 1787905703,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-full-coverage/invoke_20260828_30_w0.md",
+          "mtime": 1787904556,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-full-coverage/invoke_20260828_30_w1.md",
+          "mtime": 1787904817,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-full-coverage/invoke_20260828_30_w2.md",
+          "mtime": 1787905120,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-full-coverage/invoke_20260828_30_w3_mcp.md",
+          "mtime": 1787905375,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-full-coverage/invoke_20260828_30_w3_subagent.md",
+          "mtime": 1787905418,
+          "hat_id": "30"
+        }
+      ]
+    },
+    "meta-graph-issue-sync-gate": {
+      "task_slug": "meta-graph-issue-sync-gate",
+      "invokes": [
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-issue-sync-gate/invoke_20260618_30_issue-sync-gate.md",
+          "mtime": 1782457887,
+          "hat_id": "30"
+        },
+        {
+          "path": "docs/harness/invokes/by-task/meta-graph-issue-sync-gate/invoke_20260618_40_issue-sync-gate-close.md",
+          "mtime": 1782457887,
+          "hat_id": "40"
+        }
+      ],
+      "task_markdown": "docs/tasks/done/task_meta_graph_issue_sync_gate_v1.md",
+      "entry_points": {
+        "10": "Projects/docs/harness/invokes/by-task/meta-graph-issue-sync-gate/",
+        "20": "Projects/docs/harness/invokes/by-task/meta-graph-issue-sync-gate/PROMPT_START_20_v1.md",
+        "30": "Projects/docs/harness/invokes/by-task/meta-graph-issue-sync-gate/PROMPT_START_30_v1.md"
+      }
+    },
+    "meta-graph-flow-deepen-cli": {
+      "task_slug": "meta-graph-flow-deepen-cli",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_cli_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-cli.md"
+      }
+    },
+    "meta-graph-flow-deepen-close": {
+      "task_slug": "meta-graph-flow-deepen-close",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_close_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-close.md"
+      }
+    },
+    "meta-graph-flow-deepen-ctx": {
+      "task_slug": "meta-graph-flow-deepen-ctx",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_ctx_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-ctx.md"
+      }
+    },
+    "meta-graph-flow-deepen-mcp": {
+      "task_slug": "meta-graph-flow-deepen-mcp",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_mcp_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-mcp.md"
+      }
+    },
+    "meta-graph-flow-deepen-read": {
+      "task_slug": "meta-graph-flow-deepen-read",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_read_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-read.md"
+      }
+    },
+    "meta-graph-flow-deepen-skill": {
+      "task_slug": "meta-graph-flow-deepen-skill",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_skill_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-skill.md"
+      }
+    },
+    "meta-graph-flow-deepen-sub": {
+      "task_slug": "meta-graph-flow-deepen-sub",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_sub_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-sub.md"
+      }
+    },
+    "meta-graph-flow-deepen-turn": {
+      "task_slug": "meta-graph-flow-deepen-turn",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_flow_deepen_turn_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-flow-deepen/PROMPT_30_meta-graph-flow-deepen-turn.md"
+      }
+    },
+    "meta-graph-full-coverage-w0": {
+      "task_slug": "meta-graph-full-coverage-w0",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_full_coverage_w0_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-full-coverage/PROMPT_30_meta-graph-full-coverage-w0.md"
+      }
+    },
+    "meta-graph-full-coverage-w1": {
+      "task_slug": "meta-graph-full-coverage-w1",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_full_coverage_w1_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-full-coverage/PROMPT_30_meta-graph-full-coverage-w1.md"
+      }
+    },
+    "meta-graph-full-coverage-w2": {
+      "task_slug": "meta-graph-full-coverage-w2",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_full_coverage_w2_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-full-coverage/PROMPT_30_meta-graph-full-coverage-w2.md"
+      }
+    },
+    "meta-graph-full-coverage-w3-mcp": {
+      "task_slug": "meta-graph-full-coverage-w3-mcp",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_full_coverage_w3_mcp_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-full-coverage/PROMPT_30_meta-graph-full-coverage-w3-mcp.md"
+      }
+    },
+    "meta-graph-full-coverage-w3-subagent": {
+      "task_slug": "meta-graph-full-coverage-w3-subagent",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_full_coverage_w3_subagent_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-full-coverage/PROMPT_30_meta-graph-full-coverage-w3-subagent.md"
+      }
+    },
+    "meta-graph-full-coverage-w-close": {
+      "task_slug": "meta-graph-full-coverage-w-close",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_full_coverage_w_close_v1.md",
+      "entry_points": {
+        "30": "docs/harness/invokes/by-task/meta-graph-full-coverage/PROMPT_30_meta-graph-full-coverage-w-close.md"
+      }
+    },
+    "meta-graph-v2-batch-migrate": {
+      "task_slug": "meta-graph-v2-batch-migrate",
+      "invokes": [],
+      "task_markdown": "docs/tasks/done/task_meta_graph_v2_batch_migrate_v1.md",
+      "entry_points": {
+        "10": "docs/harness/invokes/by-task/meta-graph-v2-batch-migrate/PROMPT_START_10_v1.md",
+        "30": "Projects/docs/harness/invokes/by-task/meta-graph-v2-batch-migrate/PROMPT_START_30_v1.md"
+      }
+    }
+  }
+}

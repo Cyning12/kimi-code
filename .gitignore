@@ -24,10 +24,14 @@ docs/superpowers/
 reports/
 .superpowers/
 
-# Harness 本地覆盖（机器级 · 不进仓）
+# Harness/SpecWave 本地覆盖（机器级 · 不进仓）
 .cyning-harness/local.json
+.coding-kit/local.json
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
+
+# SpecWave local rollback backups
+.coding-kit/backups/
