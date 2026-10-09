@@ -35,3 +35,6 @@ __pycache__/
 
 # SpecWave local rollback backups
 .coding-kit/backups/
+
+# SpecWave local audit JSONL（本机过程日志）
+docs/harness/audit/
